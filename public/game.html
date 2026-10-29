@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Catch the Dip — Dip Duck</title>
+  <meta name="theme-color" content="#0B1524">
+  <link rel="icon" href="favicon-48.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+  <style>
+    html, body { margin: 0; height: 100%; background: #0b1524; overflow: hidden; }
+    body { display: grid; place-items: center; }
+    canvas { width: min(100vw, 200vh); height: auto; max-height: 100vh; touch-action: none; display: block; }
+    a.back { position: fixed; top: 10px; left: 12px; color: #b3c0d3; font: 700 14px "Nunito", sans-serif; text-decoration: none; }
+  </style>
+</head>
+<body data-page="game">
+  <a class="back" href="./">← Dip Duck</a>
+  <canvas id="game-canvas" width="960" height="480" aria-label="Catch the Dip"></canvas>
+
+  <script src="i18n.js"></script>
+  <script src="canvas-art.js"></script>
+  <script>
+    // Page autonome (plein écran, future mini-app Telegram) : même langue que le site.
+    const LANGS = Object.keys(I18N);
+    const fromUrl = new URLSearchParams(location.search).get("lang");
+    const saved = localStorage.getItem("lang");
+    const browser = (navigator.language || "en").slice(0, 2).toLowerCase();
+    const currentLang = [fromUrl, saved, browser].find((l) => LANGS.includes(l)) || "en";
+    const t = (key) => I18N[currentLang][key] ?? I18N.en[key] ?? key;
+    document.documentElement.lang = currentLang === "zh" ? "zh-Hans" : currentLang;
+  </script>
+  <script src="btc-history.js"></script>
+  <script src="game.js"></script>
+  <script>
+    DipGame.mount(document.getElementById("game-canvas"));
+  </script>
+</body>
+</html>

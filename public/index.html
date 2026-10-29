@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dip Duck ($DIPDUCK) — Buy the dip. Quack.</title>
+  <meta name="description" content="Dip Duck ($DIPDUCK) — a meme token. Fixed supply, no owner, no tax, liquidity burned, team share locked. Not affiliated with Robinhood.">
+  <meta property="og:title" content="Dip Duck ($DIPDUCK)">
+  <meta property="og:description" content="The duck that buys every dip. Fixed supply, no owner, no tax, liquidity burned.">
+  <meta property="og:url" content="https://dipduck.xyz/">
+  <meta property="og:image" content="https://dipduck.xyz/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@DipDuckToken">
+  <meta name="twitter:image" content="https://dipduck.xyz/og-image.png">
+  <link rel="canonical" href="https://dipduck.xyz/">
+  <meta name="theme-color" content="#0B1524">
+  <link rel="icon" href="favicon-48.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Icônes (style Lucide), réutilisées avec <use> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+      <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></symbol>
+      <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></symbol>
+      <symbol id="i-bridge" viewBox="0 0 24 24"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+      <symbol id="i-swap" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 6-6"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="nav">
+    <a class="brand" href="#top"><img src="logo.png" alt="" width="34" height="34"> <span>Dip Duck</span></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#story" data-i18n="navStory"></a>
+      <a href="#tokenomics" data-i18n="navTokenomics"></a>
+      <a href="#unlock" data-i18n="navUnlock"></a>
+      <a href="#memes" data-i18n="navMemes"></a>
+      <a href="#nft">NFT</a>
+      <a href="#suivi" data-i18n="navTax"></a>
+      <a href="#game" data-i18n="navGame"></a>
+      <a href="#faq" data-i18n="navFaq"></a>
+    </nav>
+    <div class="nav-right">
+      <div class="langs" role="group" aria-label="Language">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="fr">FR</button>
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="zh">中文</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow"><span class="dot"></span> <span data-i18n="eyebrow"></span></p>
+        <h1><span data-i18n="heroLine1"></span><br><span class="accent" data-i18n="heroLine2"></span></h1>
+        <p class="lead" data-i18n="heroLead"></p>
+        <div class="countdown" id="countdown" hidden>
+          <span class="cd-title" data-i18n="cdTitle"></span>
+          <div class="cd-boxes">
+            <div><span class="cd-n" id="cd-d">0</span><span class="cd-l" data-i18n="cdDays"></span></div>
+            <div><span class="cd-n" id="cd-h">00</span><span class="cd-l" data-i18n="cdHours"></span></div>
+            <div><span class="cd-n" id="cd-m">00</span><span class="cd-l" data-i18n="cdMin"></span></div>
+            <div><span class="cd-n" id="cd-s">00</span><span class="cd-l" data-i18n="cdSec"></span></div>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn primary buy-link" target="_blank" rel="noopener"><svg class="ic"><use href="#i-swap"/></svg><span data-i18n="buy"></span></a>
+          <a class="btn ghost chart-link" target="_blank" rel="noopener"><svg class="ic"><use href="#i-chart"/></svg><span data-i18n="chart"></span></a>
+        </div>
+        <div class="ca" id="ca">
+          <span class="ca-label" data-i18n="contractLabel"></span>
+          <code class="ca-value" id="ca-value"></code>
+          <button type="button" class="ca-copy" id="copy" aria-label="Copy"><svg class="ic"><use href="#i-copy"/></svg><span data-i18n="copy"></span></button>
+        </div>
+        <ul class="badges">
+          <li><svg class="ic"><use href="#i-ban"/></svg><span data-i18n="badgeOwner"></span></li>
+          <li><svg class="ic"><use href="#i-flame"/></svg><span data-i18n="badgeLp"></span></li>
+          <li><svg class="ic"><use href="#i-check"/></svg><span data-i18n="badgeTax"></span></li>
+          <li><svg class="ic"><use href="#i-lock"/></svg><span data-i18n="badgeLock"></span></li>
+        </ul>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div>
+        <svg viewBox="0 0 520 480" class="duck-scene">
+          <defs>
+            <linearGradient id="harea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF8A3D" stop-opacity=".35"/><stop offset="1" stop-color="#FF8A3D" stop-opacity="0"/></linearGradient>
+          </defs>
+          <g class="grid">
+            <path d="M20 80H500M20 160H500M20 240H500M20 320H500" />
+          </g>
+          <path class="chart-area" d="M10 130 L50 160 L85 300 L140 250 L300 170 L420 110 L510 40 L510 440 L10 440Z" fill="url(#harea)"/>
+          <polyline class="chart-line" points="10,130 50,160 85,300 140,250 300,170 420,110 510,40"/>
+          <circle class="dip-dot" cx="85" cy="300" r="11"/>
+          <image class="duck" href="logo.png" x="130" y="70" width="360" height="360"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- BANDEAU -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee"></div>
+    </div>
+
+    <!-- STATS EN DIRECT -->
+    <section class="stats" aria-live="polite">
+      <div class="stat"><span class="stat-label" data-i18n="statPrice"></span><span class="stat-value" id="s-price">—</span></div>
+      <div class="stat"><span class="stat-label" data-i18n="statMcap"></span><span class="stat-value" id="s-mcap">—</span></div>
+      <div class="stat"><span class="stat-label" data-i18n="statLiq"></span><span class="stat-value" id="s-liq">—</span></div>
+      <div class="stat"><span class="stat-label" data-i18n="statVol"></span><span class="stat-value" id="s-vol">—</span></div>
+      <div class="stat holders"><span class="stat-label" data-i18n="statHolders"></span><span class="stat-value" id="s-holders">—</span></div>
+      <p class="stats-note" id="stats-note" data-i18n="statsSoon"></p>
+    </section>
+
+    <!-- HISTOIRE -->
+    <section id="story" class="section">
+      <p class="kicker" data-i18n="storyKicker"></p>
+      <h2 data-i18n="storyTitle"></h2>
+      <div class="story">
+        <article class="story-card"><span class="story-num">01</span><h3 data-i18n="story1Title"></h3><p data-i18n="story1Text"></p></article>
+        <article class="story-card"><span class="story-num">02</span><h3 data-i18n="story2Title"></h3><p data-i18n="story2Text"></p></article>
+        <article class="story-card"><span class="story-num">03</span><h3 data-i18n="story3Title"></h3><p data-i18n="story3Text"></p></article>
+      </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section id="tokenomics" class="section">
+      <p class="kicker" data-i18n="tokKicker"></p>
+      <h2 data-i18n="tokTitle"></h2>
+      <div class="tok">
+        <figure class="donut">
+          <svg viewBox="0 0 200 200" role="img" aria-labelledby="donut-title">
+            <title id="donut-title">87% pool, 10% team (locked), 3% community</title>
+            <circle cx="100" cy="100" r="70" class="donut-track"/>
+            <circle cx="100" cy="100" r="70" class="donut-pool" stroke-dasharray="382.64 439.82"/>
+            <circle cx="100" cy="100" r="70" class="donut-team" stroke-dasharray="43.98 439.82" stroke-dashoffset="-382.64"/>
+            <circle cx="100" cy="100" r="70" class="donut-community" stroke-dasharray="13.19 439.82" stroke-dashoffset="-426.62"/>
+          </svg>
+          <figcaption>
+            <span class="donut-total">1,000,000,000</span>
+            <span class="donut-sub">$DIPDUCK</span>
+          </figcaption>
+        </figure>
+        <div class="tok-list">
+          <div class="tok-row"><span class="swatch pool"></span><div><strong><span data-i18n="tokPool"></span> — 87%</strong><p data-i18n="tokPoolText"></p></div></div>
+          <div class="tok-row"><span class="swatch team"></span><div><strong><span data-i18n="tokTeam"></span> — 10%</strong><p data-i18n="tokTeamText"></p></div></div>
+          <div class="tok-row"><span class="swatch community"></span><div><strong><span data-i18n="tokCommunity"></span> — 3%</strong><p data-i18n="tokCommunityText"></p><p class="hint" id="community-line" hidden><a id="community-link" target="_blank" rel="noopener"></a></p></div></div>
+          <div class="tok-facts">
+            <div><span class="tf-v">0%</span><span class="tf-l" data-i18n="tfTax"></span></div>
+            <div><span class="tf-v">0</span><span class="tf-l" data-i18n="tfMint"></span></div>
+            <div><span class="tf-v">100%</span><span class="tf-l" data-i18n="tfLp"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DÉBLOCAGE -->
+    <section id="unlock" class="section">
+      <p class="kicker" data-i18n="unlockKicker"></p>
+      <h2 data-i18n="unlockTitle"></h2>
+      <p class="section-lead" data-i18n="unlockLead"></p>
+      <div class="unlock-chart">
+        <svg viewBox="0 0 620 240" role="img" aria-labelledby="unlock-title">
+          <title id="unlock-title">0% until day 90, 10% at day 90, then linear to 100% at day 900</title>
+          <path class="axis" d="M50 200H600M50 200V20"/>
+          <path class="guide" d="M50 30H600M50 183H600"/>
+          <path class="unlock-area" d="M50 200 L105 200 L105 183 L600 30 L600 200Z"/>
+          <path class="unlock-line" d="M50 200 L105 200 L105 183 L600 30"/>
+          <circle class="unlock-dot" cx="105" cy="183" r="6"/>
+          <circle class="unlock-dot" cx="600" cy="30" r="6"/>
+          <text x="44" y="34" text-anchor="end">100%</text>
+          <text x="44" y="187" text-anchor="end">10%</text>
+          <text x="44" y="204" text-anchor="end">0</text>
+          <text x="50" y="222" text-anchor="middle" data-i18n="axisD0"></text>
+          <text x="105" y="222" text-anchor="middle" data-i18n="axisD90"></text>
+          <text x="600" y="222" text-anchor="end" data-i18n="axisD900"></text>
+        </svg>
+      </div>
+      <ol class="timeline">
+        <li><span class="tl-when" data-i18n="unlock1Title"></span><span class="tl-what" data-i18n="unlock1Text"></span></li>
+        <li><span class="tl-when" data-i18n="unlock2Title"></span><span class="tl-what" data-i18n="unlock2Text"></span></li>
+        <li><span class="tl-when" data-i18n="unlock3Title"></span><span class="tl-what" data-i18n="unlock3Text"></span></li>
+        <li><span class="tl-when" data-i18n="unlock4Title"></span><span class="tl-what" data-i18n="unlock4Text"></span></li>
+      </ol>
+      <p class="hint" id="vesting-line" hidden><svg class="ic"><use href="#i-lock"/></svg><span data-i18n="vestingContract"></span> <a id="vesting-link" target="_blank" rel="noopener"></a></p>
+    </section>
+
+    <!-- MÈMES -->
+    <section id="memes" class="section">
+      <p class="kicker" data-i18n="memesKicker"></p>
+      <h2 data-i18n="memesTitle"></h2>
+      <p class="section-lead" data-i18n="memesLead"></p>
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" data-tab="tab-meme" aria-selected="true"><span data-i18n="tabMeme"></span></button>
+        <button type="button" role="tab" data-tab="tab-card" aria-selected="false"><span data-i18n="tabCard"></span></button>
+      </div>
+      <div id="tab-meme" role="tabpanel">
+      <div class="meme">
+        <canvas id="meme-canvas" width="1080" height="1080" aria-label="Meme preview"></canvas>
+        <form class="meme-form" id="meme-form">
+          <fieldset class="tpl">
+            <legend data-i18n="memeTemplate"></legend>
+            <label><input type="radio" name="tpl" value="classic" checked><span data-i18n="tplClassic"></span></label>
+            <label><input type="radio" name="tpl" value="chart"><span data-i18n="tplChart"></span></label>
+            <label><input type="radio" name="tpl" value="calm"><span data-i18n="tplCalm"></span></label>
+          </fieldset>
+          <label class="field"><span data-i18n="memeTop"></span><input type="text" id="meme-top" maxlength="60" autocomplete="off"></label>
+          <label class="field"><span data-i18n="memeBottom"></span><input type="text" id="meme-bottom" maxlength="60" autocomplete="off"></label>
+          <button type="button" class="btn ghost" id="meme-random"><span data-i18n="memeRandom"></span></button>
+          <div class="actions">
+            <button type="button" class="btn primary" id="meme-download"><span data-i18n="memeDownload"></span></button>
+            <a class="btn ghost" id="meme-share" target="_blank" rel="noopener"><span data-i18n="memeShare"></span></a>
+          </div>
+          <p class="hint" data-i18n="memeHint"></p>
+        </form>
+      </div>
+      </div>
+
+      <div id="tab-card" role="tabpanel" hidden>
+        <div class="meme">
+          <canvas id="card-canvas" width="1080" height="1080" aria-label="Collectible card"></canvas>
+          <form class="meme-form" id="card-form">
+            <p class="hint" data-i18n="cardIntro"></p>
+            <label class="field"><span data-i18n="cardName"></span><input type="text" name="name" maxlength="20" autocomplete="off"></label>
+            <label class="field"><span data-i18n="cardMood"></span>
+              <select name="mood">
+                <option value="calm" data-i18n="mood_calm"></option>
+                <option value="brave" data-i18n="mood_brave"></option>
+                <option value="sleepy" data-i18n="mood_sleepy"></option>
+                <option value="hungry" data-i18n="mood_hungry"></option>
+              </select>
+            </label>
+            <label class="field"><span data-i18n="cardElement"></span>
+              <select name="element">
+                <option value="water" data-i18n="element_water"></option>
+                <option value="fire" data-i18n="element_fire"></option>
+                <option value="ice" data-i18n="element_ice"></option>
+                <option value="thunder" data-i18n="element_thunder"></option>
+              </select>
+            </label>
+            <label class="field"><span data-i18n="cardLucky"></span><input type="number" name="lucky" min="0" max="999" value="7" inputmode="numeric"></label>
+            <button type="submit" class="btn primary"><span data-i18n="cardHatch"></span></button>
+            <div id="card-result" hidden>
+              <p class="tier-badge" id="card-tier"></p>
+              <ul class="traits" id="card-traits"></ul>
+              <div class="actions">
+                <button type="button" class="btn ghost" id="card-download"><span data-i18n="memeDownload"></span></button>
+                <a class="btn ghost" id="card-share" target="_blank" rel="noopener"><span data-i18n="memeShare"></span></a>
+              </div>
+            </div>
+            <p class="hint" data-i18n="cardNote"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- NFT : Dip Duck Cards -->
+    <section id="nft" class="section">
+      <p class="kicker">Dip Duck Cards</p>
+      <h2 data-i18n="nftTitle"></h2>
+      <p class="section-lead" data-i18n="nftLead"></p>
+      <div class="nft-top">
+        <canvas id="nft-preview" width="1080" height="1080" aria-label="Dip Duck Cards"></canvas>
+        <div class="nft-panel">
+          <div class="countdown" id="nft-countdown" hidden>
+            <span class="cd-title" data-i18n="nftCdTitle"></span>
+            <div class="cd-boxes">
+              <div><span class="cd-n" id="nft-cd-d">0</span><span class="cd-l" data-i18n="cdDays"></span></div>
+              <div><span class="cd-n" id="nft-cd-h">00</span><span class="cd-l" data-i18n="cdHours"></span></div>
+              <div><span class="cd-n" id="nft-cd-m">00</span><span class="cd-l" data-i18n="cdMin"></span></div>
+              <div><span class="cd-n" id="nft-cd-s">00</span><span class="cd-l" data-i18n="cdSec"></span></div>
+            </div>
+          </div>
+          <ul class="nft-facts">
+            <li><span data-i18n="nftSupply"></span><strong>3333</strong></li>
+            <li><span data-i18n="nftPrice"></span><strong>0.001 ETH</strong></li>
+            <li><span data-i18n="nftLimit"></span><strong>10</strong></li>
+          </ul>
+          <div class="nft-split">
+            <p data-i18n="nftSplitTitle"></p>
+            <div class="split-bar"><span class="s-founders">30 %</span><span class="s-community">40 %</span><span class="s-charity">30 %</span></div>
+            <p class="hint"><span class="dot-f"></span><span data-i18n="nftFounders"></span> <span class="dot-c"></span><span data-i18n="nftCommunity"></span> <span class="dot-h"></span><span data-i18n="nftCharity"></span></p>
+          </div>
+
+          <div id="nft-live" hidden>
+            <div class="nft-progress-wrap">
+              <span data-i18n="nftMinted"></span> <strong id="nft-minted">0 / 3 333</strong>
+              <div class="nft-progress" id="nft-progress"></div>
+            </div>
+            <p class="tier-badge" id="nft-soldout" hidden><span data-i18n="nftSoldOut"></span></p>
+            <form class="meme-form" id="nft-form" hidden>
+              <label class="field"><span data-i18n="cardName"></span><input type="text" name="name" maxlength="20" pattern="[A-Za-z0-9 ._\-]{0,20}" autocomplete="off"></label>
+              <label class="field"><span data-i18n="cardMood"></span>
+                <select name="mood">
+                  <option value="calm" data-i18n="mood_calm"></option>
+                  <option value="brave" data-i18n="mood_brave"></option>
+                  <option value="sleepy" data-i18n="mood_sleepy"></option>
+                  <option value="hungry" data-i18n="mood_hungry"></option>
+                </select>
+              </label>
+              <label class="field"><span data-i18n="cardElement"></span>
+                <select name="element">
+                  <option value="water" data-i18n="element_water"></option>
+                  <option value="fire" data-i18n="element_fire"></option>
+                  <option value="ice" data-i18n="element_ice"></option>
+                  <option value="thunder" data-i18n="element_thunder"></option>
+                </select>
+              </label>
+              <label class="field"><span data-i18n="cardLucky"></span><input type="number" name="lucky" min="0" max="999" value="7" inputmode="numeric"></label>
+              <label class="field"><span data-i18n="nftQuantity"></span><input type="number" name="quantity" min="1" max="10" value="1" inputmode="numeric"></label>
+              <button type="submit" class="btn primary"><span data-i18n="nftMint"></span></button>
+            </form>
+            <button type="button" class="btn ghost" id="nft-connect"><span data-i18n="nftConnect"></span></button>
+            <p class="nft-status" id="nft-status" aria-live="polite"></p>
+          </div>
+          <a class="btn ghost" id="nft-opensea" target="_blank" rel="noopener" hidden>OpenSea</a>
+          <p class="hint" data-i18n="nftNote"></p>
+        </div>
+      </div>
+
+      <div id="nft-mine-wrap" hidden>
+        <h3 class="sub" data-i18n="nftMine"></h3>
+        <p class="hint" id="nft-mine-empty" data-i18n="nftMineEmpty"></p>
+        <div class="nft-grid" id="nft-mine"></div>
+      </div>
+
+      <div class="nft-vote" id="nft-vote-wrap" hidden>
+        <h3 class="sub" data-i18n="nftVoteTitle"></h3>
+        <p class="section-lead" data-i18n="nftVoteLead"></p>
+        <p class="round-title" id="round-title"></p>
+        <p class="hint" id="vote-ends"></p>
+        <ul class="vote-list" id="vote-list"></ul>
+        <p class="hint" id="vote-upcoming" hidden></p>
+        <button type="button" class="btn primary" id="vote-btn"><span data-i18n="nftVoteBtn"></span></button>
+        <div id="past-rounds-wrap" hidden>
+          <h4 class="mini" data-i18n="nftPastRounds"></h4>
+          <ul class="past-rounds" id="past-rounds"></ul>
+        </div>
+      </div>
+
+      <div class="nft-proposals" id="nft-proposals-wrap" hidden>
+        <h3 class="sub" data-i18n="nftProposalsTitle"></h3>
+        <p class="section-lead" data-i18n="nftProposalsLead"></p>
+        <div class="proposals-layout">
+          <form class="meme-form" id="proposal-form">
+            <label class="field"><span data-i18n="nftPropName"></span><input type="text" name="name" maxlength="40" required autocomplete="off"></label>
+            <label class="field"><span data-i18n="nftPropWallet"></span><input type="text" name="wallet" required pattern="0x[0-9a-fA-F]{40}" placeholder="0x…" autocomplete="off"></label>
+            <label class="field"><span data-i18n="nftPropUrl"></span><input type="url" name="url" maxlength="120" placeholder="https://" autocomplete="off"></label>
+            <label class="field"><span data-i18n="nftPropText"></span><textarea name="description" maxlength="280" rows="4" required></textarea></label>
+            <button type="submit" class="btn primary"><span data-i18n="nftPropose"></span></button>
+            <p class="hint" data-i18n="nftProposeRules"></p>
+          </form>
+          <div>
+            <p class="hint" id="proposal-empty" data-i18n="nftNoProposals"></p>
+            <ul class="proposal-list" id="proposal-list"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="treasury" id="nft-treasury" hidden>
+        <h3 class="sub" data-i18n="nftTreasury"></h3>
+        <p class="section-lead" data-i18n="nftTreasuryLead"></p>
+        <div class="tok-facts">
+          <div><span class="tf-v" id="tr-founders">—</span><span class="tf-l" data-i18n="nftFoundersAvailable"></span><button type="button" class="btn ghost small" id="withdraw-founders" data-i18n="nftSend"></button></div>
+          <div><span class="tf-v" id="tr-community">—</span><span class="tf-l" data-i18n="nftCommunityAvailable"></span><button type="button" class="btn ghost small" id="withdraw-community" data-i18n="nftSend"></button></div>
+          <div><span class="tf-v" id="tr-founders-paid">—</span><span class="tf-l" data-i18n="nftFoundersPaid"></span></div>
+          <div><span class="tf-v" id="tr-community-paid">—</span><span class="tf-l" data-i18n="nftCommunityPaid"></span></div>
+          <div><span class="tf-v" id="tr-released">—</span><span class="tf-l" data-i18n="nftCharityPaid"></span></div>
+        </div>
+        <p class="hint"><a id="tr-contract" target="_blank" rel="noopener" data-i18n="nftContractLink"></a></p>
+      </div>
+    </section>
+
+    <!-- MON SUIVI (déclaration) -->
+    <section id="suivi" class="section">
+      <p class="kicker" data-i18n="taxKicker"></p>
+      <h2 data-i18n="taxTitle"></h2>
+      <p class="section-lead" data-i18n="taxLead"></p>
+      <p class="hint" id="tax-soon" data-i18n="taxSoon"></p>
+      <div id="tax-tool" hidden>
+        <div class="tax-form">
+          <button type="button" class="btn primary" id="tax-connect"><span data-i18n="taxConnect"></span></button>
+          <p class="hint" id="tax-account" hidden></p>
+        </div>
+        <p class="nft-status" id="tax-status" aria-live="polite"></p>
+        <div id="tax-result" hidden>
+          <div class="tax-bar">
+            <label class="level-pick"><span data-i18n="taxYear"></span> <select id="tax-year"></select></label>
+            <button type="button" class="btn ghost small" id="tax-csv"><span data-i18n="taxCsv"></span></button>
+          </div>
+          <div class="tok-facts tax-totals">
+            <div><span class="tf-v" id="tax-count">0</span><span class="tf-l" data-i18n="taxOps"></span></div>
+            <div><span class="tf-v" id="tax-in">—</span><span class="tf-l" data-i18n="taxTotalIn"></span></div>
+            <div><span class="tf-v" id="tax-out">—</span><span class="tf-l" data-i18n="taxTotalOut"></span></div>
+            <div><span class="tf-v" id="tax-fees">—</span><span class="tf-l" data-i18n="taxTotalFees"></span></div>
+          </div>
+          <p class="hint" id="tax-empty" data-i18n="taxEmpty"></p>
+          <div class="tax-table-wrap">
+            <table class="tax-table">
+              <thead>
+                <tr>
+                  <th data-i18n="taxColDate"></th><th data-i18n="taxColOp"></th><th data-i18n="taxColDetail"></th>
+                  <th data-i18n="taxColIn"></th><th data-i18n="taxColOut"></th><th data-i18n="taxColFee"></th>
+                  <th>CAD</th><th>USD</th><th data-i18n="taxColProof"></th>
+                </tr>
+              </thead>
+              <tbody id="tax-body"></tbody>
+            </table>
+          </div>
+          <p class="hint" data-i18n="taxNote"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- JEU -->
+    <section id="game" class="section">
+      <p class="kicker" data-i18n="gameKicker"></p>
+      <h2 data-i18n="gameTitle"></h2>
+      <p class="section-lead" data-i18n="gameLead"></p>
+      <div class="game-wrap">
+        <canvas id="game-canvas" width="960" height="480" aria-label="Catch the Dip"></canvas>
+      </div>
+      <div class="game-bar">
+        <span><span data-i18n="gameBest"></span> : <strong id="game-best">0</strong></span>
+        <a class="btn ghost" id="game-share" target="_blank" rel="noopener" hidden><span data-i18n="gameShare"></span></a>
+        <a class="btn ghost" href="game.html" target="_blank" rel="noopener"><span data-i18n="gameFull"></span></a>
+      </div>
+    </section>
+
+    <!-- CLASSEMENT DU JEU (on-chain) -->
+    <section id="leaderboard" class="section" hidden>
+      <p class="kicker" data-i18n="lbKicker"></p>
+      <h2 data-i18n="lbTitle"></h2>
+      <p class="section-lead" data-i18n="lbLead"></p>
+      <p class="hint" id="lb-season"></p>
+      <div class="actions">
+        <button type="button" class="btn primary" id="lb-ranked"><span data-i18n="lbRankedBtn"></span></button>
+      </div>
+      <div class="lb-submit" id="lb-submit-wrap" hidden>
+        <p class="round-title" id="lb-result"></p>
+        <label class="field"><span data-i18n="lbNick"></span><input type="text" id="lb-nick" maxlength="16" pattern="[A-Za-z0-9 ._\-]{0,16}" autocomplete="off"></label>
+        <button type="button" class="btn primary" id="lb-submit"><span data-i18n="lbSubmit"></span></button>
+      </div>
+      <p class="nft-status" id="lb-status" aria-live="polite"></p>
+      <p class="hint" id="lb-empty" data-i18n="lbEmpty" hidden></p>
+      <div class="tax-table-wrap">
+        <table class="tax-table lb-table">
+          <thead><tr><th>#</th><th data-i18n="lbPlayer"></th><th data-i18n="lbReached"></th><th data-i18n="gameDips"></th><th data-i18n="gameCoins"></th><th data-i18n="gameScore"></th></tr></thead>
+          <tbody id="lb-body"></tbody>
+        </table>
+      </div>
+      <div id="lb-previous-wrap" hidden>
+        <h4 class="mini" id="lb-previous-title"></h4>
+        <div class="tax-table-wrap">
+          <table class="tax-table lb-table">
+            <thead><tr><th>#</th><th data-i18n="lbPlayer"></th><th data-i18n="lbReached"></th><th data-i18n="gameDips"></th><th data-i18n="gameCoins"></th><th data-i18n="gameScore"></th></tr></thead>
+            <tbody id="lb-previous"></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="hint" data-i18n="lbNote"></p>
+    </section>
+
+    <!-- KIT MÉDIA -->
+    <section id="kit" class="section">
+      <p class="kicker" data-i18n="kitKicker"></p>
+      <h2 data-i18n="kitTitle"></h2>
+      <p class="section-lead" data-i18n="kitLead"></p>
+      <div class="kit">
+        <a class="kit-card" href="logo.png" download="dipduck-logo-512.png"><img src="logo.png" alt="" width="120" height="120"><strong data-i18n="kitLogo"></strong><span>PNG · 512 × 512</span></a>
+        <a class="kit-card" href="logo-1024.png" download="dipduck-logo-1024.png"><img src="logo.png" alt="" width="120" height="120"><strong data-i18n="kitLogoHd"></strong><span>PNG · 1024 × 1024</span></a>
+        <button type="button" class="kit-card" id="kit-banner"><img src="og-image.png" alt="" width="240" height="126"><strong data-i18n="kitBanner"></strong><span>PNG · 1500 × 500</span></button>
+        <a class="kit-card" href="og-image.png" download="dipduck-share-1200x630.png"><img src="og-image.png" alt="" width="240" height="126"><strong data-i18n="kitOg"></strong><span>PNG · 1200 × 630</span></a>
+      </div>
+    </section>
+
+    <!-- SÉCURITÉ -->
+    <section class="section">
+      <p class="kicker" data-i18n="safeKicker"></p>
+      <h2 data-i18n="safeTitle"></h2>
+      <ul class="checks">
+        <li><svg class="ic"><use href="#i-shield"/></svg><div><strong data-i18n="safe1Title"></strong><p data-i18n="safe1Text"></p></div></li>
+        <li><svg class="ic"><use href="#i-flame"/></svg><div><strong data-i18n="safe2Title"></strong><p data-i18n="safe2Text"></p></div></li>
+        <li><svg class="ic"><use href="#i-ban"/></svg><div><strong data-i18n="safe3Title"></strong><p data-i18n="safe3Text"></p></div></li>
+        <li><svg class="ic"><use href="#i-lock"/></svg><div><strong data-i18n="safe4Title"></strong><p data-i18n="safe4Text"></p></div></li>
+      </ul>
+    </section>
+
+    <!-- ACHETER -->
+    <section id="buy" class="section">
+      <p class="kicker" data-i18n="howKicker"></p>
+      <h2 data-i18n="howTitle"></h2>
+      <div class="steps">
+        <article class="step"><span class="step-n">1</span><svg class="ic big"><use href="#i-wallet"/></svg><h3 data-i18n="how1Title"></h3><p data-i18n="how1"></p></article>
+        <article class="step"><span class="step-n">2</span><svg class="ic big"><use href="#i-bridge"/></svg><h3 data-i18n="how2Title"></h3><p data-i18n="how2"></p></article>
+        <article class="step"><span class="step-n">3</span><svg class="ic big"><use href="#i-copy"/></svg><h3 data-i18n="how3Title"></h3><p data-i18n="how3"></p></article>
+        <article class="step"><span class="step-n">4</span><svg class="ic big"><use href="#i-swap"/></svg><h3 data-i18n="how4Title"></h3><p data-i18n="how4"></p></article>
+      </div>
+      <p class="hint center" data-i18n="network"></p>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <p class="kicker">FAQ</p>
+      <h2 data-i18n="faqTitle"></h2>
+      <div class="faq">
+        <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+        <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+        <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
+        <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+        <details><summary data-i18n="q5"></summary><p data-i18n="a5"></p></details>
+        <details><summary data-i18n="q6"></summary><p data-i18n="a6"></p></details>
+        <details><summary data-i18n="q7"></summary><p data-i18n="a7"></p></details>
+      </div>
+    </section>
+
+    <!-- COMMUNAUTÉ -->
+    <section class="cta-band">
+      <img src="logo.png" alt="" width="96" height="96">
+      <h2 data-i18n="ctaTitle"></h2>
+      <p data-i18n="ctaText"></p>
+      <div class="actions">
+        <a class="btn primary buy-link" target="_blank" rel="noopener"><svg class="ic"><use href="#i-swap"/></svg><span data-i18n="buy"></span></a>
+        <a class="btn ghost" id="x-link" target="_blank" rel="noopener" hidden>X</a>
+        <a class="btn ghost" id="tg-link" target="_blank" rel="noopener" hidden>Telegram</a>
+      </div>
+    </section>
+
+    <section class="disclaimer">
+      <h2 data-i18n="disclaimerTitle"></h2>
+      <p data-i18n="disclaimer"></p>
+    </section>
+  </main>
+
+  <footer>
+    <img src="logo.png" alt="" width="28" height="28">
+    <p>© Dip Duck · <span data-i18n="footer"></span></p>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="canvas-art.js"></script>
+  <script src="app.js"></script>
+  <script src="memes.js"></script>
+  <script src="cards.js"></script>
+  <script src="nft.js"></script>
+  <script src="eth-history.js"></script>
+  <script src="tax.js"></script>
+  <script src="btc-history.js"></script>
+  <script src="game.js"></script>
+  <script src="leaderboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dip Duck Card</title>
+  <meta name="theme-color" content="#0B1524">
+  <link rel="icon" href="favicon-48.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+  <style>
+    html, body { margin: 0; min-height: 100%; background: #0b1524; color: #f5f7fa; font: 700 16px "Nunito", sans-serif; }
+    body { display: grid; place-items: center; min-height: 100vh; }
+    canvas { width: min(100vw, 100vh); height: auto; display: block; }
+    p { position: fixed; bottom: 10px; width: 100%; text-align: center; color: #b3c0d3; margin: 0; }
+    body.render p { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Vue d'une vraie carte NFT (animation_url des métadonnées) ; ?render=1 sert à générer son image PNG. -->
+  <canvas id="card" width="1080" height="1080" aria-label="Dip Duck Card"></canvas>
+  <p id="msg"></p>
+
+  <script src="i18n.js"></script>
+  <script src="canvas-art.js"></script>
+  <script>
+    const EXPLORER = "https://robinhoodchain.blockscout.com";
+    const params = new URLSearchParams(location.search);
+    const LANGS = Object.keys(I18N);
+    const currentLang = [params.get("lang"), localStorage.getItem("lang")].find((l) => LANGS.includes(l)) || "en";
+    const t = (key) => I18N[currentLang][key] ?? I18N.en[key] ?? key;
+    if (params.get("render")) document.body.classList.add("render");
+  </script>
+  <script src="cards.js"></script>
+  <script src="nft.js"></script>
+  <script>
+    (async () => {
+      const id = Number(params.get("id"));
+      const msg = document.getElementById("msg");
+      if (!NFT.live || !Number.isInteger(id) || id < 1) {
+        msg.textContent = "Dip Duck Cards";
+        return;
+      }
+      const card = await NFT.loadCard(id);
+      if (!card.revealed) {
+        DD.pond(document.getElementById("card").getContext("2d"), 1080, 1080);
+        msg.textContent = `#${id} · ${t("nftUnrevealed")}`;
+        return;
+      }
+      await DipCards.render(DipCards.fromChain(id, card.traits, card), document.getElementById("card"));
+      msg.textContent = `Dip Duck Card #${id}`;
+      document.body.dataset.ready = "1"; // repère pour la génération des images
+    })();
+  </script>
+</body>
+</html>

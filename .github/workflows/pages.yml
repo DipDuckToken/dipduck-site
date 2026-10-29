@@ -1,0 +1,76 @@
+# Publie le dossier public/ sur GitHub Pages.
+# - À chaque push sur main.
+# - Chaque jour à 6 h UTC : cours ETH de la veille (suivi fiscal) ; le 1er du mois, la
+#   courbe du jeu reçoit en plus le mois qui vient de se terminer.
+# - Pendant le mint NFT, décommente la ligne « toutes les heures » : images des nouvelles cartes.
+# Dépôt public : les minutes d'Actions sont gratuites et illimitées.
+name: Publier le site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * *"
+    # - cron: "0 * * * *" # toutes les heures, pendant le mint NFT
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Historique du Bitcoin et cours ETH (USD, CAD) : si une source ne répond pas, on garde la version du dépôt.
+      - name: Mettre à jour les données
+        run: |
+          python tools/make-btc-history.py || echo "Historique du Bitcoin non mis à jour, version du dépôt conservée."
+          python tools/make-price-history.py || echo "Cours ETH non mis à jour, version du dépôt conservée."
+
+      # Images des cartes NFT révélées, gardées d'une exécution à l'autre (rien à faire avant le déploiement des NFT).
+      - uses: actions/cache@v4
+        with:
+          path: public/nft
+          key: nft-images-${{ github.run_id }}
+          restore-keys: nft-images-
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Dessiner les images des cartes NFT
+        run: |
+          if grep -qE 'contract: "0x[0-9a-fA-F]{40}"' public/nft.js; then
+            npm install --no-save playwright@1.56.1
+            npx playwright install --with-deps chromium
+            node tools/render-nft-images.mjs
+          else
+            echo "Pas de contrat NFT dans public/nft.js : rien à dessiner."
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
