@@ -359,10 +359,11 @@
           <form class="meme-form" id="proposal-form">
             <label class="field"><span data-i18n="nftPropName"></span><input type="text" name="name" maxlength="40" required autocomplete="off"></label>
             <label class="field"><span data-i18n="nftPropWallet"></span><input type="text" name="wallet" required pattern="0x[0-9a-fA-F]{40}" placeholder="0x…" autocomplete="off"></label>
-            <label class="field"><span data-i18n="nftPropUrl"></span><input type="url" name="url" maxlength="120" placeholder="https://" autocomplete="off"></label>
+            <label class="field"><span data-i18n="nftPropUrl"></span><input type="url" name="url" maxlength="200" required pattern="https://.+" placeholder="https://" autocomplete="off"></label>
             <label class="field"><span data-i18n="nftPropText"></span><textarea name="description" maxlength="280" rows="4" required></textarea></label>
             <button type="submit" class="btn primary"><span data-i18n="nftPropose"></span></button>
             <p class="hint" data-i18n="nftProposeRules"></p>
+            <p class="hint" id="proposal-deposit"></p>
           </form>
           <div>
             <p class="hint" id="proposal-empty" data-i18n="nftNoProposals"></p>
@@ -375,12 +376,21 @@
         <h3 class="sub" data-i18n="nftTreasury"></h3>
         <p class="section-lead" data-i18n="nftTreasuryLead"></p>
         <div class="tok-facts">
-          <div><span class="tf-v" id="tr-founders">—</span><span class="tf-l" data-i18n="nftFoundersAvailable"></span><button type="button" class="btn ghost small" id="withdraw-founders" data-i18n="nftSend"></button></div>
-          <div><span class="tf-v" id="tr-community">—</span><span class="tf-l" data-i18n="nftCommunityAvailable"></span><button type="button" class="btn ghost small" id="withdraw-community" data-i18n="nftSend"></button></div>
-          <div><span class="tf-v" id="tr-founders-paid">—</span><span class="tf-l" data-i18n="nftFoundersPaid"></span></div>
-          <div><span class="tf-v" id="tr-community-paid">—</span><span class="tf-l" data-i18n="nftCommunityPaid"></span></div>
+          <div><span class="tf-v" id="tr-founders">—</span><span class="tf-l" data-i18n="nftFoundersOwed"></span><button type="button" class="btn ghost small" id="withdraw-founders" data-i18n="nftWithdraw"></button></div>
+          <div><span class="tf-v" id="tr-community">—</span><span class="tf-l" data-i18n="nftCommunityOwed"></span><button type="button" class="btn ghost small" id="withdraw-community" data-i18n="nftWithdraw"></button></div>
+          <div><span class="tf-v" id="tr-pending">—</span><span class="tf-l" data-i18n="nftPendingPots"></span></div>
+          <div><span class="tf-v" id="tr-owed-total">—</span><span class="tf-l" data-i18n="nftOwedTotal"></span></div>
           <div><span class="tf-v" id="tr-released">—</span><span class="tf-l" data-i18n="nftCharityPaid"></span></div>
         </div>
+        <button type="button" class="btn primary small" id="close-rounds" hidden><span data-i18n="nftCloseRounds"></span></button>
+        <div id="tr-payees-wrap" hidden>
+          <h4 class="mini" data-i18n="nftPayeesTitle"></h4>
+          <ul class="past-rounds" id="tr-payees"></ul>
+        </div>
+        <form class="meme-form" id="withdraw-form">
+          <label class="field"><span data-i18n="nftWithdrawAny"></span><input type="text" name="payee" required pattern="0x[0-9a-fA-F]{40}" placeholder="0x…" autocomplete="off"></label>
+          <button type="submit" class="btn ghost small"><span data-i18n="nftWithdraw"></span></button>
+        </form>
         <p class="hint"><a id="tr-contract" target="_blank" rel="noopener" data-i18n="nftContractLink"></a></p>
       </div>
     </section>

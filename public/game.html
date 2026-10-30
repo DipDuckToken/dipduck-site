@@ -22,20 +22,9 @@
 
   <script src="i18n.js"></script>
   <script src="canvas-art.js"></script>
-  <script>
-    // Page autonome (plein écran, future mini-app Telegram) : même langue que le site.
-    const LANGS = Object.keys(I18N);
-    const fromUrl = new URLSearchParams(location.search).get("lang");
-    const saved = localStorage.getItem("lang");
-    const browser = (navigator.language || "en").slice(0, 2).toLowerCase();
-    const currentLang = [fromUrl, saved, browser].find((l) => LANGS.includes(l)) || "en";
-    const t = (key) => I18N[currentLang][key] ?? I18N.en[key] ?? key;
-    document.documentElement.lang = currentLang === "zh" ? "zh-Hans" : currentLang;
-  </script>
+  <script src="game-boot.js"></script>
   <script src="btc-history.js"></script>
   <script src="game.js"></script>
-  <script>
-    DipGame.mount(document.getElementById("game-canvas"));
-  </script>
+  <script src="game-start.js"></script>
 </body>
 </html>

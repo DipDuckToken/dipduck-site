@@ -11,6 +11,13 @@
 // mêmes règles entières que le jeu et refuse un résultat arrivé plus vite que le jeu ne le
 // permet. Personne ne peut inventer un résultat ; seul un programme qui jouerait vraiment
 // en temps réel resterait possible.
+//
+// Prix décalé : la courbe s'arrête à hier. Le contrat n'enregistre que des jours terminés,
+// chacun à sa clôture officielle Chainlink : pour chaque jour, le site cherche le dernier
+// round du flux publié avant minuit UTC (recherche par paliers sur getRoundData, en lots de
+// 16 lectures : environ 3 lots par jour), puis l'envoie à recordDay, qui le vérifie. Ce
+// rattrapage n'est demandé que si les prix ne couvrent pas encore la course du concours
+// (en pratique au début de chaque trimestre : 2 transactions pour ~90 jours).
 
 // ─── À remplir après le déploiement (voir README.md) ────────────────────────
 const LEADERBOARD_CONFIG = {
@@ -35,9 +42,23 @@ const LEADERBOARD_CONFIG = {
     best: "0x2950dca2", // best(uint32,address)
     dipCount: "0x83152f44", // dipCount()
     dipAt: "0x2746ea46", // dipAt(uint256) → (day, bonus)
-    recordDay: "0xb7e04c9b", // recordDay() : enregistre jusqu'à 60 jours de prix par appel
-    daysBehind: "0x8ca809dc", // daysBehind() : jours de prix encore à enregistrer
+    recordDay: "0xf40805ea", // recordDay(uint80[]) : un round Chainlink par jour, 60 jours au plus
+    daysBehind: "0x8ca809dc", // daysBehind() : jours terminés pas encore enregistrés
+    lastRecordedDay: "0x3278239b", // lastRecordedDay()
+    FEED: "0x0beaf38c", // FEED() : flux Chainlink BTC/USD
   };
+  // Flux Chainlink (AggregatorV3) : roundId = phaseId << 64 | numéro du round dans la phase.
+  const FEED_SEL = {
+    latestRoundData: "0xfeaf968c", // latestRoundData() → (roundId, answer, startedAt, updatedAt, answeredInRound)
+    getRoundData: "0x9a6fc8f5", // getRoundData(uint80)
+  };
+  const DATA_START = 1282089600; // jour 0 du jeu (DATA_START du contrat), 2010-08-18 UTC
+  const FINISH_EVAL = 15; // la course du concours doit être enregistrée jusqu'à finishDay + 15
+  const MAX_DAYS_PER_TX = 60; // MAX_DAYS_PER_CALL du contrat
+  const PROBES = 16; // lectures par lot
+  const MAX_BATCHES_PER_DAY = 12; // recherche bornée
+  const MASK64 = (1n << 64n) - 1n;
+  const CHAIN_HEX = `0x${LEADERBOARD_CONFIG.chainId.toString(16)}`;
   const NICK_PATTERN = /^[A-Za-z0-9 ._-]{0,16}$/;
   const $ = (id) => document.getElementById(id);
   let contest; // concours en cours
@@ -68,6 +89,105 @@ const LEADERBOARD_CONFIG = {
     return body.result;
   }
   const call = (data) => rpc("eth_call", [{ to: LEADERBOARD_CONFIG.contract, data }, "latest"]);
+
+  // Plusieurs appels en une requête JSON-RPC (lot) ; si le RPC refuse les lots, un par un.
+  async function rpcBatch(requests) {
+    const single = (r) =>
+      fetch(LEADERBOARD_CONFIG.rpc, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ jsonrpc: "2.0", id: 1, ...r }),
+      }).then((response) => response.json(), () => ({ error: {} }));
+    try {
+      const response = await fetch(LEADERBOARD_CONFIG.rpc, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(requests.map((r, i) => ({ jsonrpc: "2.0", id: i, ...r }))),
+      });
+      const body = await response.json();
+      if (!Array.isArray(body)) throw new Error("batch");
+      const byId = new Map(body.map((reply) => [reply.id, reply]));
+      return requests.map((_, i) => byId.get(i) ?? { error: {} });
+    } catch {
+      return Promise.all(requests.map(single));
+    }
+  }
+
+  // ─── Clôtures officielles Chainlink ───────────────────────────────────────
+  // updatedAt (secondes) de chaque round, ou null s'il n'existe pas.
+  async function roundTimes(feed, ids) {
+    const replies = await rpcBatch(ids.map((id) => ({ method: "eth_call", params: [{ to: feed, data: FEED_SEL.getRoundData + word(id) }, "latest"] })));
+    return replies.map((reply) => {
+      if (!reply || reply.error || !reply.result || reply.result.length < 2 + 64 * 5) return null;
+      const updatedAt = words(reply.result)[3];
+      return updatedAt === 0n ? null : updatedAt;
+    });
+  }
+
+  // Plus grand numéro n de [lo, hi] (phase `phase`) dont le round est publié au plus tard à `end`,
+  // sachant que celui de `lo` l'est : galop (lo + 1, 2, 4… en un lot), puis paliers de 16.
+  async function searchLast(feed, phase, lo, hi, end) {
+    let exponential = true;
+    let stride = 1n; // galop : grandit si tout un lot est encore avant `end`
+    for (let batch = 0; lo < hi; batch++) {
+      if (batch >= MAX_BATCHES_PER_DAY) throw new Error(t("lbRoundNotFound"));
+      const points = [];
+      for (let k = 1; k <= PROBES; k++) {
+        let n = exponential ? lo + stride * (1n << BigInt(k - 1)) : lo + ((hi - lo) * BigInt(k)) / BigInt(PROBES);
+        if (n > hi) n = hi;
+        if (n > lo && n !== points.at(-1)) points.push(n);
+      }
+      const times = await roundTimes(feed, points.map((n) => (phase << 64n) | n));
+      const bad = times.findIndex((time) => time === null || time > end);
+      if (bad === -1) {
+        lo = points.at(-1);
+        stride <<= 16n;
+        continue;
+      }
+      if (bad > 0) lo = points[bad - 1];
+      hi = points[bad] - 1n;
+      exponential = false;
+    }
+    return lo;
+  }
+
+  /**
+   * Rounds Chainlink des jours fromDay, fromDay + 1… (au plus toDay) : pour chaque jour, le dernier
+   * round publié avant son minuit UTC de fin. S'arrête au premier jour pas encore final (aucun round
+   * après son minuit). Gère un changement de phase récent (jours de la phase précédente).
+   */
+  async function findCloses(fromDay, toDay, progress) {
+    const feed = `0x${(await call(SEL.FEED)).slice(-40)}`;
+    const latest = words(await rpc("eth_call", [{ to: feed, data: FEED_SEL.latestRoundData }, "latest"]));
+    const phase = latest[0] >> 64n;
+    const latestUpdated = latest[3];
+    const cursor = new Map(); // dernier résultat par phase : point de départ du jour suivant
+    const lastOf = new Map(); // dernier round d'une phase terminée
+    const ids = [];
+    for (let day = fromDay; day <= toDay; day++) {
+      const end = BigInt(DATA_START + (day + 1) * 86_400);
+      if (latestUpdated <= end) break; // pas encore de round après minuit : jour pas final
+      progress?.(day - fromDay + 1, toDay - fromDay + 1);
+      let found;
+      for (const p of phase > 1n ? [phase, phase - 1n] : [phase]) {
+        const lo = cursor.get(p) ?? 1n;
+        const [first] = await roundTimes(feed, [(p << 64n) | lo]);
+        if (first === null || first > end) continue; // ce jour est avant cette phase
+        let hi = p === phase ? latest[0] & MASK64 : lastOf.get(p);
+        if (hi === undefined) {
+          hi = await searchLast(feed, p, 1n, MASK64 >> 1n, 1n << 62n);
+          lastOf.set(p, hi);
+        }
+        const n = await searchLast(feed, p, lo, hi, end);
+        cursor.set(p, n);
+        found = (p << 64n) | n;
+        break;
+      }
+      if (found === undefined) throw new Error(t("lbRoundNotFound"));
+      ids.push(found);
+    }
+    return ids;
+  }
 
   async function loadContest() {
     const [id, startTs, endTs, finishDay] = words(await call(SEL.currentContest)).map(Number);
@@ -163,23 +283,32 @@ const LEADERBOARD_CONFIG = {
   }
 
   // ─── Wallet et transactions ───────────────────────────────────────────────
+  // Avant chaque transaction : le wallet doit être sur Robinhood Chain (changement demandé si
+  // besoin, puis relu) ; sinon rien n'est envoyé.
+  async function ensureChain() {
+    const onChain = async () => Number(await window.ethereum.request({ method: "eth_chainId" })) === LEADERBOARD_CONFIG.chainId;
+    if (await onChain()) return;
+    try {
+      await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: CHAIN_HEX }] });
+    } catch (error) {
+      if (error.code !== 4902) throw new Error(t("nftWrongChain"));
+      await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [{ chainId: CHAIN_HEX, chainName: "Robinhood Chain", nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 }, rpcUrls: [LEADERBOARD_CONFIG.rpc], blockExplorerUrls: [EXPLORER] }],
+      });
+    }
+    if (!(await onChain())) throw new Error(t("nftWrongChain"));
+  }
+
   async function connect() {
     if (!window.ethereum) throw new Error(t("nftNoWallet"));
     [account] = await window.ethereum.request({ method: "eth_requestAccounts" });
-    const chainId = `0x${LEADERBOARD_CONFIG.chainId.toString(16)}`;
-    try {
-      await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId }] });
-    } catch (error) {
-      if (error.code !== 4902) throw error;
-      await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{ chainId, chainName: "Robinhood Chain", nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 }, rpcUrls: [LEADERBOARD_CONFIG.rpc], blockExplorerUrls: [EXPLORER] }],
-      });
-    }
+    await ensureChain();
   }
 
   async function send(data) {
-    const hash = await window.ethereum.request({ method: "eth_sendTransaction", params: [{ from: account, to: LEADERBOARD_CONFIG.contract, data }] });
+    await ensureChain();
+    const hash = await window.ethereum.request({ method: "eth_sendTransaction", params: [{ from: account, to: LEADERBOARD_CONFIG.contract, data, chainId: CHAIN_HEX }] });
     for (let i = 0; i < 120; i++) {
       const receipt = await rpc("eth_getTransactionReceipt", [hash]);
       if (receipt) {
@@ -191,16 +320,28 @@ const LEADERBOARD_CONFIG = {
     throw new Error(t("nftSlow"));
   }
 
-  // 1. Départ signé (le contrat note aussi le prix du jour au passage), puis le jeu
-  //    attend le prochain toucher. La course va de 2010 à la ligne d'arrivée du concours.
+  // Si les prix enregistrés ne couvrent pas la course du concours (début de trimestre), le
+  // départ serait refusé (DataBehind) : on enregistre d'abord les clôtures officielles.
+  async function catchUp() {
+    contest = await loadContest();
+    const needed = contest.finishDay + FINISH_EVAL;
+    const last = Number(words(await call(SEL.lastRecordedDay))[0]);
+    if (last >= needed) return;
+    const block = await rpc("eth_getBlockByNumber", ["latest", false]);
+    const yesterday = Math.floor((Number(BigInt(block.timestamp)) - DATA_START) / 86_400) - 1;
+    const ids = await findCloses(last + 1, yesterday, (done, total) => status(t("lbFindingRounds").replace("{done}", done).replace("{total}", total), "wait"));
+    if (last + ids.length < needed) throw new Error(t("lbDataBehind"));
+    for (let i = 0; i < ids.length; i += MAX_DAYS_PER_TX) {
+      status(t("lbCatchUp"), "wait");
+      await send(SEL.recordDay + word(32) + uintArray(ids.slice(i, i + MAX_DAYS_PER_TX)));
+    }
+  }
+
+  // 1. Départ signé (le contrat ne lit aucun prix : il marche même pendant une panne du flux),
+  //    puis le jeu attend le prochain toucher. La course va de 2010 à la ligne d'arrivée du concours.
   async function startRanked() {
     await connect();
-    // Si la courbe a pris du retard (personne n'a joué depuis longtemps), on la rattrape
-    // d'abord, 60 jours par transaction, pour que le départ ne soit pas refusé.
-    for (let i = 0; i < 20 && Number(words(await call(SEL.daysBehind))[0]) > 60; i++) {
-      status(t("lbCatchUp"), "wait");
-      await send(SEL.recordDay);
-    }
+    await catchUp();
     status(t("lbLoadingCourse"), "wait");
     status(t("lbConfirmStart"), "wait");
     await send(SEL.startRun);
@@ -263,6 +404,18 @@ const LEADERBOARD_CONFIG = {
     status("");
   });
   $("lb-ranked").addEventListener("click", () => run(startRanked));
+  // Le visiteur change de compte ou de réseau dans son wallet : on oublie la partie en cours.
+  window.ethereum?.on?.("accountsChanged", (accounts) => {
+    account = accounts?.[0];
+    lastRun = undefined;
+    $("lb-submit-wrap").hidden = true;
+    status("");
+    run(showTop);
+  });
+  window.ethereum?.on?.("chainChanged", () => {
+    status("");
+    run(showTop);
+  });
   $("lb-submit").addEventListener("click", () => run(submit));
   document.addEventListener("langchange", () => run(showTop));
   run(showTop);

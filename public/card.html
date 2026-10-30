@@ -24,34 +24,9 @@
 
   <script src="i18n.js"></script>
   <script src="canvas-art.js"></script>
-  <script>
-    const EXPLORER = "https://robinhoodchain.blockscout.com";
-    const params = new URLSearchParams(location.search);
-    const LANGS = Object.keys(I18N);
-    const currentLang = [params.get("lang"), localStorage.getItem("lang")].find((l) => LANGS.includes(l)) || "en";
-    const t = (key) => I18N[currentLang][key] ?? I18N.en[key] ?? key;
-    if (params.get("render")) document.body.classList.add("render");
-  </script>
+  <script src="card-boot.js"></script>
   <script src="cards.js"></script>
   <script src="nft.js"></script>
-  <script>
-    (async () => {
-      const id = Number(params.get("id"));
-      const msg = document.getElementById("msg");
-      if (!NFT.live || !Number.isInteger(id) || id < 1) {
-        msg.textContent = "Dip Duck Cards";
-        return;
-      }
-      const card = await NFT.loadCard(id);
-      if (!card.revealed) {
-        DD.pond(document.getElementById("card").getContext("2d"), 1080, 1080);
-        msg.textContent = `#${id} · ${t("nftUnrevealed")}`;
-        return;
-      }
-      await DipCards.render(DipCards.fromChain(id, card.traits, card), document.getElementById("card"));
-      msg.textContent = `Dip Duck Card #${id}`;
-      document.body.dataset.ready = "1"; // repère pour la génération des images
-    })();
-  </script>
+  <script src="card-view.js"></script>
 </body>
 </html>
