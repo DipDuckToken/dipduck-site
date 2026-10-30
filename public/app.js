@@ -6,14 +6,14 @@ const CONFIG = {
   contract: "",
   // Adresse du contrat de blocage (deployments/robinhood.json → vesting.address)
   vesting: "",
-  // Adresse de la courbe de lancement (deployments/robinhood.json → curve.address) :
-  // section « Courbe de lancement » ; vide = section masquée
-  curve: "",
-  // Bloc de déploiement de la courbe (deployments/robinhood.json → curve.blockNumber) :
+  // Adresse du contrat de lancement LaunchPool (deployments/robinhood.json → launcher.address) :
+  // section « Lancement » (achat / revente dans le pool Uniswap v3) ; vide = section masquée
+  launcher: "",
+  // Bloc de déploiement de LaunchPool (deployments/robinhood.json → launcher.blockNumber) :
   // départ de la liste des transactions ; 0 = seulement les blocs récents
-  curveFromBlock: 0,
-  // Lien d'achat direct (page de swap Uniswap avec l'adresse du token), une fois testé ;
-  // tant que la courbe n'a pas ouvert le pool, le bouton d'achat mène à la courbe
+  launchFromBlock: 0,
+  // Lien Uniswap (page de swap avec l'adresse du token), une fois testé : bouton
+  // « Ouvrir sur Uniswap » de la section Lancement
   buyUrl: "",
   // Lien du graphique ; vide = la page DexScreener trouvée automatiquement
   chartUrl: "",
@@ -117,8 +117,8 @@ function applyConfig() {
 }
 
 // ─── Vérifie toi-même : un lien Blockscout par promesse ──────────────────────
-// Chaque ligne reste masquée tant que son adresse n'est pas dans CONFIG. La ligne des parts
-// LP est remplie par curve.js (adresse de la paire lue dans la courbe).
+// Chaque ligne reste masquée tant que son adresse n'est pas dans CONFIG. Les lignes de la
+// position (NFT) et du pool sont remplies par launch.js (adresses lues dans LaunchPool).
 function showVerify(id, url) {
   const row = document.getElementById(id);
   if (!row) return;
@@ -129,12 +129,11 @@ function showVerify(id, url) {
 
 function applyVerify() {
   const lines = [
-    ["v-curve", CONFIG.curve, (a) => `${EXPLORER}/address/${a}?tab=contract`],
+    ["v-launcher", CONFIG.launcher, (a) => `${EXPLORER}/address/${a}?tab=contract`],
     ["v-token", CONFIG.contract, (a) => `${EXPLORER}/address/${a}?tab=contract`],
-    ["v-supply", CONFIG.contract, (a) => `${EXPLORER}/token/${a}?tab=holders`],
-    ["v-eth", CONFIG.curve, (a) => `${EXPLORER}/address/${a}`],
-    ["v-vesting", CONFIG.vesting, (a) => `${EXPLORER}/address/${a}?tab=contract`],
+    ["v-vesting", CONFIG.vesting, (a) => `${EXPLORER}/address/${a}?tab=tokens`],
     ["v-safe", CONFIG.communityWallet, (a) => `${EXPLORER}/address/${a}?tab=read_proxy`],
+    ["v-fees", CONFIG.launcher, (a) => `${EXPLORER}/address/${a}?tab=read_contract`],
     ["v-deployer", CONFIG.deployer, (a) => `${EXPLORER}/address/${a}?tab=tokens`],
   ];
   for (const [id, address, url] of lines) if (isAddress(address)) showVerify(id, url(address));

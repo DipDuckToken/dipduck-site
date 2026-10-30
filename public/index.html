@@ -145,7 +145,7 @@
       <div class="tok">
         <figure class="donut">
           <svg viewBox="0 0 200 200" role="img" aria-labelledby="donut-title">
-            <title id="donut-title">87% launch curve then Uniswap pool, 10% team (locked), 3% community</title>
+            <title id="donut-title">87% Uniswap v3 pool (locked forever), 10% team (locked), 3% community</title>
             <circle cx="100" cy="100" r="70" class="donut-track"/>
             <circle cx="100" cy="100" r="70" class="donut-pool" stroke-dasharray="382.64 439.82"/>
             <circle cx="100" cy="100" r="70" class="donut-team" stroke-dasharray="43.98 439.82" stroke-dashoffset="-382.64"/>
@@ -520,81 +520,74 @@
       <p class="section-lead" data-i18n="verifyLead"></p>
       <p class="hint" id="verify-empty" data-i18n="verifyEmpty"></p>
       <ul class="verify-list">
-        <li id="v-curve" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vCurveTitle"></strong><p data-i18n="vCurveText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-launcher" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vLauncherTitle"></strong><p data-i18n="vLauncherText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
         <li id="v-token" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vTokenTitle"></strong><p data-i18n="vTokenText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
-        <li id="v-supply" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vSupplyTitle"></strong><p data-i18n="vSupplyText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
-        <li id="v-eth" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vEthTitle"></strong><p data-i18n="vEthText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
-        <li id="v-lp" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vLpTitle"></strong><p data-i18n="vLpText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-position" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vPositionTitle"></strong><p data-i18n="vPositionText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-pool" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vPoolTitle"></strong><p data-i18n="vPoolText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
         <li id="v-vesting" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vVestingTitle"></strong><p data-i18n="vVestingText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
         <li id="v-safe" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vSafeTitle"></strong><p data-i18n="vSafeText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-fees" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vFeesTitle"></strong><p data-i18n="vFeesText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
         <li id="v-deployer" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vDeployerTitle"></strong><p data-i18n="vDeployerText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
       </ul>
     </section>
 
-    <!-- COURBE DE LANCEMENT (on-chain) -->
-    <section id="curve" class="section" hidden>
-      <p class="kicker" data-i18n="curveKicker"></p>
-      <h2 data-i18n="curveTitle"></h2>
-      <p class="section-lead" data-i18n="curveLead"></p>
-      <div class="countdown" id="curve-countdown" hidden>
-        <span class="cd-title" data-i18n="curveOpensIn"></span>
+    <!-- LANCEMENT : pool Uniswap v3 rempli d'un seul côté (on-chain) -->
+    <section id="launch" class="section" hidden>
+      <p class="kicker" data-i18n="launchKicker"></p>
+      <h2 data-i18n="launchTitle"></h2>
+      <p class="section-lead" data-i18n="launchLead"></p>
+      <div class="countdown" id="launch-countdown" hidden>
+        <span class="cd-title" data-i18n="launchOpensIn"></span>
         <div class="cd-boxes">
-          <div><span class="cd-n" id="curve-cd-d">0</span><span class="cd-l" data-i18n="cdDays"></span></div>
-          <div><span class="cd-n" id="curve-cd-h">00</span><span class="cd-l" data-i18n="cdHours"></span></div>
-          <div><span class="cd-n" id="curve-cd-m">00</span><span class="cd-l" data-i18n="cdMin"></span></div>
-          <div><span class="cd-n" id="curve-cd-s">00</span><span class="cd-l" data-i18n="cdSec"></span></div>
+          <div><span class="cd-n" id="launch-cd-d">0</span><span class="cd-l" data-i18n="cdDays"></span></div>
+          <div><span class="cd-n" id="launch-cd-h">00</span><span class="cd-l" data-i18n="cdHours"></span></div>
+          <div><span class="cd-n" id="launch-cd-m">00</span><span class="cd-l" data-i18n="cdMin"></span></div>
+          <div><span class="cd-n" id="launch-cd-s">00</span><span class="cd-l" data-i18n="cdSec"></span></div>
         </div>
       </div>
-      <p class="hint" id="curve-opens" hidden></p>
-      <div class="nft-progress-wrap curve-progress">
-        <span data-i18n="curveRaised"></span> <strong id="curve-raised">—</strong>
-        <div class="nft-progress" id="curve-progress"></div>
+      <p class="hint" id="launch-opens" hidden></p>
+      <div class="tok-facts launch-facts">
+        <div><span class="tf-v" id="launch-price">—</span><span class="tf-l" data-i18n="launchPrice"></span></div>
+        <div><span class="tf-v" id="launch-mcap">—</span><span class="tf-l" data-i18n="launchMcap"></span></div>
+        <div><span class="tf-v" id="launch-eth">—</span><span class="tf-l" data-i18n="launchPoolEth"></span></div>
+        <div><span class="tf-v" id="launch-limit">—</span><span class="tf-l" data-i18n="launchLimit"></span><span class="launch-when" id="launch-limit-when"></span></div>
+        <div><span class="tf-v" id="launch-mine">—</span><span class="tf-l" data-i18n="launchMine"></span></div>
       </div>
-      <div class="tok-facts curve-facts">
-        <div><span class="tf-v" id="curve-price">—</span><span class="tf-l" data-i18n="curvePrice"></span></div>
-        <div><span class="tf-v" id="curve-limit">—</span><span class="tf-l" data-i18n="curveLimit"></span><span class="curve-when" id="curve-limit-when"></span></div>
-        <div><span class="tf-v" id="curve-mine">—</span><span class="tf-l" data-i18n="curveMine"></span></div>
-      </div>
-      <div class="curve-trade" id="curve-trade" hidden>
-        <form class="meme-form curve-box" id="curve-buy-form">
-          <h3 data-i18n="curveBuyTitle"></h3>
-          <label class="field"><span data-i18n="curveEthAmount"></span><input type="text" name="eth" inputmode="decimal" placeholder="0.01" autocomplete="off"></label>
-          <p class="hint" id="curve-buy-quote" aria-live="polite"></p>
-          <button type="submit" class="btn primary"><span data-i18n="curveBuyBtn"></span></button>
+      <div class="launch-trade" id="launch-trade" hidden>
+        <form class="meme-form launch-box" id="launch-buy-form">
+          <h3 data-i18n="launchBuyTitle"></h3>
+          <label class="field"><span data-i18n="launchEthAmount"></span><input type="text" name="eth" inputmode="decimal" placeholder="0.01" autocomplete="off"></label>
+          <p class="hint" id="launch-buy-quote" aria-live="polite"></p>
+          <button type="submit" class="btn primary"><span data-i18n="launchBuyBtn"></span></button>
         </form>
-        <form class="meme-form curve-box" id="curve-sell-form">
-          <h3 data-i18n="curveSellTitle"></h3>
-          <div class="curve-row">
-            <label class="field"><span data-i18n="curveTokenAmount"></span><input type="text" name="tokens" inputmode="decimal" placeholder="1000000" autocomplete="off"></label>
-            <button type="button" class="btn ghost small" id="curve-sell-max" data-i18n="curveMax"></button>
+        <form class="meme-form launch-box" id="launch-sell-form">
+          <h3 data-i18n="launchSellTitle"></h3>
+          <div class="launch-row">
+            <label class="field"><span data-i18n="launchTokenAmount"></span><input type="text" name="tokens" inputmode="decimal" placeholder="1000000" autocomplete="off"></label>
+            <button type="button" class="btn ghost small" id="launch-sell-max" data-i18n="launchMax"></button>
           </div>
-          <p class="hint" id="curve-sell-quote" aria-live="polite"></p>
-          <button type="submit" class="btn ghost"><span data-i18n="curveSellBtn"></span></button>
+          <p class="hint" id="launch-sell-quote" aria-live="polite"></p>
+          <button type="submit" class="btn ghost"><span data-i18n="launchSellBtn"></span></button>
         </form>
-        <label class="field curve-slippage"><span data-i18n="curveSlippage"></span><input type="number" id="curve-slippage" min="0.1" max="20" step="0.1" value="1" inputmode="decimal"></label>
+        <label class="field launch-slippage"><span data-i18n="launchSlippage"></span><input type="number" id="launch-slippage" min="0.1" max="20" step="0.1" value="1" inputmode="decimal"></label>
       </div>
-      <button type="button" class="btn ghost" id="curve-connect" hidden><span data-i18n="nftConnect"></span></button>
-      <p class="nft-status" id="curve-status" aria-live="polite"></p>
-      <div class="curve-done" id="curve-done" hidden>
-        <p class="round-title" data-i18n="curveDoneTitle"></p>
-        <p data-i18n="curveDoneText"></p>
-        <div class="actions">
-          <a class="btn primary" id="curve-uniswap" target="_blank" rel="noopener" hidden><svg class="ic"><use href="#i-swap"/></svg><span data-i18n="curveUniswap"></span></a>
-          <a class="btn ghost" id="curve-pair" target="_blank" rel="noopener"><span data-i18n="curvePairLink"></span></a>
-        </div>
+      <div class="actions">
+        <button type="button" class="btn ghost" id="launch-connect" hidden><span data-i18n="nftConnect"></span></button>
+        <a class="btn ghost" id="launch-uniswap" target="_blank" rel="noopener" hidden><svg class="ic"><use href="#i-swap"/></svg><span data-i18n="launchUniswap"></span></a>
       </div>
-      <h3 class="sub" data-i18n="curveFeedTitle"></h3>
-      <p class="hint" id="curve-feed-empty" data-i18n="curveFeedEmpty" hidden></p>
-      <p class="hint" id="curve-feed-error" data-i18n="curveFeedError" hidden></p>
-      <div class="tax-table-wrap" id="curve-feed-wrap" hidden>
-        <table class="tax-table curve-table">
-          <thead><tr><th data-i18n="curveFeedType"></th><th class="num">ETH</th><th class="num">$DIPDUCK</th><th data-i18n="curveFeedTime"></th><th data-i18n="curveFeedWallet"></th></tr></thead>
-          <tbody id="curve-feed-body"></tbody>
+      <p class="nft-status" id="launch-status" aria-live="polite"></p>
+      <h3 class="sub" data-i18n="launchFeedTitle"></h3>
+      <p class="hint" id="launch-feed-empty" data-i18n="launchFeedEmpty" hidden></p>
+      <p class="hint" id="launch-feed-error" data-i18n="launchFeedError" hidden></p>
+      <div class="tax-table-wrap" id="launch-feed-wrap" hidden>
+        <table class="tax-table launch-table">
+          <thead><tr><th data-i18n="launchFeedType"></th><th class="num">ETH</th><th class="num">$DIPDUCK</th><th data-i18n="launchFeedTime"></th><th data-i18n="launchFeedWallet"></th></tr></thead>
+          <tbody id="launch-feed-body"></tbody>
         </table>
       </div>
-      <p class="hint"><a id="curve-feed-all" target="_blank" rel="noopener" data-i18n="curveFeedAll"></a></p>
-      <p class="hint"><a id="curve-contract" target="_blank" rel="noopener" data-i18n="curveContractLink"></a></p>
-      <p class="hint" data-i18n="curveNote"></p>
+      <p class="hint"><a id="launch-feed-all" target="_blank" rel="noopener" data-i18n="launchFeedAll"></a></p>
+      <p class="hint"><a id="launch-pool" target="_blank" rel="noopener" data-i18n="launchPoolLink"></a> · <a id="launch-contract" target="_blank" rel="noopener" data-i18n="launchContractLink"></a></p>
+      <p class="hint" data-i18n="launchNote"></p>
     </section>
 
     <!-- ACHETER -->
@@ -616,7 +609,6 @@
       <h2 data-i18n="faqTitle"></h2>
       <div class="faq">
         <details><summary data-i18n="q8"></summary><p data-i18n="a8"></p></details>
-        <details><summary data-i18n="q9"></summary><p data-i18n="a9"></p></details>
         <details><summary data-i18n="q10"></summary><p data-i18n="a10"></p></details>
         <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
         <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
@@ -654,7 +646,7 @@
   <script src="i18n.js"></script>
   <script src="canvas-art.js"></script>
   <script src="app.js"></script>
-  <script src="curve.js"></script>
+  <script src="launch.js"></script>
   <script src="memes.js"></script>
   <script src="cards.js"></script>
   <script src="nft.js"></script>
