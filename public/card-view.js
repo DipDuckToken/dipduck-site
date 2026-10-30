@@ -14,6 +14,6 @@
     return;
   }
   await DipCards.render(DipCards.fromChain(id, card.traits, card), document.getElementById("card"));
-  msg.textContent = `Dip Duck Card #${id}`;
+  msg.textContent = `Dip Duck Card #${id}${card.trophy ? ` · ${t("cardTrophy")}` : ""}`;
   document.body.dataset.ready = "1"; // repère pour la génération des images
 })();

@@ -9,7 +9,9 @@
 // existaient déjà) ; une fondation approuvée entre dans la liste pour la période
 // suivante. Rien n'est versé avant la fin d'une période : n'importe qui la clôture,
 // les parts deviennent des soldes dus, puis n'importe qui déclenche le retrait d'un
-// destinataire (l'ETH ne va qu'à lui). Le wallet communauté (réserve) ne vote pas.
+// destinataire (l'ETH ne va qu'à lui). Le wallet communauté ne vote pas.
+// Édition Trophée : les 111 cartes de la réserve, données en prix de concours (une par
+// wallet), tirées à part (au moins « épique ») ; elles ne votent jamais.
 
 // ─── À remplir après le déploiement (voir README.md) ────────────────────────
 const NFT_CONFIG = {
@@ -38,7 +40,7 @@ const NFT = (() => {
     mint: "0x50bf0465", // mint(bytes32,uint8,uint8,uint16,uint256)
     revealMany: "0x7243af58", // revealMany(uint256[])
     traitsOf: "0x5efab6e4", // traitsOf(uint256)
-    cardOf: "0xc22b8d82", // cardOf(uint256)
+    cardOf: "0xc22b8d82", // cardOf(uint256) → (name, mood, element, lucky, commitBlock, revealed, trophy)
     totalMinted: "0xa2309ff8",
     tokensOfOwner: "0x8462151c", // tokensOfOwner(address)
     MINT_START: "0xc6374d0c",
@@ -157,6 +159,7 @@ const NFT = (() => {
       mood: Number(c[1]),
       element: Number(c[2]),
       commitBlock: Number(c[4]),
+      trophy: c[6] === 1n,
     };
   }
 
@@ -370,7 +373,7 @@ const NFT = (() => {
 
   async function cardTile(id) {
     const card = await loadCard(id);
-    const tile = element("article", undefined, "nft-tile");
+    const tile = element("article", undefined, card.trophy ? "nft-tile trophy" : "nft-tile");
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = 1080;
     tile.append(canvas);
@@ -385,7 +388,7 @@ const NFT = (() => {
       tile.append(button(t("nftDownload"), async () => DD.download(canvas, `dip-duck-card-${id}.png`)));
     } else {
       DD.pond(canvas.getContext("2d"), 1080, 1080);
-      caption.textContent = `#${id} · ${t("nftUnrevealed")}`;
+      caption.textContent = `#${id} · ${card.trophy ? `${t("cardTrophy")} · ` : ""}${t("nftUnrevealed")}`;
       tile.append(button(t("nftRevealNow"), () => reveal([id]).then(refresh)));
     }
     tile.append(caption, externalLink(`${EXPLORER}/token/${NFT_CONFIG.contract}/instance/${id}`, "Blockscout"));
@@ -480,11 +483,20 @@ const NFT = (() => {
     await refresh();
   }
 
+  /** Cartes du wallet qui votent : toutes sauf les cartes Trophée (le contrat les refuse). */
+  async function votingCards() {
+    const ids = await myCards();
+    if (sameAddress(account, info.community)) throw new Error(t("nftCommunityNoVote"));
+    const trophy = await Promise.all(ids.map(async (id) => words(await call(SEL.cardOf + word(id)))[6] === 1n));
+    const voters = ids.filter((_, i) => !trophy[i]);
+    if (ids.length > 0 && voters.length === 0) throw new Error(t("nftTrophyNoVote"));
+    return voters;
+  }
+
   async function voteNow() {
     const choice = document.querySelector('input[name="candidate"]:checked');
     if (!choice) throw new Error(t("nftPickCharity"));
-    const ids = await myCards();
-    if (sameAddress(account, info.community)) throw new Error(t("nftCommunityNoVote"));
+    const ids = await votingCards();
     const free = [];
     for (const id of ids) if ((await uint(SEL.hasVoted, word(info.round) + word(id))) === 0n) free.push(id);
     if (free.length === 0) throw new Error(t("nftNoVotes"));
@@ -539,8 +551,7 @@ const NFT = (() => {
   }
 
   async function voteProposal(p, support) {
-    const ids = await myCards();
-    if (sameAddress(account, info.community)) throw new Error(t("nftCommunityNoVote"));
+    const ids = await votingCards();
     // Seules les cartes qui existaient à la proposition (n° 1 à snapshot) votent.
     const free = [];
     for (const card of ids) if (card <= p.snapshot && (await uint(SEL.hasVotedProposal, word(p.id) + word(card))) === 0n) free.push(card);

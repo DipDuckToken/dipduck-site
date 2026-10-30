@@ -89,6 +89,10 @@ const DipCards = (() => {
     [100, "common", "#b3c0d3"],
   ];
   const tierOf = (top) => TIERS.find(([limit]) => top <= limit);
+  // Édition Trophée (prix de concours) : tirée à part par le contrat, sans les options les
+  // plus communes, donc toujours dans le top 5 % ; le palier affiché ne descend jamais sous « épique ».
+  const tierOfCard = (card) => tierOf(card.trophy ? Math.min(card.top, 5) : card.top);
+  const TROPHY_GOLD = "#ffd23f";
 
   // Étoiles d'un attribut : 1 (courant) à 5 (introuvable).
   function stars(p) {
@@ -838,6 +842,16 @@ const DipCards = (() => {
     ctx.restore();
   }
 
+  // Liseré doré en plus du cadre tiré : la marque visuelle de l'édition Trophée.
+  function trophyFrame() {
+    ctx.save();
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = TROPHY_GOLD;
+    ctx.setLineDash([28, 14]);
+    ctx.strokeRect(50, 50, S - 100, S - 100);
+    ctx.restore();
+  }
+
   function plate(text, x, y, align, color = "#ffffff", size = 40) {
     ctx.font = `700 ${size}px "Fredoka", sans-serif`;
     const w = ctx.measureText(text).width + 40;
@@ -878,10 +892,12 @@ const DipCards = (() => {
     item(card.item);
     weather(card.weather, rnd);
     frame(card.frame);
+    if (card.trophy) trophyFrame();
     emblem(card.element);
-    const [, tier, color] = tierOf(card.top);
+    const [, tier, color] = tierOfCard(card);
     plate(card.label ?? `DIP DUCK #${card.serial}`, 70, 70, "left");
     plate(t(`tier_${tier}`), S - 70, 70, "right", color);
+    if (card.trophy) plate(t("cardTrophy").toUpperCase(), 70, 152, "left", TROPHY_GOLD, 36);
     plate(`${card.name || "Dip Duck"} · ${t(`mood_${card.mood}`)}`, 70, S - 146, "left", DD.YELLOW, 40);
     plate(`${t("cardTop")} ${formatTop(card.top)}`, S - 70, S - 146, "right", color, 40);
   }
@@ -889,8 +905,9 @@ const DipCards = (() => {
   const formatTop = (top) => `${top < 1 ? top.toFixed(2) : top.toFixed(1)} %`;
 
   function tierLabel(card) {
-    const [, tier, color] = tierOf(card.top);
-    return { text: `${t(`tier_${tier}`)} · ${t("cardTop")} ${formatTop(card.top)}`, color };
+    const [, tier, color] = tierOfCard(card);
+    const edition = card.trophy ? `${t("cardTrophy")} · ` : "";
+    return { text: `${edition}${t(`tier_${tier}`)} · ${t("cardTop")} ${formatTop(card.top)}`, color };
   }
 
   /** Liste des attributs avec leurs étoiles de rareté. */
@@ -921,6 +938,7 @@ const DipCards = (() => {
       name: info.name,
       mood: MOODS[info.mood] ?? "calm",
       element: ELEMENTS[info.element] ?? "water",
+      trophy: info.trophy === true,
     };
     ORDER.forEach((trait, i) => {
       card[trait] = TRAITS[trait][traitIndexes[i]]?.[0] ?? TRAITS[trait][0][0];
@@ -931,7 +949,7 @@ const DipCards = (() => {
 
   function showDetails(card) {
     const label = tierLabel(card);
-    const [, tier] = tierOf(card.top);
+    const [, tier] = tierOfCard(card);
     const badge = document.getElementById("card-tier");
     badge.textContent = label.text;
     badge.style.setProperty("--tier", label.color);

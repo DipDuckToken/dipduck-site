@@ -234,7 +234,13 @@ const LEADERBOARD_CONFIG = {
   }
 
   // ─── Affichage ────────────────────────────────────────────────────────────
-  const short = (a) => `${a.slice(0, 6)}…${a.slice(-4)}`;
+  // Pseudo semi-masqué (« DipMaster » → « Di••••••r ») : aucune adresse ni lien vers un wallet n'est affiché.
+  const masked = (nick) => {
+    const chars = [...nick];
+    if (chars.length <= 3) return `${chars[0]}••`;
+    const head = chars.length >= 6 ? 2 : 1;
+    return chars.slice(0, head).join("") + "•".repeat(chars.length - head - 1) + chars[chars.length - 1];
+  };
   const locale = () => (currentLang === "zh" ? "zh-CN" : currentLang);
   const quarterName = (id) => `T${(id % 4) + 1} ${2026 + Math.floor(id / 4)}`;
 
@@ -247,13 +253,7 @@ const LEADERBOARD_CONFIG = {
   function row(entry, rank) {
     const tr = document.createElement("tr");
     if (account && entry.player.toLowerCase() === account.toLowerCase()) tr.className = "me";
-    const who = document.createElement("td");
-    const link = document.createElement("a");
-    link.href = `${EXPLORER}/address/${entry.player}`;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.textContent = entry.nick || short(entry.player);
-    who.append(link);
+    const who = cell(entry.nick ? masked(entry.nick) : `🦆 #${rank}`);
     tr.append(cell(`${rank}`), who, cell(DipGame.dateOf(entry.day)), cell(String(entry.caught)), cell(String(entry.coins)), cell(String(entry.score)));
     return tr;
   }

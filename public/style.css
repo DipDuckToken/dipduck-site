@@ -361,6 +361,7 @@ h3.sub { font-size: 1.6rem; margin: 48px 0 14px; }
 .nft-tile canvas { width: 100%; height: auto; border-radius: 10px; }
 .nft-tile p { font-weight: 800; font-size: .9rem; }
 .nft-tile a { font-size: .85rem; }
+.nft-tile.trophy { border: 2px solid #ffd23f; box-shadow: 0 0 0 3px rgba(255, 210, 63, .18); }
 .vote-list { list-style: none; padding: 0; margin: 0 0 18px; display: flex; flex-direction: column; gap: 10px; }
 .vote-list li { display: grid; grid-template-columns: minmax(160px, 1.2fr) 2fr auto auto; gap: 14px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; }
 .vote-list label { display: flex; gap: 10px; align-items: center; cursor: pointer; }
