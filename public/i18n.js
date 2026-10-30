@@ -406,6 +406,7 @@ Object.assign(I18N.en, {
   tier_uncommon: "Uncommon",
   tier_rare: "Rare",
   tier_epic: "Epic",
+  tier_mythic: "Mythic",
   tier_legendary: "Legendary",
   trait_bg: "Background",
   trait_duck: "Duck",
@@ -481,6 +482,7 @@ Object.assign(I18N.fr, {
   tier_uncommon: "Peu commune",
   tier_rare: "Rare",
   tier_epic: "Épique",
+  tier_mythic: "Mythique",
   tier_legendary: "Légendaire",
   trait_bg: "Fond",
   trait_duck: "Canard",
@@ -556,6 +558,7 @@ Object.assign(I18N.es, {
   tier_uncommon: "Poco común",
   tier_rare: "Rara",
   tier_epic: "Épica",
+  tier_mythic: "Mítica",
   tier_legendary: "Legendaria",
   trait_bg: "Fondo",
   trait_duck: "Pato",
@@ -631,6 +634,7 @@ Object.assign(I18N.zh, {
   tier_uncommon: "少见",
   tier_rare: "稀有",
   tier_epic: "史诗",
+  tier_mythic: "神话",
   tier_legendary: "传说",
   trait_bg: "背景",
   trait_duck: "鸭子",
@@ -1738,24 +1742,24 @@ Object.assign(I18N.zh, {
 Object.assign(I18N.en, {
   cardTrophy: "Trophy",
   nftTrophyFact: "Trophy edition (contest prizes)",
-  nftTrophyNote: "Trophy edition: the 111 reserve cards are free contest prizes, one per wallet for life, only for a wallet holding 2 cards or fewer. Drawn separately, always at least Epic, without changing the odds of minted cards. Trophy cards never vote.",
+  nftTrophyNote: "Trophy edition: the 111 reserve cards are free contest prizes, one per wallet for life, only for a wallet holding 2 cards or fewer. Drawn separately: about 70% Epic, 25% Legendary and 5% Mythic (never below Epic), without changing the odds of minted cards. Mythic is the top 0.1%: only about 3 minted cards out of 3,222. Trophy cards never vote.",
   nftTrophyNoVote: "Trophy cards (contest prizes) do not vote, and you have no other card.",
 });
 Object.assign(I18N.fr, {
   cardTrophy: "Trophée",
   nftTrophyFact: "Édition Trophée (prix de concours)",
-  nftTrophyNote: "Édition Trophée : les 111 cartes de réserve sont des prix de concours gratuits, une par wallet à vie, seulement pour un wallet qui détient 2 cartes ou moins. Tirées à part, toujours au moins Épiques, sans changer les chances des cartes mintées. Les cartes Trophée ne votent jamais.",
+  nftTrophyNote: "Édition Trophée : les 111 cartes de réserve sont des prix de concours gratuits, une par wallet à vie, seulement pour un wallet qui détient 2 cartes ou moins. Tirées à part : environ 70 % Épiques, 25 % Légendaires et 5 % Mythiques (jamais sous Épique), sans changer les chances des cartes mintées. Mythique = top 0,1 % : environ 3 cartes mintées sur 3 222. Les cartes Trophée ne votent jamais.",
   nftTrophyNoVote: "Les cartes Trophée (prix de concours) ne votent pas, et tu n'as pas d'autre carte.",
 });
 Object.assign(I18N.es, {
   cardTrophy: "Trofeo",
   nftTrophyFact: "Edición Trofeo (premios de concursos)",
-  nftTrophyNote: "Edición Trofeo: las 111 cartas de reserva son premios gratuitos de concursos, una por wallet para siempre, solo para un wallet con 2 cartas o menos. Se sortean aparte, siempre al menos Épicas, sin cambiar las probabilidades de las cartas minteadas. Las cartas Trofeo nunca votan.",
+  nftTrophyNote: "Edición Trofeo: las 111 cartas de reserva son premios gratuitos de concursos, una por wallet para siempre, solo para un wallet con 2 cartas o menos. Se sortean aparte: alrededor de 70 % Épicas, 25 % Legendarias y 5 % Míticas (nunca por debajo de Épica), sin cambiar las probabilidades de las cartas minteadas. Mítica = top 0,1 %: solo unas 3 cartas minteadas de 3.222. Las cartas Trofeo nunca votan.",
   nftTrophyNoVote: "Las cartas Trofeo (premios de concursos) no votan, y no tienes otra carta.",
 });
 Object.assign(I18N.zh, {
   cardTrophy: "奖杯",
   nftTrophyFact: "奖杯版（比赛奖品）",
-  nftTrophyNote: "奖杯版：111 张预留卡是免费的比赛奖品，每个钱包终身仅一张，且只发给持有 2 张或更少卡牌的钱包。单独抽取，至少为史诗级，不改变铸造卡牌的概率。奖杯卡永远不投票。",
+  nftTrophyNote: "奖杯版：111 张预留卡是免费的比赛奖品，每个钱包终身仅一张，且只发给持有 2 张或更少卡牌的钱包。单独抽取：约 70% 史诗、25% 传说、5% 神话（从不低于史诗），不改变铸造卡牌的概率。神话为前 0.1%：3,222 张铸造卡中仅约 3 张。奖杯卡永远不投票。",
   nftTrophyNoVote: "奖杯卡（比赛奖品）不投票，而你没有其他卡牌。",
 });

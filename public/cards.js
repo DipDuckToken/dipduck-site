@@ -60,10 +60,11 @@ const DipCards = (() => {
   const probability = (trait, value) => TRAITS[trait].find(([key]) => key === value)[1] / 1000;
   const rarityScore = (card) => ORDER.reduce((sum, trait) => sum - Math.log2(probability(trait, card[trait])), 0);
 
-  // Répartition des scores, simulée une fois : sert à dire « top X % ».
+  // Répartition des scores, simulée une fois : sert à dire « top X % ». 100 000 tirages
+  // pour que le seuil du palier mythique (top 0,1 % = 100 tirages) reste stable.
   const DISTRIBUTION = (() => {
     const scores = [];
-    for (let i = 0; i < 20_000; i++) {
+    for (let i = 0; i < 100_000; i++) {
       const card = {};
       for (const trait of ORDER) card[trait] = pick(TRAITS[trait], Math.random());
       scores.push(rarityScore(card));
@@ -81,7 +82,9 @@ const DipCards = (() => {
     return Math.max(0.01, (low / DISTRIBUTION.length) * 100);
   }
 
+  // Mythique : top 0,1 %, ≈ 3 cartes achetées sur 3 222 (un peu plus avec les secrets).
   const TIERS = [
+    [0.1, "mythic", "#ff3d81"],
     [1, "legendary", "#ff8a3d"],
     [5, "epic", "#c084fc"],
     [15, "rare", "#5ab8ff"],
@@ -89,8 +92,8 @@ const DipCards = (() => {
     [100, "common", "#b3c0d3"],
   ];
   const tierOf = (top) => TIERS.find(([limit]) => top <= limit);
-  // Édition Trophée (prix de concours) : tirée à part par le contrat, sans les options les
-  // plus communes, donc toujours dans le top 5 % ; le palier affiché ne descend jamais sous « épique ».
+  // Édition Trophée (prix de concours) : tirée à part par le contrat (≈ 70 % épiques, 25 %
+  // légendaires, 5 % mythiques), jamais sous le top 5 % ; le palier affiché ne descend jamais sous « épique ».
   const tierOfCard = (card) => tierOf(card.trophy ? Math.min(card.top, 5) : card.top);
   const TROPHY_GOLD = "#ffd23f";
 
