@@ -5,7 +5,8 @@
 // achat fait monter le prix, l'ETH des acheteurs reste dans le pool, chacun revend quand il veut.
 // La position Uniswap (NFT = clé du pool) reste pour toujours dans LaunchPool, qui n'a aucune
 // fonction pour la retirer : liquidité verrouillée à vie. Les frais d'échange de la position
-// vont au Safe communauté (collectFees, appelable par tous). Le créateur n'apporte aucun ETH.
+// (1 %) sont partagés par collectFees, appelable par tous : 60 % au Safe communauté
+// (FEE_RECIPIENT), 40 % au Safe de l'équipe (TEAM_FEE_RECIPIENT). Le créateur n'apporte aucun ETH.
 //
 // Anti-bot (appliqué par le token) : aucun achat avant OPEN_AT ; pendant 24 h ensuite, un wallet
 // ne peut pas détenir plus de 0,5 % de l'offre (1re heure), 1 % (jusqu'à 6 h), 2 % (jusqu'à 24 h).
@@ -36,6 +37,8 @@
     WETH: "0xad5c4648", // WETH()
     POSITION_MANAGER: "0x1bea83fe", // POSITION_MANAGER()
     POSITION_ID: "0xd7ac71ff", // POSITION_ID()
+    FEE_RECIPIENT: "0xebd09054", // FEE_RECIPIENT() : Safe communauté, 60 % des frais
+    TEAM_FEE_RECIPIENT: "0x5e99fc91", // TEAM_FEE_RECIPIENT() : Safe de l'équipe, 40 % des frais
   };
   const POOL_SEL = {
     slot0: "0x3850c7bd", // slot0() → (sqrtPriceX96, tick, …)
@@ -147,6 +150,10 @@
     // « Vérifie toi-même » (app.js) : la position (NFT) et le pool, lus ici dans LaunchPool.
     showVerify("v-position", `${EXPLORER}/token/${npm}/instance/${positionId}`);
     showVerify("v-pool", `${EXPLORER}/address/${pool}`);
+    // Frais du pool : les deux destinataires, gravés dans LaunchPool.
+    const [community, team] = await Promise.all([SEL.FEE_RECIPIENT, SEL.TEAM_FEE_RECIPIENT].map((s) => addressOf(LAUNCHER, s)));
+    showVerify("v-fees", `${EXPLORER}/address/${community}`);
+    $("v-fees-team").href = `${EXPLORER}/address/${team}`;
   }
 
   async function loadState() {

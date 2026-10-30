@@ -118,7 +118,8 @@ function applyConfig() {
 
 // ─── Vérifie toi-même : un lien Blockscout par promesse ──────────────────────
 // Chaque ligne reste masquée tant que son adresse n'est pas dans CONFIG. Les lignes de la
-// position (NFT) et du pool sont remplies par launch.js (adresses lues dans LaunchPool).
+// position (NFT), du pool et des frais (deux Safe) sont remplies par launch.js (adresses lues
+// dans LaunchPool).
 function showVerify(id, url) {
   const row = document.getElementById(id);
   if (!row) return;
@@ -133,7 +134,6 @@ function applyVerify() {
     ["v-token", CONFIG.contract, (a) => `${EXPLORER}/address/${a}?tab=contract`],
     ["v-vesting", CONFIG.vesting, (a) => `${EXPLORER}/address/${a}?tab=tokens`],
     ["v-safe", CONFIG.communityWallet, (a) => `${EXPLORER}/address/${a}?tab=read_proxy`],
-    ["v-fees", CONFIG.launcher, (a) => `${EXPLORER}/address/${a}?tab=read_contract`],
     ["v-deployer", CONFIG.deployer, (a) => `${EXPLORER}/address/${a}?tab=tokens`],
   ];
   for (const [id, address, url] of lines) if (isAddress(address)) showVerify(id, url(address));

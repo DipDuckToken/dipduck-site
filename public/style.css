@@ -485,4 +485,5 @@ h4.mini { font-family: var(--font-head); font-size: 1.15rem; margin: 28px 0 10px
 .verify-list .ic { color: var(--yellow); }
 .verify-list p { margin: 2px 0 0; color: var(--muted); font-size: .92rem; }
 .verify-list a { color: var(--water); font-weight: 800; white-space: nowrap; }
-@media (max-width: 640px) { .verify-list li { grid-template-columns: auto 1fr; } .verify-list a { grid-column: 2; } }
+.verify-links { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+@media (max-width: 640px) { .verify-list li { grid-template-columns: auto 1fr; } .verify-list a, .verify-links { grid-column: 2; } .verify-links { align-items: flex-start; } }
