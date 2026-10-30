@@ -368,6 +368,7 @@ footer { display: flex; align-items: center; justify-content: center; gap: 10px;
 .s-community { width: 40%; background: var(--yellow); }
 .s-charity { width: 30%; background: var(--water); }
 .dot-f, .dot-c, .dot-h { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin: 0 4px 0 8px; }
+.split-key { display: inline-flex; align-items: center; }
 .dot-f { background: var(--orange); } .dot-c { background: var(--yellow); } .dot-h { background: var(--water); }
 .nft-progress-wrap { color: var(--muted); font-weight: 700; }
 .nft-progress-wrap strong { color: var(--text); }
@@ -446,3 +447,18 @@ h4.mini { font-family: var(--font-head); font-size: 1.15rem; margin: 28px 0 10px
 .lb-submit .field { flex: 1 1 280px; }
 .lb-table { min-width: 520px; }
 .lb-table tr.me td { background: rgba(255,210,63,.12); }
+
+/* ── Téléphone : titres, accueil et pastilles centrés ─── */
+@media (max-width: 640px) {
+  .hero-text { text-align: center; }
+  .hero-text .lead { margin-left: auto; margin-right: auto; }
+  .badges { justify-content: center; }
+  .ca { justify-content: center; text-align: center; }
+  .ca.pending .ca-value { word-break: normal; overflow-wrap: anywhere; flex-basis: 100%; }
+  .kicker, .section > h2, .section-lead { text-align: center; }
+  .section-lead { margin-left: auto; margin-right: auto; }
+  .nft-facts { grid-template-columns: 1fr 1fr; }
+  .nft-facts li:last-child:nth-child(odd) { grid-column: 1 / -1; align-items: center; text-align: center; }
+  .nft-split p { text-align: center; }
+  .nft-split .hint { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 6px; row-gap: 4px; }
+}

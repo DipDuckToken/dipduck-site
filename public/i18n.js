@@ -1,6 +1,6 @@
-// Textes du site, en 4 langues. Règle : aucune promesse (ni rendement, ni prix,
+// Textes du site, en 4 langues. Règle : aucune promesse (ni rendement, ni prix,
 // ni feuille de route) et toujours « non affilié à Robinhood ».
-// « marquee » : phrases du bandeau défilant, séparées par « | ».
+// « marquee » : phrases du bandeau défilant, séparées par « | ».
 const I18N = {
   en: {
     navStory: "Story", navTokenomics: "Tokenomics", navUnlock: "Unlock", navBuy: "How to buy", navFaq: "FAQ",
@@ -68,9 +68,9 @@ const I18N = {
     statsSoon: "Les chiffres en direct s'affichent ici dès l'ouverture du pool.",
     statsLive: "Données en direct de DexScreener, mises à jour chaque minute.",
     storyKicker: "L'histoire", storyTitle: "Un canard. Une baisse. Zéro panique.",
-    story1Title: "La baisse", story1Text: "Chaque graphique a ce moment : bougies rouges, panique, tout le monde court vers la sortie.",
+    story1Title: "La baisse", story1Text: "Chaque graphique a ce moment : bougies rouges, panique, tout le monde court vers la sortie.",
     story2Title: "Le canard", story2Text: "Un canard reste calme sur l'eau. Pendant que les autres fuient, il pagaie droit vers la baisse. Coin coin.",
-    story3Title: "La mare", story3Text: "Dip Duck, c'est ce canard en token : un mème pour tous ceux qui ont déjà acheté la baisse. Des règles fixes, rien de caché, aucune promesse.",
+    story3Title: "La mare", story3Text: "Dip Duck, c'est ce canard en token : un mème pour tous ceux qui ont déjà acheté la baisse. Des règles fixes, rien de caché, aucune promesse.",
     tokKicker: "Tokenomics", tokTitle: "Simple, fixe, vérifiable.",
     tokPool: "Pool de liquidité", tokPoolText: "870 000 000 tokens mis dans le pool Uniswap v2 au lancement, en une seule transaction. Parts LP brûlées.",
     tokTeam: "Équipe, bloqués", tokTeamText: "100 000 000 tokens bloqués dans un contrat de vesting public avant l'ouverture du marché.",
@@ -93,14 +93,14 @@ const I18N = {
     how2Title: "De l'ETH sur le réseau", how2: "Fais passer de l'ETH avec un pont officiel (docs.robinhood.com/chain/bridging).",
     how3Title: "Copie le contrat", how3: "Copie l'adresse officielle depuis ce site. Jamais depuis un message privé.",
     how4Title: "Échange", how4: "Échange de l'ETH contre des $DIPDUCK sur Uniswap en collant l'adresse.",
-    network: "Réseau : Robinhood Chain (chain ID 4663). Les frais se paient en ETH.",
+    network: "Réseau : Robinhood Chain (chain ID 4663). Les frais se paient en ETH.",
     faqTitle: "Tes questions, nos réponses.",
-    q1: "Y a-t-il une taxe à l'achat ou à la vente ?", a1: "Non. 0 %. Le contrat n'a aucune fonction de taxe.",
-    q2: "Peut-on créer de nouveaux tokens ?", a2: "Non. Toute l'offre a été émise une seule fois, au déploiement. Il n'existe ni fonction d'émission, ni owner.",
-    q3: "La liquidité peut-elle être retirée ?", a3: "Non. Les parts LP ont été envoyées directement à l'adresse morte à l'ouverture du pool — c'est visible dans la transaction.",
-    q4: "Quand l'équipe peut-elle vendre ?", a4: "Rien avant le jour 90. Puis 10 % de sa part, puis le reste progressivement jusqu'au jour 900. Le contrat de vesting est public sur Blockscout.",
-    q5: "Dip Duck est-il affilié à Robinhood ?", a5: "Non. Dip Duck utilise seulement Robinhood Chain comme réseau technique. Il n'est ni affilié à Robinhood, ni approuvé, ni parrainé par Robinhood.",
-    q6: "Comment éviter les faux tokens ?", a6: "Utilise uniquement l'adresse publiée sur ce site et sur nos comptes officiels. N'importe qui peut créer un token du même nom. Ignore les messages privés.",
+    q1: "Y a-t-il une taxe à l'achat ou à la vente ?", a1: "Non. 0 %. Le contrat n'a aucune fonction de taxe.",
+    q2: "Peut-on créer de nouveaux tokens ?", a2: "Non. Toute l'offre a été émise une seule fois, au déploiement. Il n'existe ni fonction d'émission, ni owner.",
+    q3: "La liquidité peut-elle être retirée ?", a3: "Non. Les parts LP ont été envoyées directement à l'adresse morte à l'ouverture du pool — c'est visible dans la transaction.",
+    q4: "Quand l'équipe peut-elle vendre ?", a4: "Rien avant le jour 90. Puis 10 % de sa part, puis le reste progressivement jusqu'au jour 900. Le contrat de vesting est public sur Blockscout.",
+    q5: "Dip Duck est-il affilié à Robinhood ?", a5: "Non. Dip Duck utilise seulement Robinhood Chain comme réseau technique. Il n'est ni affilié à Robinhood, ni approuvé, ni parrainé par Robinhood.",
+    q6: "Comment éviter les faux tokens ?", a6: "Utilise uniquement l'adresse publiée sur ce site et sur nos comptes officiels. N'importe qui peut créer un token du même nom. Ignore les messages privés.",
     ctaTitle: "Rejoins la mare.", ctaText: "Suis Dip Duck et rencontre les autres canards. Aucune promesse — juste des coin-coin.",
     disclaimerTitle: "Avertissement",
     disclaimer: "$DIPDUCK est un token mème sans valeur intrinsèque et sans attente de rendement financier. Il n'y a ni feuille de route, ni promesse, ni dividende. Son prix peut tomber à zéro. N'achète que ce que tu peux te permettre de perdre. Rien sur ce site n'est un conseil financier. Dip Duck n'est ni affilié à Robinhood Markets, Inc. ou à ses sociétés liées, ni approuvé, ni parrainé par elles.",
@@ -213,7 +213,7 @@ const I18N = {
 };
 
 // Mèmes, jeu, kit média, compte à rebours, détenteurs et réserve communauté.
-// « memeCaptions » : paires « haut / bas » séparées par « | ».
+// « memeCaptions » : paires « haut / bas » séparées par « | ».
 Object.assign(I18N.en, {
   navMemes: "Memes", navGame: "Game",
   cdTitle: "Launch in", cdDays: "days", cdHours: "hours", cdMin: "min", cdSec: "sec",
@@ -243,7 +243,7 @@ Object.assign(I18N.fr, {
   cdTitle: "Lancement dans", cdDays: "jours", cdHours: "heures", cdMin: "min", cdSec: "s",
   statHolders: "Canards dans la mare",
   tokCommunity: "Communauté", tokCommunityText: "30 000 000 tokens dans un wallet public, réservés aux concours de mèmes et aux récompenses de la communauté. Chaque mouvement est visible sur la chaîne.",
-  q7: "À quoi sert la réserve communauté ?", a7: "3 % de l'offre sont dans un wallet public dédié, utilisé seulement pour les concours de mèmes et les récompenses de la communauté. Tout le monde peut le suivre sur Blockscout.",
+  q7: "À quoi sert la réserve communauté ?", a7: "3 % de l'offre sont dans un wallet public dédié, utilisé seulement pour les concours de mèmes et les récompenses de la communauté. Tout le monde peut le suivre sur Blockscout.",
   memesKicker: "Labo à mèmes", memesTitle: "Crée ton propre mème Dip Duck.",
   memesLead: "Choisis un modèle, écris ta légende, télécharge et publie. Chaque mème agrandit la mare.",
   memeTemplate: "Modèle", tplClassic: "Classique", tplChart: "Graphique rouge", tplCalm: "Reste calme",
@@ -251,13 +251,13 @@ Object.assign(I18N.fr, {
   memeDownload: "Télécharger le PNG", memeShare: "Publier sur X",
   memeHint: "Sur X, joins l'image que tu viens de télécharger. Ajoute $DIPDUCK.",
   memeShareText: "J'ai fait mon mème Dip Duck. Achète la baisse. Coin coin. $DIPDUCK",
-  memeCaptions: "LE GRAPHIQUE EST ROUGE / JE SUIS UN CANARD, JE FLOTTE|TOUT LE MONDE PANIQUE / MOI : COIN COIN|ENCORE UNE BAISSE ? / ENCORE UN GOÛTER|ILS ONT VENDU AU PLUS BAS / MOI J'AI ACHETÉ|-40 % AUJOURD'HUI / TOUJOURS CALME SUR L'EAU|QUAND LA BOUGIE EST ROUGE / JE PAGAIE VERS ELLE",
+  memeCaptions: "LE GRAPHIQUE EST ROUGE / JE SUIS UN CANARD, JE FLOTTE|TOUT LE MONDE PANIQUE / MOI : COIN COIN|ENCORE UNE BAISSE ? / ENCORE UN GOÛTER|ILS ONT VENDU AU PLUS BAS / MOI J'AI ACHETÉ|-40 % AUJOURD'HUI / TOUJOURS CALME SUR L'EAU|QUAND LA BOUGIE EST ROUGE / JE PAGAIE VERS ELLE",
   gameKicker: "Mini-jeu", gameTitle: "Attrape la baisse.",
   gameLead: "La courbe du prix défile sous le canard. Touche l'écran (ou appuie sur espace) pile quand le canard arrive au fond d'une baisse. Plus tu es précis, plus tu marques. Trois baisses ratées et la partie est finie.",
-  gameStart: "Touche pour commencer", gameTap: "Touche au fond de chaque baisse", gamePerfect: "PARFAIT !", gameGood: "BIEN", gameMiss: "RATÉ",
+  gameStart: "Touche pour commencer", gameTap: "Touche au fond de chaque baisse", gamePerfect: "PARFAIT !", gameGood: "BIEN", gameMiss: "RATÉ",
   gameOver: "Partie terminée", gameScore: "Score", gameBest: "Record", gameRetry: "Touche pour rejouer",
   gameShare: "Partager mon score", gameFull: "Plein écran",
-  gameShareText: "J'ai attrapé {score} baisses dans Dip Duck. Tu fais mieux ? Coin coin. $DIPDUCK",
+  gameShareText: "J'ai attrapé {score} baisses dans Dip Duck. Tu fais mieux ? Coin coin. $DIPDUCK",
   kitKicker: "Kit média", kitTitle: "Tout pour faire connaître le canard.",
   kitLead: "Libre d'utilisation pour les mèmes, les posts et le contenu de la communauté. Merci de ne pas modifier le logo ni de l'utiliser pour promouvoir autre chose.",
   kitLogo: "Logo", kitLogoHd: "Logo, haute définition", kitBanner: "Bannière X", kitOg: "Image de partage",
@@ -311,7 +311,7 @@ Object.assign(I18N.zh, {
   kitLogo: "标志", kitLogoHd: "高清标志", kitBanner: "X 横幅", kitOg: "分享图片",
 });
 
-// Jeu sur la vraie courbe du Bitcoin : niveaux (époques) et textes mis à jour.
+// Jeu sur la vraie courbe du Bitcoin : niveaux (époques) et textes mis à jour.
 Object.assign(I18N.en, {
   gameLead: "Ride the real Bitcoin chart, day by day, from 2010 to today. Tap (or press space) exactly when the duck reaches the bottom of a real dip — the deeper the dip, the bigger the bonus. Crash days scroll faster: a −20% day rushes by, a −2% day barely speeds up. Each era of Bitcoin is a level. Miss three dips and the round is over.",
   gameShareText: "I scored {score} points riding the real Bitcoin chart in Dip Duck. Can you beat me? Quack. $DIPDUCK",
@@ -330,11 +330,11 @@ Object.assign(I18N.en, {
   lvl10: "New highs",
 });
 Object.assign(I18N.fr, {
-  gameLead: "Glisse sur la vraie courbe du Bitcoin, jour après jour, de 2010 à aujourd'hui. Touche l'écran (ou appuie sur espace) pile quand le canard arrive au fond d'une vraie baisse : plus elle est profonde, plus le bonus est gros. Les jours de krach défilent plus vite : un jour à −20 % file, un jour à −2 % accélère à peine. Chaque époque du Bitcoin est un niveau. Trois baisses ratées et la partie est finie.",
-  gameShareText: "J'ai fait {score} points sur la vraie courbe du Bitcoin dans Dip Duck. Tu fais mieux ? Coin coin. $DIPDUCK",
+  gameLead: "Glisse sur la vraie courbe du Bitcoin, jour après jour, de 2010 à aujourd'hui. Touche l'écran (ou appuie sur espace) pile quand le canard arrive au fond d'une vraie baisse : plus elle est profonde, plus le bonus est gros. Les jours de krach défilent plus vite : un jour à −20 % file, un jour à −2 % accélère à peine. Chaque époque du Bitcoin est un niveau. Trois baisses ratées et la partie est finie.",
+  gameShareText: "J'ai fait {score} points sur la vraie courbe du Bitcoin dans Dip Duck. Tu fais mieux ? Coin coin. $DIPDUCK",
   gameLevel: "Niveau",
   gameStartFrom: "Partir de",
-  gameFinished: "Tu as traversé toute l'histoire du Bitcoin !",
+  gameFinished: "Tu as traversé toute l'histoire du Bitcoin !",
   lvl1: "Genèse",
   lvl2: "Première bulle",
   lvl3: "Long hiver",
@@ -381,7 +381,7 @@ Object.assign(I18N.zh, {
   lvl10: "再创新高",
 });
 
-// Cartes de collection (style NFT) : onglets, choix, rareté et attributs.
+// Cartes de collection (style NFT) : onglets, choix, rareté et attributs.
 Object.assign(I18N.en, {
   tabMeme: "Meme",
   tabCard: "Collectible card",
@@ -476,8 +476,8 @@ Object.assign(I18N.fr, {
   element_ice: "Glace",
   element_thunder: "Foudre",
   cardTop: "Top",
-  cardShareText: "J'ai fait éclore un Dip Duck {tier} (#{serial}). Et le tien ? Coin coin. $DIPDUCK",
-  cardNote: "Cartes de collection pour le plaisir, style NFT : elles ne sont pas enregistrées sur une blockchain et n'ont aucune valeur financière. Ce qui rend une carte rare reste secret.",
+  cardShareText: "J'ai fait éclore un Dip Duck {tier} (#{serial}). Et le tien ? Coin coin. $DIPDUCK",
+  cardNote: "Cartes de collection pour le plaisir, style NFT : elles ne sont pas enregistrées sur une blockchain et n'ont aucune valeur financière. Ce qui rend une carte rare reste secret.",
   tier_common: "Commune",
   tier_uncommon: "Peu commune",
   tier_rare: "Rare",
@@ -693,7 +693,7 @@ I18N.fr.lvlYear = "Année {year}";
 I18N.es.lvlYear = "Año {year}";
 I18N.zh.lvlYear = "{year} 年";
 
-// Cartes : joues, objet et météo.
+// Cartes : joues, objet et météo.
 Object.assign(I18N.en, {
   trait_cheeks: "Cheeks",
   trait_item: "Item",
@@ -779,7 +779,7 @@ Object.assign(I18N.zh, {
   weather_meteor: "流星雨",
 });
 
-// NFT Dip Duck Cards : mint, révélation, vote et trésorerie.
+// NFT Dip Duck Cards : mint, révélation, vote et trésorerie.
 Object.assign(I18N.en, {
   nftTitle: "Real collectible cards, on-chain.",
   nftLead: "Each Dip Duck Card is a real NFT on Robinhood Chain: your choices plus on-chain chance decide its traits. Collectibles only — no price, no yield, nothing to expect.",
@@ -827,7 +827,7 @@ Object.assign(I18N.en, {
 });
 Object.assign(I18N.fr, {
   nftTitle: "De vraies cartes de collection, sur la chaîne.",
-  nftLead: "Chaque Dip Duck Card est un vrai NFT sur Robinhood Chain : tes choix et le hasard de la chaîne décident de ses attributs. Objet de collection uniquement : aucun prix, aucun rendement, rien à attendre.",
+  nftLead: "Chaque Dip Duck Card est un vrai NFT sur Robinhood Chain : tes choix et le hasard de la chaîne décident de ses attributs. Objet de collection uniquement : aucun prix, aucun rendement, rien à attendre.",
   nftCdTitle: "Ouverture du mint dans",
   nftSupply: "Offre",
   nftPrice: "Prix",
@@ -841,7 +841,7 @@ Object.assign(I18N.fr, {
   nftQuantity: "Quantité (1 à 10)",
   nftMint: "Minter mes cartes",
   nftConnect: "Connecter le wallet",
-  nftNote: "Objets de collection pour le plaisir : adossés à aucun prix, sans droit ni rendement. Le hasard vient de la chaîne (pseudo-aléatoire, non certifié : aucun oracle VRF n'existe encore sur Robinhood Chain). La revente est possible sur OpenSea, qui prend en charge Robinhood Chain.",
+  nftNote: "Objets de collection pour le plaisir : adossés à aucun prix, sans droit ni rendement. Le hasard vient de la chaîne (pseudo-aléatoire, non certifié : aucun oracle VRF n'existe encore sur Robinhood Chain). La revente est possible sur OpenSea, qui prend en charge Robinhood Chain.",
   nftMine: "Mes cartes",
   nftMineEmpty: "Aucune carte dans ce wallet pour l'instant.",
   nftVoteTitle: "Vote pour la fondation",
@@ -851,15 +851,15 @@ Object.assign(I18N.fr, {
   nftCharityWaiting: "Fondation, en attente",
   nftCharityPaid: "Fondation, déjà versé",
   nftContractLink: "Voir le contrat sur Blockscout",
-  nftNoWallet: "Aucun wallet trouvé : installe MetaMask ou Rabby.",
+  nftNoWallet: "Aucun wallet trouvé : installe MetaMask ou Rabby.",
   nftPending: "Transaction envoyée :",
   nftFailed: "La transaction a échoué sur la chaîne. Rien n'a été minté, hors frais.",
-  nftSlow: "Confirmation toujours en attente : vérifie ton wallet, puis recharge la page.",
-  nftNameRule: "Nom : 20 caractères au plus, lettres, chiffres, espaces, . _ -",
+  nftSlow: "Confirmation toujours en attente : vérifie ton wallet, puis recharge la page.",
+  nftNameRule: "Nom : 20 caractères au plus, lettres, chiffres, espaces, . _ -",
   nftConfirmMint: "Confirme le mint dans ton wallet…",
   nftHatching: "Éclosion en cours… le hasard se fixe dans une trentaine de secondes.",
   nftConfirmReveal: "Confirme la révélation dans ton wallet (une seule transaction pour toutes tes nouvelles cartes)…",
-  nftDone: "Tes canards ont éclos !",
+  nftDone: "Tes canards ont éclos !",
   nftUnrevealed: "pas encore révélée",
   nftRevealNow: "Révéler",
   nftVotes: "voix",
@@ -868,7 +868,7 @@ Object.assign(I18N.fr, {
   nftPickCharity: "Choisis d'abord une fondation.",
   nftNoVotes: "Toutes tes cartes ont déjà voté (ou tu n'en as pas).",
   nftConfirmVote: "Confirme le vote de {n} carte(s) dans ton wallet…",
-  nftVoted: "Vote enregistré. Merci !",
+  nftVoted: "Vote enregistré. Merci !",
 });
 Object.assign(I18N.es, {
   nftTitle: "Cartas coleccionables reales, en la cadena.",
@@ -963,11 +963,11 @@ Object.assign(I18N.zh, {
 
 // Versements seulement après la fin du vote.
 I18N.en.nftVoteLead = "1 card = 1 vote, recorded in the contract. Until the vote ends, all the mint money stays locked in the contract — founders included. Then anyone can trigger every payout: the winning charity, the founders and the community. Everything is visible on Blockscout.";
-I18N.fr.nftVoteLead = "1 carte = 1 voix, enregistrée dans le contrat. Jusqu'à la fin du vote, tout l'argent des mints reste bloqué dans le contrat, fondateurs compris. Ensuite, n'importe qui peut déclencher tous les versements : la fondation gagnante, les fondateurs et la communauté. Tout est visible sur Blockscout.";
+I18N.fr.nftVoteLead = "1 carte = 1 voix, enregistrée dans le contrat. Jusqu'à la fin du vote, tout l'argent des mints reste bloqué dans le contrat, fondateurs compris. Ensuite, n'importe qui peut déclencher tous les versements : la fondation gagnante, les fondateurs et la communauté. Tout est visible sur Blockscout.";
 I18N.es.nftVoteLead = "1 carta = 1 voto, registrado en el contrato. Hasta el final de la votación, todo el dinero de los mints queda bloqueado en el contrato, incluidos los fundadores. Después, cualquiera puede activar todos los pagos: la fundación ganadora, los fundadores y la comunidad. Todo es visible en Blockscout.";
 I18N.zh.nftVoteLead = "1 张卡 = 1 票，记录在合约中。投票结束前，所有铸造资金都锁在合约里，创始人也不例外。投票结束后，任何人都可以触发全部发放：获胜的慈善基金、创始人和社区。一切都可在 Blockscout 上查看。";
 
-// Fondations : cagnottes par période, propositions, trésorerie.
+// Fondations : cagnottes par période, propositions, trésorerie.
 Object.assign(I18N.en, {
   nftVoteLead: "One pot per 30-day period. During the period, every card votes once for a charity; when the period ends, anyone can send that pot to the winner. Until then, all the mint money stays locked in the contract — founders included. The next mints fill the next pot, with a new vote.",
   nftRoundTitle: "Period {n} pot: {pot}",
@@ -1016,7 +1016,7 @@ Object.assign(I18N.en, {
 });
 Object.assign(I18N.fr, {
   nftVoteLead: "Une cagnotte par période de 30 jours. Pendant la période, chaque carte vote une fois pour une fondation ; à la fin, n'importe qui peut envoyer la cagnotte à la gagnante. D'ici là, tout l'argent des mints reste bloqué dans le contrat, fondateurs compris. Les mints suivants remplissent la cagnotte suivante, avec un nouveau vote.",
-  nftRoundTitle: "Cagnotte de la période {n} : {pot}",
+  nftRoundTitle: "Cagnotte de la période {n} : {pot}",
   nftRoundEnds: "Cette période se termine le",
   nftWebsite: "site",
   nftUpcoming: "Entrent dans la liste à la prochaine cagnotte :",
@@ -1033,14 +1033,14 @@ Object.assign(I18N.fr, {
   nftPropName: "Nom de la fondation",
   nftPropWallet: "Son adresse de wallet (Robinhood Chain)",
   nftPropUrl: "Site officiel (facultatif)",
-  nftPropText: "Pourquoi la soutenir ? (280 caractères au plus)",
+  nftPropText: "Pourquoi la soutenir ? (280 caractères au plus)",
   nftPropose: "Publier ma proposition",
   nftProposeRules: "Il faut au moins une carte. Une proposition par wallet et par période. Affichée en texte brut, visible par tous.",
   nftNoProposals: "Aucune proposition pour l'instant.",
   nftProposedBy: "proposée par",
   nftYes: "Oui",
   nftNo: "Non",
-  nftQuorum: "quorum : {n} voix",
+  nftQuorum: "quorum : {n} voix",
   nftVoteYes: "Voter oui",
   nftVoteNo: "Voter non",
   nftFinalize: "Clore le vote",
@@ -1052,7 +1052,7 @@ Object.assign(I18N.fr, {
   nftBadAddress: "Adresse de wallet invalide.",
   nftBadUrl: "Le site doit commencer par https://",
   nftNeedCard: "Il faut au moins une Dip Duck Card pour proposer une fondation.",
-  nftProposed: "Proposition publiée ! Le vote est ouvert jusqu'à la fin de la période.",
+  nftProposed: "Proposition publiée ! Le vote est ouvert jusqu'à la fin de la période.",
   nftTreasuryLead: "En direct du contrat. Les parts ne sont versées que pour les périodes terminées, toujours vers les adresses fixes ; n'importe qui peut les déclencher.",
   nftFoundersAvailable: "Fondateurs, versable",
   nftCommunityAvailable: "Communauté, versable",
@@ -1153,7 +1153,7 @@ Object.assign(I18N.zh, {
   nftSend: "发放",
 });
 
-// « Mon suivi » : historique pour la déclaration.
+// « Mon suivi » : historique pour la déclaration.
 Object.assign(I18N.en, {
   navTax: "My tracking",
   taxKicker: "My tracking",
@@ -1196,7 +1196,7 @@ Object.assign(I18N.fr, {
   navTax: "Mon suivi",
   taxKicker: "Mon suivi",
   taxTitle: "Tout ce que tu as fait avec Dip Duck, prêt pour ta déclaration.",
-  taxLead: "Connecte ton wallet (ou colle une adresse) : chaque achat et vente de DIPDUCK, chaque carte mintée ou échangée et chaque versement reçu, avec la date, le montant en ETH et sa valeur en CAD et en USD ce jour-là. Chaque ligne renvoie à sa preuve publique sur Blockscout.",
+  taxLead: "Connecte ton wallet (ou colle une adresse) : chaque achat et vente de DIPDUCK, chaque carte mintée ou échangée et chaque versement reçu, avec la date, le montant en ETH et sa valeur en CAD et en USD ce jour-là. Chaque ligne renvoie à sa preuve publique sur Blockscout.",
   taxSoon: "Disponible dès le lancement du token.",
   taxAddress: "Adresse du wallet",
   taxShow: "Afficher l'historique",
@@ -1217,7 +1217,7 @@ Object.assign(I18N.fr, {
   taxColOut: "ETH payés",
   taxColFee: "Frais (ETH)",
   taxColProof: "Preuve",
-  taxNote: "Valeurs : cours de clôture quotidien ETH/USD (Coinbase) × taux quotidien USD/CAD de la Banque du Canada, celui qu'accepte l'ARC. ≈ = estimation au cours du jour. Les prix de vente sur les places de marché (OpenSea) n'apparaissent que s'ils sont payés en ETH à ton wallet. Les frais des transactions sans transfert (révélation, vote) ne sont pas listés. Aide à la tenue de registres, pas un conseil fiscal.",
+  taxNote: "Valeurs : cours de clôture quotidien ETH/USD (Coinbase) × taux quotidien USD/CAD de la Banque du Canada, celui qu'accepte l'ARC. ≈ = estimation au cours du jour. Les prix de vente sur les places de marché (OpenSea) n'apparaissent que s'ils sont payés en ETH à ton wallet. Les frais des transactions sans transfert (révélation, vote) ne sont pas listés. Aide à la tenue de registres, pas un conseil fiscal.",
   taxBuyToken: "Achat de DIPDUCK",
   taxSellToken: "Vente de DIPDUCK",
   taxReceiveToken: "DIPDUCK reçus",
@@ -1307,27 +1307,27 @@ Object.assign(I18N.zh, {
   taxPayout: "收到款项（NFT 合约）",
 });
 
-// Suivi : limite de débit de Blockscout.
+// Suivi : limite de débit de Blockscout.
 I18N.en.taxRateLimit = "Blockscout's request limit is reached, resuming in {s} s…";
 I18N.fr.taxRateLimit = "Limite de requêtes de Blockscout atteinte, reprise dans {s} s…";
 I18N.es.taxRateLimit = "Se alcanzó el límite de peticiones de Blockscout, se reanuda en {s} s…";
 I18N.zh.taxRateLimit = "已达到 Blockscout 的请求上限，{s} 秒后继续…";
 
-// Règle de secours : 3 périodes sans vote.
+// Règle de secours : 3 périodes sans vote.
 I18N.en.nftFallbackLast = "No vote for 3 periods: send to {name} (last winner)";
-I18N.fr.nftFallbackLast = "3 périodes sans vote : envoyer à {name} (dernière gagnante)";
+I18N.fr.nftFallbackLast = "3 périodes sans vote : envoyer à {name} (dernière gagnante)";
 I18N.es.nftFallbackLast = "3 periodos sin votos: enviar a {name} (última ganadora)";
 I18N.zh.nftFallbackLast = "连续 3 期无人投票：发送给 {name}（上一次获胜者）";
 I18N.en.nftFallbackSplit = "No vote yet for 3 periods: split equally between the charities";
-I18N.fr.nftFallbackSplit = "Aucun vote depuis 3 périodes : partager à parts égales entre les fondations";
+I18N.fr.nftFallbackSplit = "Aucun vote depuis 3 périodes : partager à parts égales entre les fondations";
 I18N.es.nftFallbackSplit = "Ningún voto en 3 periodos: repartir a partes iguales entre las fundaciones";
 I18N.zh.nftFallbackSplit = "连续 3 期从未有人投票：在各慈善基金之间平均分配";
 I18N.en.nftVoteLead += " If nobody votes for 3 periods in a row, the pot goes to the last charity the community made win (or is split equally if there has never been a vote): it can never stay locked.";
-I18N.fr.nftVoteLead += " Si personne ne vote pendant 3 périodes de suite, la cagnotte va à la dernière fondation que la communauté a fait gagner (ou est partagée à parts égales s'il n'y a jamais eu de vote) : elle ne peut jamais rester bloquée.";
+I18N.fr.nftVoteLead += " Si personne ne vote pendant 3 périodes de suite, la cagnotte va à la dernière fondation que la communauté a fait gagner (ou est partagée à parts égales s'il n'y a jamais eu de vote) : elle ne peut jamais rester bloquée.";
 I18N.es.nftVoteLead += " Si nadie vota durante 3 periodos seguidos, el bote va a la última fundación que la comunidad hizo ganar (o se reparte a partes iguales si nunca hubo votación): nunca puede quedar bloqueado.";
 I18N.zh.nftVoteLead += "如果连续 3 期无人投票，奖池将发给社区上一次选出的慈善基金（若从未投票，则平均分配）：资金永远不会被锁死。";
 
-// Suivi : seulement le wallet connecté (pas de saisie d'adresse).
+// Suivi : seulement le wallet connecté (pas de saisie d'adresse).
 I18N.en.taxConnect = "Connect my wallet to see my history";
 I18N.fr.taxConnect = "Connecter mon wallet pour voir mon historique";
 I18N.es.taxConnect = "Conectar mi wallet para ver mi historial";
@@ -1337,7 +1337,7 @@ I18N.fr.taxConnected = "Wallet connecté :";
 I18N.es.taxConnected = "Wallet conectada:";
 I18N.zh.taxConnected = "已连接钱包：";
 I18N.en.taxLead = "Connect your wallet: every buy and sale of DIPDUCK, every card minted or traded and every payout received, with the date, the ETH amount and its value in CAD and USD on that day. Each line links to its public proof on Blockscout. Only the connected wallet is shown.";
-I18N.fr.taxLead = "Connecte ton wallet : chaque achat et vente de DIPDUCK, chaque carte mintée ou échangée et chaque versement reçu, avec la date, le montant en ETH et sa valeur en CAD et en USD ce jour-là. Chaque ligne renvoie à sa preuve publique sur Blockscout. Seul le wallet connecté est affiché.";
+I18N.fr.taxLead = "Connecte ton wallet : chaque achat et vente de DIPDUCK, chaque carte mintée ou échangée et chaque versement reçu, avec la date, le montant en ETH et sa valeur en CAD et en USD ce jour-là. Chaque ligne renvoie à sa preuve publique sur Blockscout. Seul le wallet connecté est affiché.";
 I18N.es.taxLead = "Conecta tu wallet: cada compra y venta de DIPDUCK, cada carta minteada o intercambiada y cada pago recibido, con la fecha, el importe en ETH y su valor en CAD y USD ese día. Cada línea enlaza a su prueba pública en Blockscout. Solo se muestra la wallet conectada.";
 I18N.zh.taxLead = "连接你的钱包：每一次买卖 DIPDUCK、每一张铸造或交易的卡片、每一笔收到的款项，附日期、ETH 数额以及当天折合的加元和美元价值。每一行都链接到 Blockscout 上的公开凭证。只显示已连接的钱包。";
 
@@ -1347,7 +1347,7 @@ I18N.fr.nftDownload = "Télécharger (PNG)";
 I18N.es.nftDownload = "Descargar (PNG)";
 I18N.zh.nftDownload = "下载（PNG）";
 
-// Jeu : départ toujours en 2010, le record est la date la plus lointaine atteinte.
+// Jeu : départ toujours en 2010, le record est la date la plus lointaine atteinte.
 Object.assign(I18N.en, {
   gameBest: "Record",
   gameReached: "You reached {date}",
@@ -1357,8 +1357,8 @@ Object.assign(I18N.en, {
 Object.assign(I18N.fr, {
   gameBest: "Record",
   gameReached: "Tu es arrivé au {date}",
-  gameShareText: "Mon canard a glissé sur la vraie courbe du Bitcoin jusqu'au {date} ({score} pts) dans Dip Duck. Tu vas plus loin ? Coin coin. $DIPDUCK",
-  gameLead: "Glisse sur la vraie courbe du Bitcoin, jour après jour, d'août 2010 à aujourd'hui : chaque partie commence au tout début. Touche l'écran (ou appuie sur espace) pile quand le canard arrive au fond d'une vraie baisse, marquée par un petit rond : plus elle est profonde, plus le bonus est gros. Les jours de krach défilent plus vite : un jour à −20 % file, un jour à −2 % accélère à peine. Chaque époque du Bitcoin est un niveau. Trois baisses ratées et la partie est finie. Le gagnant est celui qui va le plus loin dans l'histoire.",
+  gameShareText: "Mon canard a glissé sur la vraie courbe du Bitcoin jusqu'au {date} ({score} pts) dans Dip Duck. Tu vas plus loin ? Coin coin. $DIPDUCK",
+  gameLead: "Glisse sur la vraie courbe du Bitcoin, jour après jour, d'août 2010 à aujourd'hui : chaque partie commence au tout début. Touche l'écran (ou appuie sur espace) pile quand le canard arrive au fond d'une vraie baisse, marquée par un petit rond : plus elle est profonde, plus le bonus est gros. Les jours de krach défilent plus vite : un jour à −20 % file, un jour à −2 % accélère à peine. Chaque époque du Bitcoin est un niveau. Trois baisses ratées et la partie est finie. Le gagnant est celui qui va le plus loin dans l'histoire.",
 });
 Object.assign(I18N.es, {
   gameBest: "Récord",
@@ -1393,20 +1393,20 @@ Object.assign(I18N.en, {
 });
 Object.assign(I18N.fr, {
   lbKicker: "Classement",
-  lbTitle: "Qui va le plus loin dans l'histoire du Bitcoin ?",
-  lbLead: "Le classement public, enregistré sur la blockchain : permanent et visible par tous. Termine une partie, puis enregistre ton résultat avec ton wallet (quelques centimes de frais). La date la plus lointaine gagne ; le score départage.",
-  lbNick: "Pseudo (facultatif, 16 caractères : lettres, chiffres, espace . _ -)",
+  lbTitle: "Qui va le plus loin dans l'histoire du Bitcoin ?",
+  lbLead: "Le classement public, enregistré sur la blockchain : permanent et visible par tous. Termine une partie, puis enregistre ton résultat avec ton wallet (quelques centimes de frais). La date la plus lointaine gagne ; le score départage.",
+  lbNick: "Pseudo (facultatif, 16 caractères : lettres, chiffres, espace . _ -)",
   lbSubmit: "Enregistrer mon résultat sur la blockchain",
-  lbYourRun: "Ta dernière partie : {date} · {score} pts",
+  lbYourRun: "Ta dernière partie : {date} · {score} pts",
   lbPlayer: "Joueur",
   lbReached: "Arrivé au",
-  lbEmpty: "Aucun résultat pour l'instant : sois le premier canard au classement.",
+  lbEmpty: "Aucun résultat pour l'instant : sois le premier canard au classement.",
   lbError: "Impossible de lire le classement",
   lbPlayFirst: "Termine d'abord une partie.",
-  lbNickRule: "Pseudo : 16 caractères au plus, lettres, chiffres, espaces, . _ -",
+  lbNickRule: "Pseudo : 16 caractères au plus, lettres, chiffres, espaces, . _ -",
   lbNotBetter: "Ton record sur la blockchain est déjà meilleur ou égal ({date}). Va plus loin pour l'améliorer.",
-  lbSaved: "Enregistré sur la blockchain !",
-  lbNote: "Le jeu tourne dans ton navigateur : la blockchain ne peut donc pas empêcher la triche. Elle refuse les résultats impossibles (date future, trop de points) et rend chaque entrée publique et liée à un wallet. Pour un concours avec des prix, les meilleurs résultats sont vérifiés à part.",
+  lbSaved: "Enregistré sur la blockchain !",
+  lbNote: "Le jeu tourne dans ton navigateur : la blockchain ne peut donc pas empêcher la triche. Elle refuse les résultats impossibles (date future, trop de points) et rend chaque entrée publique et liée à un wallet. Pour un concours avec des prix, les meilleurs résultats sont vérifiés à part.",
 });
 Object.assign(I18N.es, {
   lbKicker: "Clasificación",
@@ -1443,7 +1443,7 @@ Object.assign(I18N.zh, {
   lbNote: "游戏在你的浏览器中运行，因此区块链无法阻止作弊：它会拒绝不可能的成绩（未来日期、分数过高），并让每条记录公开且与钱包绑定。有奖比赛的前几名会另行核实。",
 });
 
-// Classement : parties classées vérifiées par le contrat.
+// Classement : parties classées vérifiées par le contrat.
 Object.assign(I18N.en, {
   lbLead: "The public ranking, recorded on the blockchain. Only ranked runs count: sign a start (a few cents), play, then send your run. The contract replays it tap by tap with the same rules as the game, and refuses any result that came faster than the game allows. The furthest date wins; the score breaks ties.",
   lbNote: "Nobody can invent a score or a date: the contract recomputes everything from your taps. The only thing a blockchain can't detect is a program that really plays in real time. Free runs stay unlimited but don't enter the ranking.",
@@ -1457,14 +1457,14 @@ Object.assign(I18N.en, {
   gameRankedReady: "Ranked run",
 });
 Object.assign(I18N.fr, {
-  lbLead: "Le classement public, enregistré sur la blockchain. Seules les parties classées comptent : signe un départ (quelques centimes), joue, puis envoie ta partie. Le contrat la rejoue touche par touche avec les mêmes règles que le jeu, et refuse tout résultat arrivé plus vite que le jeu ne le permet. La date la plus lointaine gagne ; le score départage.",
-  lbNote: "Personne ne peut inventer un score ni une date : le contrat recalcule tout à partir de tes touches. La seule chose qu'une blockchain ne peut pas détecter, c'est un programme qui jouerait vraiment en temps réel. Les parties libres restent illimitées mais n'entrent pas au classement.",
+  lbLead: "Le classement public, enregistré sur la blockchain. Seules les parties classées comptent : signe un départ (quelques centimes), joue, puis envoie ta partie. Le contrat la rejoue touche par touche avec les mêmes règles que le jeu, et refuse tout résultat arrivé plus vite que le jeu ne le permet. La date la plus lointaine gagne ; le score départage.",
+  lbNote: "Personne ne peut inventer un score ni une date : le contrat recalcule tout à partir de tes touches. La seule chose qu'une blockchain ne peut pas détecter, c'est un programme qui jouerait vraiment en temps réel. Les parties libres restent illimitées mais n'entrent pas au classement.",
   lbRankedBtn: "Jouer une partie classée",
   lbSeason: "Saison {n} · courbe figée jusqu'au {date}",
   lbConfirmStart: "Confirme le départ de ta partie classée dans ton wallet…",
-  lbArmed: "Partie classée prête : touche le jeu pour commencer. Prends ton temps.",
-  lbCasual: "Partie libre : non classée. Utilise « Jouer une partie classée » pour entrer au classement.",
-  lbMismatch: "Le contrat ne trouve pas le même résultat que le jeu : rien n'a été envoyé. Signale-le-nous.",
+  lbArmed: "Partie classée prête : touche le jeu pour commencer. Prends ton temps.",
+  lbCasual: "Partie libre : non classée. Utilise « Jouer une partie classée » pour entrer au classement.",
+  lbMismatch: "Le contrat ne trouve pas le même résultat que le jeu : rien n'a été envoyé. Signale-le-nous.",
   lbSubmit: "Envoyer ma partie au contrat",
   gameRankedReady: "Partie classée",
 });
@@ -1493,7 +1493,7 @@ Object.assign(I18N.zh, {
   gameRankedReady: "排位赛",
 });
 
-// Jeu : saut et pièces ; classement : concours de 3 mois sur un contrat unique.
+// Jeu : saut et pièces ; classement : concours de 3 mois sur un contrat unique.
 Object.assign(I18N.en, {
   gameDips: "Dips",
   gameCoins: "Coins",
@@ -1507,12 +1507,12 @@ Object.assign(I18N.en, {
 Object.assign(I18N.fr, {
   gameDips: "Baisses",
   gameCoins: "Pièces",
-  gameLead: "Glisse sur la vraie courbe du Bitcoin, jour après jour, de 2010 à aujourd'hui : chaque partie commence au tout début. Une seule commande : toucher l'écran (ou la barre d'espace). Près d'une baisse (marquée par un rond), le toucher l'attrape : pile au fond pour le plus de points ; trop tôt ou trop tard coûte une vie. Partout ailleurs, le canard saute et ramasse les pièces en l'air. Les jours de krach défilent plus vite. Trois baisses ratées et la partie est finie.",
-  lbLead: "Le classement public, enregistré sur la blockchain. Un nouveau concours tous les 3 mois, chacun avec sa ligne d'arrivée sur la courbe. Seules les parties classées comptent : signe un départ (quelques centimes), joue, puis envoie ta partie. Le contrat la rejoue touche par touche (baisses, sauts, pièces) et refuse tout résultat arrivé plus vite que le jeu ne le permet. Ordre : la distance, puis les baisses attrapées, puis les pièces, puis les points.",
-  lbContest: "Concours {name} · se termine le {end} · ligne d'arrivée : {finish}",
+  gameLead: "Glisse sur la vraie courbe du Bitcoin, jour après jour, de 2010 à aujourd'hui : chaque partie commence au tout début. Une seule commande : toucher l'écran (ou la barre d'espace). Près d'une baisse (marquée par un rond), le toucher l'attrape : pile au fond pour le plus de points ; trop tôt ou trop tard coûte une vie. Partout ailleurs, le canard saute et ramasse les pièces en l'air. Les jours de krach défilent plus vite. Trois baisses ratées et la partie est finie.",
+  lbLead: "Le classement public, enregistré sur la blockchain. Un nouveau concours tous les 3 mois, chacun avec sa ligne d'arrivée sur la courbe. Seules les parties classées comptent : signe un départ (quelques centimes), joue, puis envoie ta partie. Le contrat la rejoue touche par touche (baisses, sauts, pièces) et refuse tout résultat arrivé plus vite que le jeu ne le permet. Ordre : la distance, puis les baisses attrapées, puis les pièces, puis les points.",
+  lbContest: "Concours {name} · se termine le {end} · ligne d'arrivée : {finish}",
   lbPrevious: "Gagnants du concours {name}",
   lbLoadingCourse: "Chargement du parcours depuis la blockchain…",
-  lbYourRun: "Ta dernière partie classée : {date} · {caught} baisses · {coins} pièces · {score} pts",
+  lbYourRun: "Ta dernière partie classée : {date} · {caught} baisses · {coins} pièces · {score} pts",
 });
 Object.assign(I18N.es, {
   gameDips: "Caídas",
@@ -1535,20 +1535,20 @@ Object.assign(I18N.zh, {
   lbYourRun: "你上一局排位赛：{date} · 抄底 {caught} 次 · 金币 {coins} · {score} 分",
 });
 
-// Classement : rattrapage de la courbe avant un départ.
+// Classement : rattrapage de la courbe avant un départ.
 I18N.en.lbCatchUp = "The curve fell behind: confirm a catch-up transaction (60 days at a time)…";
-I18N.fr.lbCatchUp = "La courbe a pris du retard : confirme une transaction de rattrapage (60 jours à la fois)…";
+I18N.fr.lbCatchUp = "La courbe a pris du retard : confirme une transaction de rattrapage (60 jours à la fois)…";
 I18N.es.lbCatchUp = "El gráfico se ha retrasado: confirma una transacción de puesta al día (60 días cada vez)…";
 I18N.zh.lbCatchUp = "走势落后了：请确认一笔补录交易（每次 60 天）…";
 
-// Jeu : les pièces se ramassent au sommet du saut.
+// Jeu : les pièces se ramassent au sommet du saut.
 I18N.en.gameLead = "Ride the real Bitcoin chart, day by day, from 2010 to today — every run starts at the very beginning. One control only: tap (or press space). Near a dip (marked by a ring), the tap catches it — exactly at the bottom for the most points; too early or too late costs a life. Anywhere else, the duck jumps: time it so the duck is right under a coin at the top of its jump to grab it. Crash days scroll faster. Miss three dips and the round is over.";
-I18N.fr.gameLead = "Glisse sur la vraie courbe du Bitcoin, jour après jour, de 2010 à aujourd'hui : chaque partie commence au tout début. Une seule commande : toucher l'écran (ou la barre d'espace). Près d'une baisse (marquée par un rond), le toucher l'attrape : pile au fond pour le plus de points ; trop tôt ou trop tard coûte une vie. Partout ailleurs, le canard saute : saute un peu avant une pièce pour passer dessus au sommet du saut et la ramasser. Les jours de krach défilent plus vite. Trois baisses ratées et la partie est finie.";
+I18N.fr.gameLead = "Glisse sur la vraie courbe du Bitcoin, jour après jour, de 2010 à aujourd'hui : chaque partie commence au tout début. Une seule commande : toucher l'écran (ou la barre d'espace). Près d'une baisse (marquée par un rond), le toucher l'attrape : pile au fond pour le plus de points ; trop tôt ou trop tard coûte une vie. Partout ailleurs, le canard saute : saute un peu avant une pièce pour passer dessus au sommet du saut et la ramasser. Les jours de krach défilent plus vite. Trois baisses ratées et la partie est finie.";
 I18N.es.gameLead = "Deslízate por el gráfico real de Bitcoin, día a día, de 2010 a hoy: cada partida empieza desde el principio. Un solo control: tocar la pantalla (o la barra espaciadora). Cerca de una caída (marcada con un círculo), el toque la atrapa: justo en el fondo para más puntos; demasiado pronto o tarde cuesta una vida. En cualquier otro lugar, el pato salta: salta un poco antes de una moneda para pasar por encima en lo alto del salto y recogerla. Los días de desplome pasan más rápido. Falla tres caídas y se acaba la partida.";
 I18N.zh.gameLead = "沿着比特币从 2010 年至今的真实走势一天天滑行：每局都从头开始。只有一个操作：点击屏幕（或空格键）。靠近下跌（以小圆圈标出）时点击即可抄底：正好在谷底得分最高；太早或太晚会失去一条命。其他任何地方点击，鸭子会起跳：在金币前稍早起跳，让鸭子在跳跃最高点经过金币即可收集。暴跌日滚动更快。错过三次下跌，本局结束。";
 
-// Cartes : dépôt et vote de 7 jours des propositions, versements en mode pull, réseau du wallet ;
-// classement : clôtures officielles Chainlink (la courbe s'arrête à hier).
+// Cartes : dépôt et vote de 7 jours des propositions, versements en mode pull, réseau du wallet ;
+// classement : clôtures officielles Chainlink (la courbe s'arrête à hier).
 Object.assign(I18N.en, {
   nftWrongChain: "Your wallet is not on Robinhood Chain. Switch network in your wallet, then try again: nothing was sent.",
   nftExternalUnverified: "external link, not verified",
@@ -1597,7 +1597,7 @@ Object.assign(I18N.en, {
   lbRoundNotFound: "Could not find the Chainlink close of a day. Try again later.",
 });
 Object.assign(I18N.fr, {
-  nftWrongChain: "Ton wallet n'est pas sur Robinhood Chain. Change de réseau dans ton wallet, puis réessaie : rien n'a été envoyé.",
+  nftWrongChain: "Ton wallet n'est pas sur Robinhood Chain. Change de réseau dans ton wallet, puis réessaie : rien n'a été envoyé.",
   nftExternalUnverified: "lien externe non vérifié",
   nftCopy: "Copier",
   nftCopied: "Copié",
@@ -1609,15 +1609,15 @@ Object.assign(I18N.fr, {
   nftSnapshot: "votent les cartes n° 1 à {n} (celles qui existaient à la proposition)",
   nftExpiresAfter: "Doit gagner une période d'ici la période {n}, sinon elle sort de la liste.",
   nftCommunityNoVote: "Le wallet communauté ne vote pas et ne propose pas.",
-  nftNoEligibleCards: "Aucune de tes cartes ne peut voter sur celle-ci : seulement les cartes n° 1 à {n}, une fois chacune.",
+  nftNoEligibleCards: "Aucune de tes cartes ne peut voter sur celle-ci : seulement les cartes n° 1 à {n}, une fois chacune.",
   nftConfirmDeposit: "Confirme dans ton wallet (dépôt de {eth})…",
-  nftDepositRule: "Dépôt : {eth}. Rendu si elle est approuvée (ou si la liste n'a plus de place) ; versé à la cagnotte communauté si elle est refusée.",
+  nftDepositRule: "Dépôt : {eth}. Rendu si elle est approuvée (ou si la liste n'a plus de place) ; versé à la cagnotte communauté si elle est refusée.",
   nftWaitingClose: "attend les périodes précédentes",
   nftCloseRounds: "Clôturer les périodes terminées",
-  nftSendCharity: "Clôturer : créditer la gagnante",
-  nftRollOver: "Clôturer : reporter sur la cagnotte en cours",
-  nftFallbackLast: "3 périodes sans vote : clôturer et créditer {name} (dernière gagnante)",
-  nftFallbackSplit: "Personne n'a jamais voté : clôturer et partager à parts égales",
+  nftSendCharity: "Clôturer : créditer la gagnante",
+  nftRollOver: "Clôturer : reporter sur la cagnotte en cours",
+  nftFallbackLast: "3 périodes sans vote : clôturer et créditer {name} (dernière gagnante)",
+  nftFallbackSplit: "Personne n'a jamais voté : clôturer et partager à parts égales",
   nftPaid: "clôturée",
   nftFoundersOwed: "Fondateurs, dû",
   nftCommunityOwed: "Communauté, dû",
@@ -1628,19 +1628,19 @@ Object.assign(I18N.fr, {
   nftWithdrawAny: "Adresse qui a un solde dû",
   nftPayeesTitle: "Soldes dus",
   nftNothingOwed: "Rien n'est dû à cette adresse.",
-  nftWithdrawFailed: "Le destinataire a refusé l'ETH : son solde reste crédité, personne d'autre n'est bloqué.",
-  nftTreasuryLead: "En direct du contrat. À la fin d'une période, n'importe qui la clôture : chaque part devient un solde dû. Ensuite, n'importe qui déclenche un retrait, et l'ETH ne va qu'à ce destinataire. Un destinataire qui refuse l'ETH ne bloque personne.",
+  nftWithdrawFailed: "Le destinataire a refusé l'ETH : son solde reste crédité, personne d'autre n'est bloqué.",
+  nftTreasuryLead: "En direct du contrat. À la fin d'une période, n'importe qui la clôture : chaque part devient un solde dû. Ensuite, n'importe qui déclenche un retrait, et l'ETH ne va qu'à ce destinataire. Un destinataire qui refuse l'ETH ne bloque personne.",
   nftVoteLead: "Une cagnotte par période de 30 jours. Pendant la période, chaque carte vote une fois pour une fondation ; à la fin, n'importe qui clôture la période et la cagnotte est créditée à la gagnante. D'ici là, tout l'argent du mint reste bloqué dans le contrat, fondateurs compris. Les cartes Trophée (prix de concours) et le wallet communauté ne votent pas.",
   nftProposalsLead: "Tout détenteur de carte peut présenter une fondation, avec un dépôt de 0,005 ETH. Pendant 7 jours pleins, les cartes qui existaient déjà votent oui ou non. Approuvée avec 2/3 des voix et un quorum (25 voix, ou 5 % des cartes) = elle entre dans la liste à la période suivante ; 3 au plus par période. Une nouvelle fondation qui ne gagne aucune période en 6 périodes sort de la liste.",
   nftPropUrl: "Page officielle de dons qui affiche cette adresse (https://)",
   nftProposeRules: "Il faut au moins une carte. Affiché en texte brut ; le lien n'est cliquable qu'une fois approuvée.",
   nftProposalRules: "Nom de 1 à 40 caractères, lien de 9 à 200 (https://), texte de 1 à 280.",
   nftBadUrl: "Le lien doit commencer par https://",
-  nftProposed: "Proposition publiée ! Le vote est ouvert pendant 7 jours.",
+  nftProposed: "Proposition publiée ! Le vote est ouvert pendant 7 jours.",
   nftStatusFull: "Approuvée, sans place (dépôt rendu)",
-  lbCatchUp: "La courbe a du retard : confirme l'enregistrement des clôtures officielles (jusqu'à 60 jours par transaction)…",
-  lbFindingRounds: "Recherche des clôtures officielles Chainlink : jour {done} sur {total}…",
-  lbDataBehind: "La clôture d'hier n'est pas encore définitive chez Chainlink : réessaie dans quelques minutes.",
+  lbCatchUp: "La courbe a du retard : confirme l'enregistrement des clôtures officielles (jusqu'à 60 jours par transaction)…",
+  lbFindingRounds: "Recherche des clôtures officielles Chainlink : jour {done} sur {total}…",
+  lbDataBehind: "La clôture d'hier n'est pas encore définitive chez Chainlink : réessaie dans quelques minutes.",
   lbRoundNotFound: "Impossible de trouver la clôture Chainlink d'un jour. Réessaie plus tard.",
 });
 Object.assign(I18N.es, {
@@ -1738,7 +1738,7 @@ Object.assign(I18N.zh, {
   lbRoundNotFound: "找不到某一天的 Chainlink 收盘价，请稍后再试。",
 });
 
-// Cartes : édition Trophée (les 111 cartes de la réserve, données en prix de concours).
+// Cartes : édition Trophée (les 111 cartes de la réserve, données en prix de concours).
 Object.assign(I18N.en, {
   cardTrophy: "Trophy",
   nftTrophyFact: "Trophy edition (contest prizes)",
@@ -1748,7 +1748,7 @@ Object.assign(I18N.en, {
 Object.assign(I18N.fr, {
   cardTrophy: "Trophée",
   nftTrophyFact: "Édition Trophée (prix de concours)",
-  nftTrophyNote: "Édition Trophée : les 111 cartes de réserve sont des prix de concours gratuits, une par wallet à vie, seulement pour un wallet qui détient 2 cartes ou moins. Tirées à part : environ 70 % Épiques, 25 % Légendaires et 5 % Mythiques (jamais sous Épique), sans changer les chances des cartes mintées. Mythique = top 0,1 % : environ 3 cartes mintées sur 3 222. Les cartes Trophée ne votent jamais.",
+  nftTrophyNote: "Édition Trophée : les 111 cartes de réserve sont des prix de concours gratuits, une par wallet à vie, seulement pour un wallet qui détient 2 cartes ou moins. Tirées à part : environ 70 % Épiques, 25 % Légendaires et 5 % Mythiques (jamais sous Épique), sans changer les chances des cartes mintées. Mythique = top 0,1 % : environ 3 cartes mintées sur 3 222. Les cartes Trophée ne votent jamais.",
   nftTrophyNoVote: "Les cartes Trophée (prix de concours) ne votent pas, et tu n'as pas d'autre carte.",
 });
 Object.assign(I18N.es, {
@@ -1764,12 +1764,34 @@ Object.assign(I18N.zh, {
   nftTrophyNoVote: "奖杯卡（比赛奖品）不投票，而你没有其他卡牌。",
 });
 
-// En-tête : bouton « Connecter mon wallet ».
+// En-tête : bouton « Connecter mon wallet ».
 Object.assign(I18N.en, { walletConnect: "Connect wallet", walletWrongChain: "Switch to Robinhood Chain", walletNone: "No wallet: install Rabby or MetaMask" });
-Object.assign(I18N.fr, { walletConnect: "Connecter mon wallet", walletWrongChain: "Passer sur Robinhood Chain", walletNone: "Aucun wallet : installe Rabby ou MetaMask" });
+Object.assign(I18N.fr, { walletConnect: "Connecter mon wallet", walletWrongChain: "Passer sur Robinhood Chain", walletNone: "Aucun wallet : installe Rabby ou MetaMask" });
 Object.assign(I18N.es, { walletConnect: "Conectar wallet", walletWrongChain: "Cambiar a Robinhood Chain", walletNone: "Sin wallet: instala Rabby o MetaMask" });
 Object.assign(I18N.zh, { walletConnect: "连接钱包", walletWrongChain: "切换到 Robinhood Chain", walletNone: "未找到钱包：请安装 Rabby 或 MetaMask" });
 Object.assign(I18N.en, { walletShort: "Wallet", walletShortChain: "Network ⚠" });
 Object.assign(I18N.fr, { walletShort: "Wallet", walletShortChain: "Réseau ⚠" });
 Object.assign(I18N.es, { walletShort: "Wallet", walletShortChain: "Red ⚠" });
 Object.assign(I18N.zh, { walletShort: "钱包", walletShortChain: "网络 ⚠" });
+
+// Token : anti-bot des 24 premières heures ; réserve communauté dans un Safe 2 sur 3.
+Object.assign(I18N.en, {
+  safe1Text: "The contract code is published and verified on Blockscout: an OpenZeppelin ERC-20 with a single addition, an anti-bot limit for the first 24 hours (max 0.5% of the supply per wallet, then 1%, then 2%). After that, no limit ever again. Nobody can change it.",
+  tokCommunityText: "30,000,000 tokens in a public Safe multisig (2 signatures out of 3), only for meme contests and community rewards. Every move is visible on-chain.",
+  a7: "3% of the supply sits in a dedicated public Safe: every transfer needs 2 signatures out of 3, so no single key can move it. Used only for meme contests and community rewards. Anyone can follow it on Blockscout.",
+});
+Object.assign(I18N.fr, {
+  safe1Text: "Le code du contrat est publié et vérifié sur Blockscout : un ERC-20 d'OpenZeppelin avec un seul ajout, une limite anti-bot les 24 premières heures (0,5 % de l'offre au maximum par wallet, puis 1 %, puis 2 %). Ensuite, plus aucune limite, pour toujours. Personne ne peut la modifier.",
+  tokCommunityText: "30 000 000 tokens dans un Safe public à plusieurs signatures (2 sur 3), réservés aux concours de mèmes et aux récompenses de la communauté. Chaque mouvement est visible sur la chaîne.",
+  a7: "3 % de l'offre sont dans un Safe public dédié : chaque envoi demande 2 signatures sur 3, aucune clé ne peut le vider seule. Utilisé seulement pour les concours de mèmes et les récompenses de la communauté. Tout le monde peut le suivre sur Blockscout.",
+});
+Object.assign(I18N.es, {
+  safe1Text: "El código del contrato está publicado y verificado en Blockscout: un ERC-20 de OpenZeppelin con un solo añadido, un límite anti-bot durante las primeras 24 horas (máximo 0,5 % del suministro por wallet, luego 1 %, luego 2 %). Después, ningún límite nunca más. Nadie puede cambiarlo.",
+  tokCommunityText: "30.000.000 tokens en un Safe público multifirma (2 firmas de 3), reservados para concursos de memes y recompensas de la comunidad. Cada movimiento es visible en la cadena.",
+  a7: "El 3 % del suministro está en un Safe público dedicado: cada envío necesita 2 firmas de 3, ninguna clave puede vaciarlo sola. Se usa solo para concursos de memes y recompensas de la comunidad. Cualquiera puede seguirlo en Blockscout.",
+});
+Object.assign(I18N.zh, {
+  safe1Text: "合约代码已在 Blockscout 上公开并验证：OpenZeppelin ERC-20，只增加了一项：开盘后 24 小时内的防机器人限制（每个钱包最多持有供应量的 0.5%，之后 1%，再之后 2%）。此后永远不再有任何限制。任何人都无法修改。",
+  tokCommunityText: "30,000,000 枚代币存放在公开的 Safe 多签钱包中（3 个签名中需要 2 个），仅用于表情包比赛和社区奖励。每一笔转账都可在链上查看。",
+  a7: "3% 的供应量存放在专用的公开 Safe 多签钱包中：每次转账需要 3 个签名中的 2 个，任何单一密钥都无法将其转走。仅用于表情包比赛和社区奖励。任何人都可以在 Blockscout 上查看。",
+});
