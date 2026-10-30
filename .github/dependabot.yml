@@ -1,0 +1,7 @@
+# Propose les mises à jour des actions GitHub (épinglées par SHA dans les workflows).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

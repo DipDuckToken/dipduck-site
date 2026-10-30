@@ -140,7 +140,8 @@ async function loadMarket() {
     );
     if (pairs.length === 0) return;
     market = pairs.sort((a, b) => (b.liquidity?.usd ?? 0) - (a.liquidity?.usd ?? 0))[0];
-    if (!CONFIG.chartUrl && market.url) setLinks(".chart-link", market.url);
+    // Seulement un lien DexScreener : on ne met jamais sur le site une URL venue d'ailleurs.
+    if (!CONFIG.chartUrl && /^https:\/\/dexscreener\.com\//.test(market.url || "")) setLinks(".chart-link", market.url);
     renderStats();
   } catch {
     // Pas de données : les tirets restent affichés.
