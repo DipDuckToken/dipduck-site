@@ -172,7 +172,7 @@ h1 .accent { color: var(--yellow); }
 .swatch { width: 16px; height: 16px; border-radius: 5px; margin-top: 6px; flex: none; }
 .swatch.pool { background: var(--yellow); }
 .swatch.team { background: var(--orange); }
-.tok-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.tok-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .tok-facts > div { background: var(--bg-2); border: 1px solid var(--line); border-radius: 16px; padding: 16px; text-align: center; }
 .tf-v { display: block; font-family: var(--font-head); font-weight: 700; font-size: 1.8rem; color: var(--yellow); }
 .tf-l { color: var(--muted); font-size: .9rem; font-weight: 700; }
