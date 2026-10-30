@@ -9,6 +9,9 @@ const CONFIG = {
   // Adresse de la courbe de lancement (deployments/robinhood.json → curve.address) :
   // section « Courbe de lancement » ; vide = section masquée
   curve: "",
+  // Bloc de déploiement de la courbe (deployments/robinhood.json → curve.blockNumber) :
+  // départ de la liste des transactions ; 0 = seulement les blocs récents
+  curveFromBlock: 0,
   // Lien d'achat direct (page de swap Uniswap avec l'adresse du token), une fois testé ;
   // tant que la courbe n'a pas ouvert le pool, le bouton d'achat mène à la courbe
   buyUrl: "",
@@ -16,6 +19,9 @@ const CONFIG = {
   chartUrl: "",
   // Wallet de la réserve communauté (launch.config.ts → community.beneficiary)
   communityWallet: "",
+  // Wallet qui a déployé les contrats (deployments/robinhood.json → deployer) :
+  // « Vérifie toi-même » montre qu'il ne garde aucun token
+  deployer: "",
   // Date et heure du lancement, en UTC, pour le compte à rebours
   // (ex. "2026-11-20T20:00:00Z"). Vide = pas de compte à rebours.
   launchAt: "",
@@ -108,6 +114,30 @@ function applyConfig() {
     el.hidden = !url;
     if (url) el.href = url;
   }
+}
+
+// ─── Vérifie toi-même : un lien Blockscout par promesse ──────────────────────
+// Chaque ligne reste masquée tant que son adresse n'est pas dans CONFIG. La ligne des parts
+// LP est remplie par curve.js (adresse de la paire lue dans la courbe).
+function showVerify(id, url) {
+  const row = document.getElementById(id);
+  if (!row) return;
+  row.querySelector("a").href = url;
+  row.hidden = false;
+  document.getElementById("verify-empty").hidden = true;
+}
+
+function applyVerify() {
+  const lines = [
+    ["v-curve", CONFIG.curve, (a) => `${EXPLORER}/address/${a}?tab=contract`],
+    ["v-token", CONFIG.contract, (a) => `${EXPLORER}/address/${a}?tab=contract`],
+    ["v-supply", CONFIG.contract, (a) => `${EXPLORER}/token/${a}?tab=holders`],
+    ["v-eth", CONFIG.curve, (a) => `${EXPLORER}/address/${a}`],
+    ["v-vesting", CONFIG.vesting, (a) => `${EXPLORER}/address/${a}?tab=contract`],
+    ["v-safe", CONFIG.communityWallet, (a) => `${EXPLORER}/address/${a}?tab=read_proxy`],
+    ["v-deployer", CONFIG.deployer, (a) => `${EXPLORER}/address/${a}?tab=tokens`],
+  ];
+  for (const [id, address, url] of lines) if (isAddress(address)) showVerify(id, url(address));
 }
 
 // ─── Chiffres en direct (DexScreener, API publique) ─────────────────────────
@@ -217,6 +247,7 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObse
 }
 
 applyConfig();
+applyVerify();
 applyLanguage(pickLanguage());
 startCountdown();
 if (launched) {

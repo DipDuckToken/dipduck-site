@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dip Duck ($DIPDUCK) — Buy the dip. Quack.</title>
-  <meta name="description" content="Dip Duck ($DIPDUCK) — a meme token. Fixed supply, no owner, no tax, liquidity burned, team share locked. Not affiliated with Robinhood.">
+  <meta name="description" content="Dip Duck ($DIPDUCK) — a meme token. Fixed supply, no owner, no tax, liquidity locked forever, team share locked. Not affiliated with Robinhood.">
   <meta property="og:title" content="Dip Duck ($DIPDUCK)">
-  <meta property="og:description" content="The duck that buys every dip. Fixed supply, no owner, no tax, liquidity burned.">
+  <meta property="og:description" content="The duck that buys every dip. Fixed supply, no owner, no tax, liquidity locked forever.">
   <meta property="og:url" content="https://dipduck.xyz/">
   <meta property="og:image" content="https://dipduck.xyz/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -89,7 +89,7 @@
         </div>
         <ul class="badges">
           <li><svg class="ic"><use href="#i-ban"/></svg><span data-i18n="badgeOwner"></span></li>
-          <li><svg class="ic"><use href="#i-flame"/></svg><span data-i18n="badgeLp"></span></li>
+          <li><svg class="ic"><use href="#i-lock"/></svg><span data-i18n="badgeLp"></span></li>
           <li><svg class="ic"><use href="#i-check"/></svg><span data-i18n="badgeTax"></span></li>
           <li><svg class="ic"><use href="#i-lock"/></svg><span data-i18n="badgeLock"></span></li>
         </ul>
@@ -507,9 +507,27 @@
       <h2 data-i18n="safeTitle"></h2>
       <ul class="checks">
         <li><svg class="ic"><use href="#i-shield"/></svg><div><strong data-i18n="safe1Title"></strong><p data-i18n="safe1Text"></p></div></li>
-        <li><svg class="ic"><use href="#i-flame"/></svg><div><strong data-i18n="safe2Title"></strong><p data-i18n="safe2Text"></p></div></li>
+        <li><svg class="ic"><use href="#i-lock"/></svg><div><strong data-i18n="safe2Title"></strong><p data-i18n="safe2Text"></p></div></li>
         <li><svg class="ic"><use href="#i-ban"/></svg><div><strong data-i18n="safe3Title"></strong><p data-i18n="safe3Text"></p></div></li>
         <li><svg class="ic"><use href="#i-lock"/></svg><div><strong data-i18n="safe4Title"></strong><p data-i18n="safe4Text"></p></div></li>
+      </ul>
+    </section>
+
+    <!-- VÉRIFIE TOI-MÊME : un lien Blockscout par promesse (lignes remplies depuis CONFIG) -->
+    <section id="verify" class="section">
+      <p class="kicker" data-i18n="verifyKicker"></p>
+      <h2 data-i18n="verifyTitle"></h2>
+      <p class="section-lead" data-i18n="verifyLead"></p>
+      <p class="hint" id="verify-empty" data-i18n="verifyEmpty"></p>
+      <ul class="verify-list">
+        <li id="v-curve" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vCurveTitle"></strong><p data-i18n="vCurveText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-token" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vTokenTitle"></strong><p data-i18n="vTokenText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-supply" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vSupplyTitle"></strong><p data-i18n="vSupplyText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-eth" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vEthTitle"></strong><p data-i18n="vEthText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-lp" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vLpTitle"></strong><p data-i18n="vLpText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-vesting" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vVestingTitle"></strong><p data-i18n="vVestingText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-safe" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vSafeTitle"></strong><p data-i18n="vSafeText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
+        <li id="v-deployer" hidden><svg class="ic"><use href="#i-check"/></svg><div><strong data-i18n="vDeployerTitle"></strong><p data-i18n="vDeployerText"></p></div><a target="_blank" rel="noopener" data-i18n="verifyOpen"></a></li>
       </ul>
     </section>
 
@@ -565,6 +583,16 @@
           <a class="btn ghost" id="curve-pair" target="_blank" rel="noopener"><span data-i18n="curvePairLink"></span></a>
         </div>
       </div>
+      <h3 class="sub" data-i18n="curveFeedTitle"></h3>
+      <p class="hint" id="curve-feed-empty" data-i18n="curveFeedEmpty" hidden></p>
+      <p class="hint" id="curve-feed-error" data-i18n="curveFeedError" hidden></p>
+      <div class="tax-table-wrap" id="curve-feed-wrap" hidden>
+        <table class="tax-table curve-table">
+          <thead><tr><th data-i18n="curveFeedType"></th><th class="num">ETH</th><th class="num">$DIPDUCK</th><th data-i18n="curveFeedTime"></th><th data-i18n="curveFeedWallet"></th></tr></thead>
+          <tbody id="curve-feed-body"></tbody>
+        </table>
+      </div>
+      <p class="hint"><a id="curve-feed-all" target="_blank" rel="noopener" data-i18n="curveFeedAll"></a></p>
       <p class="hint"><a id="curve-contract" target="_blank" rel="noopener" data-i18n="curveContractLink"></a></p>
       <p class="hint" data-i18n="curveNote"></p>
     </section>
@@ -588,6 +616,8 @@
       <h2 data-i18n="faqTitle"></h2>
       <div class="faq">
         <details><summary data-i18n="q8"></summary><p data-i18n="a8"></p></details>
+        <details><summary data-i18n="q9"></summary><p data-i18n="a9"></p></details>
+        <details><summary data-i18n="q10"></summary><p data-i18n="a10"></p></details>
         <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
         <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
         <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>

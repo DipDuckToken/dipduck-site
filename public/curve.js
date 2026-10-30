@@ -12,6 +12,8 @@
 // 0,5 % de l'offre (1re heure), 1 % (jusqu'à 6 h), 2 % (jusqu'à 24 h) : walletLimit().
 // Le site prévient AVANT l'envoi et propose le maximum permis.
 //
+// Transactions en direct : événements Bought / Sold / Graduated lus avec eth_getLogs.
+//
 // Lecture seule sans wallet : eth_call sur le RPC public. Achat et revente par le wallet du
 // visiteur (window.ethereum). Encodage ABI fait à la main, comme leaderboard.js et nft.js.
 
@@ -58,6 +60,16 @@
     "0xa8908786": "curveErrTooMany", // TooManyTokens(uint256 max)
     "0x1f2a2005": "curveErrZero", // ZeroAmount()
   };
+  // Événements de la courbe (topic0 = keccak256 de la signature, vérifié avec ethers).
+  const TOPIC = {
+    Bought: "0x27330bd7589580547b6437e08f9c60653de63691d2d2b2c13bff9ee67da2a68d", // Bought(address,uint256,uint256,uint256,uint256)
+    Sold: "0x490fdc1c23c0f3a84bf80a0384eaadcb9188c9ef71b9430da391a0e4c4c39bf6", // Sold(address,uint256,uint256,uint256,uint256)
+    Graduated: "0x71aa8c3702dbbc54247a4e6446450e64a46250dd72707a247ddb01d72eaef445", // Graduated(address,uint256,uint256,uint256,uint256)
+  };
+  const FEED_SIZE = 20; // transactions affichées
+  const LOG_CHUNK = 50_000; // blocs par eth_getLogs au départ (réduit tout seul si le RPC refuse)
+  const MIN_CHUNK = 1_000;
+  const MAX_CHUNKS = 40; // recherche vers le passé bornée à chaque premier chargement
   const MAX = (1n << 256n) - 1n;
   const UNIT = 10n ** 18n;
   const DEADLINE_SECONDS = 600; // deadline = maintenant + 10 min
@@ -115,6 +127,8 @@
     const [openAt, target, vEth, vTokens] = await Promise.all([SEL.OPEN_AT, SEL.TARGET_ETH, SEL.VIRTUAL_ETH, SEL.VIRTUAL_TOKENS].map(uint));
     const [token, pair] = await Promise.all([call(SEL.TOKEN), call(SEL.PAIR)]).then((list) => list.map(addressAt));
     info = { openAt: Number(openAt) * 1000, target, vEth, vTokens, token, pair };
+    // « Vérifie toi-même » (app.js) : les parts LP de la paire, lues ici dans la courbe.
+    showVerify("v-lp", `${EXPLORER}/token/${pair}?tab=holders`);
     info.supply = await tokenUint(TOKEN_SEL.totalSupply);
   }
 
@@ -262,6 +276,7 @@
     $("curve-buy-quote").textContent = "";
     status(t("curveBought"), "ok");
     await refresh();
+    await refreshFeed();
   }
 
   // ─── Revente ──────────────────────────────────────────────────────────────
@@ -291,6 +306,7 @@
     $("curve-sell-quote").textContent = "";
     status(t("curveSold"), "ok");
     await refresh();
+    await refreshFeed();
   }
 
   // ─── Aperçus (quoteBuy / quoteSell, gratuits) ─────────────────────────────
@@ -332,6 +348,116 @@
       clearTimeout(timer);
       timer = setTimeout(() => task().catch(() => {}), 300);
     };
+  }
+
+  // ─── Transactions en direct (eth_getLogs) ─────────────────────────────────
+  // Le RPC public limite la plage de blocs : lecture par tranches depuis la fin (une tranche
+  // refusée est coupée en deux), puis seulement les nouveaux blocs à chaque rafraîchissement.
+  // Si eth_getLogs échoue quand même, la liste laisse la place au lien Blockscout.
+  let feed = []; // du plus récent au plus ancien
+  let scannedTo; // dernier bloc déjà lu
+  let chunk = LOG_CHUNK;
+  let feedBroken = false;
+  const blockTimes = new Map();
+  const hexBlock = (n) => `0x${n.toString(16)}`;
+
+  async function logsBetween(from, to) {
+    try {
+      return await rpc("eth_getLogs", [{ address: CURVE, fromBlock: hexBlock(from), toBlock: hexBlock(to), topics: [[TOPIC.Bought, TOPIC.Sold, TOPIC.Graduated]] }]);
+    } catch (error) {
+      if (to - from + 1 <= MIN_CHUNK) throw error;
+      const mid = from + Math.floor((to - from) / 2);
+      chunk = Math.max(MIN_CHUNK, mid - from + 1);
+      return [...(await logsBetween(from, mid)), ...(await logsBetween(mid + 1, to))];
+    }
+  }
+
+  // Bought / Graduated : (ethIn, tokensOut, …) ; Sold : (tokensIn, ethOut, …).
+  function parseLog(log) {
+    const w = words(log.data);
+    const kind = log.topics[0] === TOPIC.Sold ? "sell" : log.topics[0] === TOPIC.Graduated ? "pool" : "buy";
+    return {
+      kind,
+      eth: kind === "sell" ? w[1] : w[0],
+      tokens: kind === "sell" ? w[0] : w[1],
+      who: `0x${log.topics[1].slice(26)}`,
+      tx: log.transactionHash,
+      block: Number(log.blockNumber),
+      time: log.blockTimestamp ? Number(log.blockTimestamp) * 1000 : undefined,
+    };
+  }
+
+  async function loadFeed() {
+    const latest = Number(await rpc("eth_blockNumber", []));
+    const start = Math.max(0, Number(CONFIG.curveFromBlock) || 0);
+    if (scannedTo === undefined) {
+      // Premier chargement : de la fin vers le passé, jusqu'à FEED_SIZE transactions.
+      const found = [];
+      let to = latest;
+      for (let i = 0; i < MAX_CHUNKS && to >= start && found.length < FEED_SIZE; i++) {
+        const from = Math.max(start, to - chunk + 1);
+        found.push(...(await logsBetween(from, to)).reverse());
+        to = from - 1;
+      }
+      feed = found.map(parseLog).slice(0, FEED_SIZE);
+    } else if (latest > scannedTo) {
+      const fresh = [];
+      for (let from = scannedTo + 1; from <= latest; from += chunk) fresh.push(...(await logsBetween(from, Math.min(latest, from + chunk - 1))));
+      feed = [...fresh.reverse().map(parseLog), ...feed].slice(0, FEED_SIZE);
+    }
+    scannedTo = latest;
+    // Heure de chaque transaction : celle de son bloc (gardée en mémoire).
+    const missing = [...new Set(feed.filter((e) => e.time === undefined && !blockTimes.has(e.block)).map((e) => e.block))];
+    await Promise.all(missing.map(async (n) => {
+      const block = await rpc("eth_getBlockByNumber", [hexBlock(n), false]);
+      if (block) blockTimes.set(n, Number(block.timestamp) * 1000);
+    }));
+    for (const e of feed) e.time ??= blockTimes.get(e.block);
+    feedBroken = false;
+  }
+
+  function feedCell(text, className = "") {
+    const td = document.createElement("td");
+    td.textContent = text;
+    if (className) td.className = className;
+    return td;
+  }
+
+  function renderFeed() {
+    $("curve-feed-error").hidden = !feedBroken;
+    $("curve-feed-empty").hidden = feedBroken || scannedTo === undefined || feed.length > 0;
+    $("curve-feed-wrap").hidden = feedBroken || feed.length === 0;
+    $("curve-feed-all").href = `${EXPLORER}/address/${CURVE}`;
+    const when = new Intl.DateTimeFormat(locale(), { dateStyle: "short", timeStyle: "short" });
+    const labels = { buy: "curveFeedBuy", sell: "curveFeedSell", pool: "curveFeedPool" };
+    $("curve-feed-body").replaceChildren(...feed.map((e) => {
+      const tr = document.createElement("tr");
+      // Wallet abrégé ; le lien mène à la transaction sur Blockscout.
+      const link = document.createElement("a");
+      link.href = `${EXPLORER}/tx/${e.tx}`;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = `${e.who.slice(0, 6)}…${e.who.slice(-4)}`;
+      const whoCell = feedCell("");
+      whoCell.append(link);
+      tr.append(
+        feedCell(t(labels[e.kind]), e.kind === "sell" ? "out" : "in"),
+        feedCell(fmtEth(e.eth), "num"),
+        feedCell(fmtTokens(e.tokens, true), "num"),
+        feedCell(e.time ? when.format(e.time) : "—"),
+        whoCell,
+      );
+      return tr;
+    }));
+  }
+
+  async function refreshFeed() {
+    try {
+      await loadFeed();
+    } catch {
+      feedBroken = true;
+    }
+    renderFeed();
   }
 
   // ─── Affichage ────────────────────────────────────────────────────────────
@@ -479,6 +605,7 @@
       render();
       previewBuy().catch(() => {});
       previewSell().catch(() => {});
+      renderFeed();
     }
   });
   // Le visiteur change de compte ou de réseau : on relit l'état.
@@ -501,9 +628,12 @@
     }
     await run(refresh);
     if (info) countdown();
+    await refreshFeed();
     // Relecture régulière ; la limite et son temps restant bougent chaque seconde.
     setInterval(() => {
-      if (!state?.graduated) refresh().catch(() => {}); // silencieux : ne cache pas un message en cours
+      if (state?.graduated) return;
+      refresh().catch(() => {}); // silencieux : ne cache pas un message en cours
+      refreshFeed();
     }, 15_000);
     setInterval(() => {
       if (info && state && !state.graduated) renderLimit();
