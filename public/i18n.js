@@ -788,7 +788,7 @@ Object.assign(I18N.en, {
   nftPrice: "Price",
   nftLimit: "Max per wallet",
   nftSplitTitle: "Where each mint goes (automatic, in the contract):",
-  nftFounders: "Founders",
+  nftFounders: "Team",
   nftCommunity: "Community",
   nftCharity: "Charity (community vote)",
   nftMinted: "Minted:",
@@ -833,7 +833,7 @@ Object.assign(I18N.fr, {
   nftPrice: "Prix",
   nftLimit: "Maximum par wallet",
   nftSplitTitle: "Où va chaque mint (automatique, dans le contrat) :",
-  nftFounders: "Fondateurs",
+  nftFounders: "Équipe",
   nftCommunity: "Communauté",
   nftCharity: "Fondation (vote de la communauté)",
   nftMinted: "Mintées :",
@@ -878,7 +878,7 @@ Object.assign(I18N.es, {
   nftPrice: "Precio",
   nftLimit: "Máximo por wallet",
   nftSplitTitle: "Adónde va cada mint (automático, en el contrato):",
-  nftFounders: "Fundadores",
+  nftFounders: "Equipo",
   nftCommunity: "Comunidad",
   nftCharity: "Fundación (voto de la comunidad)",
   nftMinted: "Minteadas:",
@@ -923,7 +923,7 @@ Object.assign(I18N.zh, {
   nftPrice: "价格",
   nftLimit: "每个钱包上限",
   nftSplitTitle: "每次铸造的资金去向（合约自动执行）：",
-  nftFounders: "创始人",
+  nftFounders: "团队",
   nftCommunity: "社区",
   nftCharity: "慈善基金（社区投票）",
   nftMinted: "已铸造：",
@@ -962,14 +962,14 @@ Object.assign(I18N.zh, {
 });
 
 // Versements seulement après la fin du vote.
-I18N.en.nftVoteLead = "1 card = 1 vote, recorded in the contract. Until the vote ends, all the mint money stays locked in the contract — founders included. Then anyone can trigger every payout: the winning charity, the founders and the community. Everything is visible on Blockscout.";
-I18N.fr.nftVoteLead = "1 carte = 1 voix, enregistrée dans le contrat. Jusqu'à la fin du vote, tout l'argent des mints reste bloqué dans le contrat, fondateurs compris. Ensuite, n'importe qui peut déclencher tous les versements : la fondation gagnante, les fondateurs et la communauté. Tout est visible sur Blockscout.";
-I18N.es.nftVoteLead = "1 carta = 1 voto, registrado en el contrato. Hasta el final de la votación, todo el dinero de los mints queda bloqueado en el contrato, incluidos los fundadores. Después, cualquiera puede activar todos los pagos: la fundación ganadora, los fundadores y la comunidad. Todo es visible en Blockscout.";
-I18N.zh.nftVoteLead = "1 张卡 = 1 票，记录在合约中。投票结束前，所有铸造资金都锁在合约里，创始人也不例外。投票结束后，任何人都可以触发全部发放：获胜的慈善基金、创始人和社区。一切都可在 Blockscout 上查看。";
+I18N.en.nftVoteLead = "1 card = 1 vote, recorded in the contract. Until the vote ends, all the mint money stays locked in the contract — team included. Then anyone can trigger every payout: the winning charity, the team and the community. Everything is visible on Blockscout.";
+I18N.fr.nftVoteLead = "1 carte = 1 voix, enregistrée dans le contrat. Jusqu'à la fin du vote, tout l'argent des mints reste bloqué dans le contrat, équipe comprise. Ensuite, n'importe qui peut déclencher tous les versements : la fondation gagnante, l'équipe et la communauté. Tout est visible sur Blockscout.";
+I18N.es.nftVoteLead = "1 carta = 1 voto, registrado en el contrato. Hasta el final de la votación, todo el dinero de los mints queda bloqueado en el contrato, incluido el equipo. Después, cualquiera puede activar todos los pagos: la fundación ganadora, el equipo y la comunidad. Todo es visible en Blockscout.";
+I18N.zh.nftVoteLead = "1 张卡 = 1 票，记录在合约中。投票结束前，所有铸造资金都锁在合约里，团队也不例外。投票结束后，任何人都可以触发全部发放：获胜的慈善基金、团队和社区。一切都可在 Blockscout 上查看。";
 
 // Fondations : cagnottes par période, propositions, trésorerie.
 Object.assign(I18N.en, {
-  nftVoteLead: "One pot per 30-day period. During the period, every card votes once for a charity; when the period ends, anyone can send that pot to the winner. Until then, all the mint money stays locked in the contract — founders included. The next mints fill the next pot, with a new vote.",
+  nftVoteLead: "One pot per 30-day period. During the period, every card votes once for a charity; when the period ends, anyone can send that pot to the winner. Until then, all the mint money stays locked in the contract — team included. The next mints fill the next pot, with a new vote.",
   nftRoundTitle: "Period {n} pot: {pot}",
   nftRoundEnds: "This period ends on",
   nftWebsite: "website",
@@ -1008,14 +1008,14 @@ Object.assign(I18N.en, {
   nftNeedCard: "You need at least one Dip Duck Card to propose a charity.",
   nftProposed: "Proposal published! The vote is open until the end of the period.",
   nftTreasuryLead: "Live from the contract. Shares are paid only for finished periods, always to the fixed addresses; anyone can trigger them.",
-  nftFoundersAvailable: "Founders, payable",
+  nftFoundersAvailable: "Team, payable",
   nftCommunityAvailable: "Community, payable",
-  nftFoundersPaid: "Founders, paid",
+  nftFoundersPaid: "Team, paid",
   nftCommunityPaid: "Community, paid",
   nftSend: "Send",
 });
 Object.assign(I18N.fr, {
-  nftVoteLead: "Une cagnotte par période de 30 jours. Pendant la période, chaque carte vote une fois pour une fondation ; à la fin, n'importe qui peut envoyer la cagnotte à la gagnante. D'ici là, tout l'argent des mints reste bloqué dans le contrat, fondateurs compris. Les mints suivants remplissent la cagnotte suivante, avec un nouveau vote.",
+  nftVoteLead: "Une cagnotte par période de 30 jours. Pendant la période, chaque carte vote une fois pour une fondation ; à la fin, n'importe qui peut envoyer la cagnotte à la gagnante. D'ici là, tout l'argent des mints reste bloqué dans le contrat, équipe comprise. Les mints suivants remplissent la cagnotte suivante, avec un nouveau vote.",
   nftRoundTitle: "Cagnotte de la période {n} : {pot}",
   nftRoundEnds: "Cette période se termine le",
   nftWebsite: "site",
@@ -1054,14 +1054,14 @@ Object.assign(I18N.fr, {
   nftNeedCard: "Il faut au moins une Dip Duck Card pour proposer une fondation.",
   nftProposed: "Proposition publiée ! Le vote est ouvert jusqu'à la fin de la période.",
   nftTreasuryLead: "En direct du contrat. Les parts ne sont versées que pour les périodes terminées, toujours vers les adresses fixes ; n'importe qui peut les déclencher.",
-  nftFoundersAvailable: "Fondateurs, versable",
+  nftFoundersAvailable: "Équipe, versable",
   nftCommunityAvailable: "Communauté, versable",
-  nftFoundersPaid: "Fondateurs, versé",
+  nftFoundersPaid: "Équipe, versé",
   nftCommunityPaid: "Communauté, versé",
   nftSend: "Envoyer",
 });
 Object.assign(I18N.es, {
-  nftVoteLead: "Un bote por cada periodo de 30 días. Durante el periodo, cada carta vota una vez por una fundación; al terminar, cualquiera puede enviar el bote a la ganadora. Hasta entonces, todo el dinero de los mints queda bloqueado en el contrato, incluidos los fundadores. Los mints siguientes llenan el bote siguiente, con una nueva votación.",
+  nftVoteLead: "Un bote por cada periodo de 30 días. Durante el periodo, cada carta vota una vez por una fundación; al terminar, cualquiera puede enviar el bote a la ganadora. Hasta entonces, todo el dinero de los mints queda bloqueado en el contrato, incluido el equipo. Los mints siguientes llenan el bote siguiente, con una nueva votación.",
   nftRoundTitle: "Bote del periodo {n}: {pot}",
   nftRoundEnds: "Este periodo termina el",
   nftWebsite: "sitio web",
@@ -1100,14 +1100,14 @@ Object.assign(I18N.es, {
   nftNeedCard: "Necesitas al menos una Dip Duck Card para proponer una fundación.",
   nftProposed: "¡Propuesta publicada! La votación está abierta hasta el final del periodo.",
   nftTreasuryLead: "En directo desde el contrato. Las partes solo se pagan por periodos terminados, siempre a las direcciones fijas; cualquiera puede activarlas.",
-  nftFoundersAvailable: "Fundadores, pagable",
+  nftFoundersAvailable: "Equipo, pagable",
   nftCommunityAvailable: "Comunidad, pagable",
-  nftFoundersPaid: "Fundadores, pagado",
+  nftFoundersPaid: "Equipo, pagado",
   nftCommunityPaid: "Comunidad, pagado",
   nftSend: "Enviar",
 });
 Object.assign(I18N.zh, {
-  nftVoteLead: "每 30 天为一期，每期一个奖池。在本期内，每张卡为一个慈善基金投一票；本期结束后，任何人都可以把奖池发送给获胜者。在此之前，所有铸造资金都锁在合约里，创始人也不例外。之后的铸造进入下一期奖池，并重新投票。",
+  nftVoteLead: "每 30 天为一期，每期一个奖池。在本期内，每张卡为一个慈善基金投一票；本期结束后，任何人都可以把奖池发送给获胜者。在此之前，所有铸造资金都锁在合约里，团队也不例外。之后的铸造进入下一期奖池，并重新投票。",
   nftRoundTitle: "第 {n} 期奖池：{pot}",
   nftRoundEnds: "本期结束于",
   nftWebsite: "网站",
@@ -1146,9 +1146,9 @@ Object.assign(I18N.zh, {
   nftNeedCard: "至少需要一张 Dip Duck Card 才能推荐慈善基金。",
   nftProposed: "推荐已发布！投票持续到本期结束。",
   nftTreasuryLead: "合约实时数据。份额只在每期结束后发放，且只发往固定地址；任何人都可以触发。",
-  nftFoundersAvailable: "创始人，可发放",
+  nftFoundersAvailable: "团队，可发放",
   nftCommunityAvailable: "社区，可发放",
-  nftFoundersPaid: "创始人，已发放",
+  nftFoundersPaid: "团队，已发放",
   nftCommunityPaid: "社区，已发放",
   nftSend: "发放",
 });
@@ -1572,7 +1572,7 @@ Object.assign(I18N.en, {
   nftFallbackLast: "No vote for 3 periods: close and credit {name} (last winner)",
   nftFallbackSplit: "Nobody ever voted: close and share equally",
   nftPaid: "closed",
-  nftFoundersOwed: "Founders, owed",
+  nftFoundersOwed: "Team, owed",
   nftCommunityOwed: "Community, owed",
   nftPendingPots: "Current period, not closed yet",
   nftOwedTotal: "Owed in total, not withdrawn yet",
@@ -1583,7 +1583,7 @@ Object.assign(I18N.en, {
   nftNothingOwed: "Nothing is owed to this address.",
   nftWithdrawFailed: "The recipient refused the ETH: its balance stays credited, nobody else is blocked.",
   nftTreasuryLead: "Live from the contract. When a period ends, anyone closes it: each share becomes an owed balance. Then anyone can trigger a withdrawal, and the ETH goes only to that recipient. A recipient that refuses ETH blocks nobody.",
-  nftVoteLead: "One pot per 30-day period. During the period, every card votes once for a charity; when the period ends, anyone closes it and the pot is credited to the winner. Until then, all the mint money stays locked in the contract — founders included. Trophy cards (contest prizes) and the community wallet do not vote.",
+  nftVoteLead: "One pot per 30-day period. During the period, every card votes once for a charity; when the period ends, anyone closes it and the pot is credited to the winner. Until then, all the mint money stays locked in the contract — team included. Trophy cards (contest prizes) and the community wallet do not vote.",
   nftProposalsLead: "Any card holder can present a charity, with a 0.005 ETH deposit. For 7 full days, the cards that already existed vote yes or no. Approved with 2/3 of the votes and a quorum (25 votes, or 10% of the cards) = it joins the list for the next period; at most 3 per period. A new charity that wins no period in 6 periods leaves the list.",
   nftPropUrl: "Official donation page that shows this address (https://)",
   nftProposeRules: "You need at least one card. Shown as plain text; the link is only clickable once approved.",
@@ -1619,7 +1619,7 @@ Object.assign(I18N.fr, {
   nftFallbackLast: "3 périodes sans vote : clôturer et créditer {name} (dernière gagnante)",
   nftFallbackSplit: "Personne n'a jamais voté : clôturer et partager à parts égales",
   nftPaid: "clôturée",
-  nftFoundersOwed: "Fondateurs, dû",
+  nftFoundersOwed: "Équipe, dû",
   nftCommunityOwed: "Communauté, dû",
   nftPendingPots: "Période en cours, pas encore clôturée",
   nftOwedTotal: "Total dû, pas encore retiré",
@@ -1630,7 +1630,7 @@ Object.assign(I18N.fr, {
   nftNothingOwed: "Rien n'est dû à cette adresse.",
   nftWithdrawFailed: "Le destinataire a refusé l'ETH : son solde reste crédité, personne d'autre n'est bloqué.",
   nftTreasuryLead: "En direct du contrat. À la fin d'une période, n'importe qui la clôture : chaque part devient un solde dû. Ensuite, n'importe qui déclenche un retrait, et l'ETH ne va qu'à ce destinataire. Un destinataire qui refuse l'ETH ne bloque personne.",
-  nftVoteLead: "Une cagnotte par période de 30 jours. Pendant la période, chaque carte vote une fois pour une fondation ; à la fin, n'importe qui clôture la période et la cagnotte est créditée à la gagnante. D'ici là, tout l'argent du mint reste bloqué dans le contrat, fondateurs compris. Les cartes Trophée (prix de concours) et le wallet communauté ne votent pas.",
+  nftVoteLead: "Une cagnotte par période de 30 jours. Pendant la période, chaque carte vote une fois pour une fondation ; à la fin, n'importe qui clôture la période et la cagnotte est créditée à la gagnante. D'ici là, tout l'argent du mint reste bloqué dans le contrat, équipe comprise. Les cartes Trophée (prix de concours) et le wallet communauté ne votent pas.",
   nftProposalsLead: "Tout détenteur de carte peut présenter une fondation, avec un dépôt de 0,005 ETH. Pendant 7 jours pleins, les cartes qui existaient déjà votent oui ou non. Approuvée avec 2/3 des voix et un quorum (25 voix, ou 10 % des cartes) = elle entre dans la liste à la période suivante ; 3 au plus par période. Une nouvelle fondation qui ne gagne aucune période en 6 périodes sort de la liste.",
   nftPropUrl: "Page officielle de dons qui affiche cette adresse (https://)",
   nftProposeRules: "Il faut au moins une carte. Affiché en texte brut ; le lien n'est cliquable qu'une fois approuvée.",
@@ -1666,7 +1666,7 @@ Object.assign(I18N.es, {
   nftFallbackLast: "3 periodos sin votos: cerrar y acreditar a {name} (última ganadora)",
   nftFallbackSplit: "Nadie ha votado nunca: cerrar y repartir a partes iguales",
   nftPaid: "cerrado",
-  nftFoundersOwed: "Fundadores, adeudado",
+  nftFoundersOwed: "Equipo, adeudado",
   nftCommunityOwed: "Comunidad, adeudado",
   nftPendingPots: "Periodo en curso, aún sin cerrar",
   nftOwedTotal: "Total adeudado, aún sin retirar",
@@ -1677,7 +1677,7 @@ Object.assign(I18N.es, {
   nftNothingOwed: "No se debe nada a esta dirección.",
   nftWithdrawFailed: "El destinatario rechazó el ETH: su saldo sigue acreditado y nadie más queda bloqueado.",
   nftTreasuryLead: "En directo desde el contrato. Al terminar un periodo, cualquiera lo cierra: cada parte se convierte en un saldo adeudado. Después, cualquiera activa un retiro y el ETH va solo a ese destinatario. Un destinatario que rechaza ETH no bloquea a nadie.",
-  nftVoteLead: "Un bote por periodo de 30 días. Durante el periodo, cada carta vota una vez por una fundación; al final, cualquiera cierra el periodo y el bote se acredita a la ganadora. Hasta entonces, todo el dinero del mint queda bloqueado en el contrato, fundadores incluidos. Las cartas Trofeo (premios de concursos) y el wallet de la comunidad no votan.",
+  nftVoteLead: "Un bote por periodo de 30 días. Durante el periodo, cada carta vota una vez por una fundación; al final, cualquiera cierra el periodo y el bote se acredita a la ganadora. Hasta entonces, todo el dinero del mint queda bloqueado en el contrato, equipo incluido. Las cartas Trofeo (premios de concursos) y el wallet de la comunidad no votan.",
   nftProposalsLead: "Cualquier poseedor de una carta puede presentar una fundación, con un depósito de 0,005 ETH. Durante 7 días completos, las cartas que ya existían votan sí o no. Aprobada con 2/3 de los votos y un quórum (25 votos, o el 10 % de las cartas) = entra en la lista el periodo siguiente; 3 como máximo por periodo. Una fundación nueva que no gana ningún periodo en 6 periodos sale de la lista.",
   nftPropUrl: "Página oficial de donaciones que muestra esta dirección (https://)",
   nftProposeRules: "Necesitas al menos una carta. Se muestra como texto plano; el enlace solo es clicable una vez aprobada.",
@@ -1713,7 +1713,7 @@ Object.assign(I18N.zh, {
   nftFallbackLast: "连续 3 期无人投票：结算并记入 {name}（上一次获胜者）",
   nftFallbackSplit: "从未有人投票：结算并平均分配",
   nftPaid: "已结算",
-  nftFoundersOwed: "创始人，应付",
+  nftFoundersOwed: "团队，应付",
   nftCommunityOwed: "社区，应付",
   nftPendingPots: "当前一期，尚未结算",
   nftOwedTotal: "应付总额，尚未提取",
@@ -1724,7 +1724,7 @@ Object.assign(I18N.zh, {
   nftNothingOwed: "此地址没有应付余额。",
   nftWithdrawFailed: "收款方拒收 ETH：其余额仍保留，其他人不受影响。",
   nftTreasuryLead: "合约实时数据。一期结束后，任何人都可以结算：每一份都变成应付余额。之后任何人都可以发起提取，ETH 只会发给该收款方。拒收 ETH 的收款方不会妨碍任何人。",
-  nftVoteLead: "每 30 天一期奖池。在本期内，每张卡牌可为一个慈善机构投一票；期满后任何人都可以结算，奖池记入获胜者。在此之前，所有铸造款都锁在合约中，创始人也不例外。奖杯卡（比赛奖品）和社区钱包不投票。",
+  nftVoteLead: "每 30 天一期奖池。在本期内，每张卡牌可为一个慈善机构投一票；期满后任何人都可以结算，奖池记入获胜者。在此之前，所有铸造款都锁在合约中，团队也不例外。奖杯卡（比赛奖品）和社区钱包不投票。",
   nftProposalsLead: "任何卡牌持有者都可以推荐慈善机构，需押金 0.005 ETH。在整整 7 天内，提案时已存在的卡牌投赞成或反对。获得 2/3 票数并达到法定票数（25 票或卡牌总数的 10%）即通过，下一期加入名单；每期最多 3 个。新机构在 6 期内一期未赢则移出名单。",
   nftPropUrl: "显示该地址的官方捐款页面（https://）",
   nftProposeRules: "至少需要一张卡牌。以纯文本显示；通过后链接才可点击。",
