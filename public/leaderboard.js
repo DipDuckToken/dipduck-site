@@ -18,6 +18,9 @@
 // 16 lectures : environ 3 lots par jour), puis l'envoie à recordDay, qui le vérifie. Ce
 // rattrapage n'est demandé que si les prix ne couvrent pas encore la course du concours
 // (en pratique au début de chaque trimestre : 2 transactions pour ~90 jours).
+// Si le flux principal est muet depuis plus de 2 jours et qu'un flux de secours existe, le site
+// prend ses rounds (recordDayBackup). Sans prix 14 jours après le début d'un trimestre, le
+// contrat passe en mode dégradé : currentContest renvoie une course déjà couverte, rien à rattraper.
 
 // ─── À remplir après le déploiement (voir README.md) ────────────────────────
 const LEADERBOARD_CONFIG = {
@@ -46,6 +49,9 @@ const LEADERBOARD_CONFIG = {
     daysBehind: "0x8ca809dc", // daysBehind() : jours terminés pas encore enregistrés
     lastRecordedDay: "0x3278239b", // lastRecordedDay()
     FEED: "0x0beaf38c", // FEED() : flux Chainlink BTC/USD
+    recordDayBackup: "0x284aa381", // recordDayBackup(uint80[]) : rounds du flux de secours
+    BACKUP_FEED: "0xa87d514f", // BACKUP_FEED() : flux de secours (0 = aucun)
+    mainFeedStale: "0x61059274", // mainFeedStale() : principal muet depuis plus de 2 jours
   };
   // Flux Chainlink (AggregatorV3) : roundId = phaseId << 64 | numéro du round dans la phase.
   const FEED_SEL = {
@@ -156,8 +162,7 @@ const LEADERBOARD_CONFIG = {
    * round publié avant son minuit UTC de fin. S'arrête au premier jour pas encore final (aucun round
    * après son minuit). Gère un changement de phase récent (jours de la phase précédente).
    */
-  async function findCloses(fromDay, toDay, progress) {
-    const feed = `0x${(await call(SEL.FEED)).slice(-40)}`;
+  async function findCloses(feed, fromDay, toDay, progress) {
     const latest = words(await rpc("eth_call", [{ to: feed, data: FEED_SEL.latestRoundData }, "latest"]));
     const phase = latest[0] >> 64n;
     const latestUpdated = latest[3];
@@ -329,11 +334,15 @@ const LEADERBOARD_CONFIG = {
     if (last >= needed) return;
     const block = await rpc("eth_getBlockByNumber", ["latest", false]);
     const yesterday = Math.floor((Number(BigInt(block.timestamp)) - DATA_START) / 86_400) - 1;
-    const ids = await findCloses(last + 1, yesterday, (done, total) => status(t("lbFindingRounds").replace("{done}", done).replace("{total}", total), "wait"));
+    // Flux principal, ou le secours si le principal est muet et qu'un secours existe.
+    const backup = `0x${(await call(SEL.BACKUP_FEED)).slice(-40)}`;
+    const useBackup = !/^0x0{40}$/.test(backup) && BigInt(await call(SEL.mainFeedStale)) !== 0n;
+    const feed = useBackup ? backup : `0x${(await call(SEL.FEED)).slice(-40)}`;
+    const ids = await findCloses(feed, last + 1, yesterday, (done, total) => status(t("lbFindingRounds").replace("{done}", done).replace("{total}", total), "wait"));
     if (last + ids.length < needed) throw new Error(t("lbDataBehind"));
     for (let i = 0; i < ids.length; i += MAX_DAYS_PER_TX) {
       status(t("lbCatchUp"), "wait");
-      await send(SEL.recordDay + word(32) + uintArray(ids.slice(i, i + MAX_DAYS_PER_TX)));
+      await send((useBackup ? SEL.recordDayBackup : SEL.recordDay) + word(32) + uintArray(ids.slice(i, i + MAX_DAYS_PER_TX)));
     }
   }
 

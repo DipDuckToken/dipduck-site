@@ -6,7 +6,11 @@ const CONFIG = {
   contract: "",
   // Adresse du contrat de blocage (deployments/robinhood.json → vesting.address)
   vesting: "",
-  // Lien d'achat direct (page de swap avec l'adresse du token), une fois testé
+  // Adresse de la courbe de lancement (deployments/robinhood.json → curve.address) :
+  // section « Courbe de lancement » ; vide = section masquée
+  curve: "",
+  // Lien d'achat direct (page de swap Uniswap avec l'adresse du token), une fois testé ;
+  // tant que la courbe n'a pas ouvert le pool, le bouton d'achat mène à la courbe
   buyUrl: "",
   // Lien du graphique ; vide = la page DexScreener trouvée automatiquement
   chartUrl: "",

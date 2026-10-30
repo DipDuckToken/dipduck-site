@@ -145,7 +145,7 @@
       <div class="tok">
         <figure class="donut">
           <svg viewBox="0 0 200 200" role="img" aria-labelledby="donut-title">
-            <title id="donut-title">87% pool, 10% team (locked), 3% community</title>
+            <title id="donut-title">87% launch curve then Uniswap pool, 10% team (locked), 3% community</title>
             <circle cx="100" cy="100" r="70" class="donut-track"/>
             <circle cx="100" cy="100" r="70" class="donut-pool" stroke-dasharray="382.64 439.82"/>
             <circle cx="100" cy="100" r="70" class="donut-team" stroke-dasharray="43.98 439.82" stroke-dashoffset="-382.64"/>
@@ -513,6 +513,62 @@
       </ul>
     </section>
 
+    <!-- COURBE DE LANCEMENT (on-chain) -->
+    <section id="curve" class="section" hidden>
+      <p class="kicker" data-i18n="curveKicker"></p>
+      <h2 data-i18n="curveTitle"></h2>
+      <p class="section-lead" data-i18n="curveLead"></p>
+      <div class="countdown" id="curve-countdown" hidden>
+        <span class="cd-title" data-i18n="curveOpensIn"></span>
+        <div class="cd-boxes">
+          <div><span class="cd-n" id="curve-cd-d">0</span><span class="cd-l" data-i18n="cdDays"></span></div>
+          <div><span class="cd-n" id="curve-cd-h">00</span><span class="cd-l" data-i18n="cdHours"></span></div>
+          <div><span class="cd-n" id="curve-cd-m">00</span><span class="cd-l" data-i18n="cdMin"></span></div>
+          <div><span class="cd-n" id="curve-cd-s">00</span><span class="cd-l" data-i18n="cdSec"></span></div>
+        </div>
+      </div>
+      <p class="hint" id="curve-opens" hidden></p>
+      <div class="nft-progress-wrap curve-progress">
+        <span data-i18n="curveRaised"></span> <strong id="curve-raised">—</strong>
+        <div class="nft-progress" id="curve-progress"></div>
+      </div>
+      <div class="tok-facts curve-facts">
+        <div><span class="tf-v" id="curve-price">—</span><span class="tf-l" data-i18n="curvePrice"></span></div>
+        <div><span class="tf-v" id="curve-limit">—</span><span class="tf-l" data-i18n="curveLimit"></span><span class="curve-when" id="curve-limit-when"></span></div>
+        <div><span class="tf-v" id="curve-mine">—</span><span class="tf-l" data-i18n="curveMine"></span></div>
+      </div>
+      <div class="curve-trade" id="curve-trade" hidden>
+        <form class="meme-form curve-box" id="curve-buy-form">
+          <h3 data-i18n="curveBuyTitle"></h3>
+          <label class="field"><span data-i18n="curveEthAmount"></span><input type="text" name="eth" inputmode="decimal" placeholder="0.01" autocomplete="off"></label>
+          <p class="hint" id="curve-buy-quote" aria-live="polite"></p>
+          <button type="submit" class="btn primary"><span data-i18n="curveBuyBtn"></span></button>
+        </form>
+        <form class="meme-form curve-box" id="curve-sell-form">
+          <h3 data-i18n="curveSellTitle"></h3>
+          <div class="curve-row">
+            <label class="field"><span data-i18n="curveTokenAmount"></span><input type="text" name="tokens" inputmode="decimal" placeholder="1000000" autocomplete="off"></label>
+            <button type="button" class="btn ghost small" id="curve-sell-max" data-i18n="curveMax"></button>
+          </div>
+          <p class="hint" id="curve-sell-quote" aria-live="polite"></p>
+          <button type="submit" class="btn ghost"><span data-i18n="curveSellBtn"></span></button>
+        </form>
+        <label class="field curve-slippage"><span data-i18n="curveSlippage"></span><input type="number" id="curve-slippage" min="0.1" max="20" step="0.1" value="1" inputmode="decimal"></label>
+      </div>
+      <button type="button" class="btn ghost" id="curve-connect" hidden><span data-i18n="nftConnect"></span></button>
+      <p class="nft-status" id="curve-status" aria-live="polite"></p>
+      <div class="curve-done" id="curve-done" hidden>
+        <p class="round-title" data-i18n="curveDoneTitle"></p>
+        <p data-i18n="curveDoneText"></p>
+        <div class="actions">
+          <a class="btn primary" id="curve-uniswap" target="_blank" rel="noopener" hidden><svg class="ic"><use href="#i-swap"/></svg><span data-i18n="curveUniswap"></span></a>
+          <a class="btn ghost" id="curve-pair" target="_blank" rel="noopener"><span data-i18n="curvePairLink"></span></a>
+        </div>
+      </div>
+      <p class="hint"><a id="curve-contract" target="_blank" rel="noopener" data-i18n="curveContractLink"></a></p>
+      <p class="hint" data-i18n="curveNote"></p>
+    </section>
+
     <!-- ACHETER -->
     <section id="buy" class="section">
       <p class="kicker" data-i18n="howKicker"></p>
@@ -531,6 +587,7 @@
       <p class="kicker">FAQ</p>
       <h2 data-i18n="faqTitle"></h2>
       <div class="faq">
+        <details><summary data-i18n="q8"></summary><p data-i18n="a8"></p></details>
         <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
         <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
         <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
@@ -567,6 +624,7 @@
   <script src="i18n.js"></script>
   <script src="canvas-art.js"></script>
   <script src="app.js"></script>
+  <script src="curve.js"></script>
   <script src="memes.js"></script>
   <script src="cards.js"></script>
   <script src="nft.js"></script>
