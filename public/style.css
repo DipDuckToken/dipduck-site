@@ -57,6 +57,21 @@ p { margin: 0; }
 .langs button:hover { color: var(--text); }
 .langs button[aria-pressed="true"] { color: var(--bg); background: var(--yellow); border-color: var(--yellow); }
 
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.nav-links a, .brand, .langs button { white-space: nowrap; }
+@media (max-width: 1320px) { .nav-links { gap: 0; } .nav-links a { padding: 8px 7px; font-size: 0.88rem; } .langs button { min-width: 38px; padding: 4px 8px; } }
+.wallet-btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 4px 14px;
+  background: var(--yellow); color: var(--bg); border: 1px solid var(--yellow); border-radius: 999px;
+  font: inherit; font-size: 0.85rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: filter .2s;
+}
+.wallet-btn:hover { filter: brightness(1.08); }
+.wallet-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: .45; }
+.wallet-btn[data-state="ok"] { background: transparent; color: var(--text); border-color: var(--line); }
+.wallet-btn[data-state="ok"] .wallet-dot { background: #3ddc84; opacity: 1; }
+.wallet-btn[data-state="wrong"] { background: transparent; color: #ff8a3d; border-color: #ff8a3d; }
+.wallet-btn[data-state="wrong"] .wallet-dot { background: #ff8a3d; opacity: 1; }
+
 main { padding-top: 90px; }
 .section, .hero, .stats, .cta-band, .disclaimer { max-width: var(--max); margin: 0 auto; padding-left: 24px; padding-right: 24px; }
 .section { padding-top: 96px; padding-bottom: 24px; }
@@ -235,8 +250,10 @@ footer { display: flex; align-items: center; justify-content: center; gap: 10px;
 }
 
 /* ── Responsive ──────────────────────────────────────── */
-@media (max-width: 1020px) {
+@media (max-width: 1120px) {
   .nav-links { display: none; }
+}
+@media (max-width: 1020px) {
   .hero { grid-template-columns: 1fr; min-height: auto; text-align: left; }
   .hero-art { max-width: 520px; margin: 0 auto; order: -1; }
   .stats { grid-template-columns: repeat(2, 1fr); }
@@ -250,6 +267,10 @@ footer { display: flex; align-items: center; justify-content: center; gap: 10px;
   .nav { padding: 8px 10px 8px 14px; }
   .brand span { display: none; }
   .langs button { min-width: 40px; padding: 4px 8px; }
+  .nav-right { gap: 6px; }
+  .wallet-btn { padding: 4px 10px; font-size: 0.78rem; }
+  .langs { gap: 2px; }
+  .langs button { min-width: 34px; padding: 4px 6px; }
   .story, .steps, .checks, .timeline, .tok-facts { grid-template-columns: 1fr; }
   .stats { grid-template-columns: 1fr 1fr; gap: 10px; }
   .stat-value { font-size: 1.3rem; }

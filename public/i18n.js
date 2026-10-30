@@ -1763,3 +1763,13 @@ Object.assign(I18N.zh, {
   nftTrophyNote: "奖杯版：111 张预留卡是免费的比赛奖品，每个钱包终身仅一张，且只发给持有 2 张或更少卡牌的钱包。单独抽取：约 70% 史诗、25% 传说、5% 神话（从不低于史诗），不改变铸造卡牌的概率。神话为前 0.1%：3,222 张铸造卡中仅约 3 张。奖杯卡永远不投票。",
   nftTrophyNoVote: "奖杯卡（比赛奖品）不投票，而你没有其他卡牌。",
 });
+
+// En-tête : bouton « Connecter mon wallet ».
+Object.assign(I18N.en, { walletConnect: "Connect wallet", walletWrongChain: "Switch to Robinhood Chain", walletNone: "No wallet: install Rabby or MetaMask" });
+Object.assign(I18N.fr, { walletConnect: "Connecter mon wallet", walletWrongChain: "Passer sur Robinhood Chain", walletNone: "Aucun wallet : installe Rabby ou MetaMask" });
+Object.assign(I18N.es, { walletConnect: "Conectar wallet", walletWrongChain: "Cambiar a Robinhood Chain", walletNone: "Sin wallet: instala Rabby o MetaMask" });
+Object.assign(I18N.zh, { walletConnect: "连接钱包", walletWrongChain: "切换到 Robinhood Chain", walletNone: "未找到钱包：请安装 Rabby 或 MetaMask" });
+Object.assign(I18N.en, { walletShort: "Wallet", walletShortChain: "Network ⚠" });
+Object.assign(I18N.fr, { walletShort: "Wallet", walletShortChain: "Réseau ⚠" });
+Object.assign(I18N.es, { walletShort: "Wallet", walletShortChain: "Red ⚠" });
+Object.assign(I18N.zh, { walletShort: "钱包", walletShortChain: "网络 ⚠" });
