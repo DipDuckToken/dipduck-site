@@ -1847,7 +1847,7 @@ Object.assign(I18N.en, {
   vPositionTitle: "Pool key held by the launch contract", vPositionText: "The Uniswap position NFT: its owner is the launch contract, forever.",
   vPoolTitle: "The buyers' ETH is in the pool", vPoolText: "The pool's balance: ≈ 870 M tokens at the start, then the ETH of every buy.",
   vVestingTitle: "Team share locked 900 days, from the start", vVestingText: "The vesting contract has held the 100,000,000 team tokens since deployment; its schedule is written in its code.",
-  vSafeTitle: "Community reserve in a 2-of-3 Safe", vSafeText: "“Read” tab of the Safe: getThreshold = 2 and getOwners lists 3 addresses.",
+  vSafeTitle: "Community reserve in a 2-of-3 Safe", vSafeText: "“Read” tab of the Safe: getThreshold = 2 and getOwners lists 3 addresses. The 3 keys are held by the team, on 3 separate devices.",
   vFeesTitle: "Trading fees: 60% community, 40% team", vFeesText: "“Read” tab of the launch contract: FEE_RECIPIENT (community Safe) receives 60%, TEAM_FEE_RECIPIENT (team Safe) 40%; anyone can call collectFees.",
   vDeployerTitle: "Deployment wallet empty", vDeployerText: "The wallet that deployed the contracts holds no $DIPDUCK.",
 });
@@ -1900,7 +1900,7 @@ Object.assign(I18N.fr, {
   vPositionTitle: "Clé du pool gardée par le contrat de lancement", vPositionText: "Le NFT de position Uniswap : son propriétaire est le contrat de lancement, pour toujours.",
   vPoolTitle: "L'ETH des acheteurs est dans le pool", vPoolText: "Le solde du pool : ≈ 870 M de tokens au départ, puis l'ETH de chaque achat.",
   vVestingTitle: "Part de l'équipe bloquée 900 jours, dès le départ", vVestingText: "Le contrat de blocage détient les 100 000 000 tokens de l'équipe depuis le déploiement ; son calendrier est écrit dans son code.",
-  vSafeTitle: "Réserve communauté dans un Safe 2 sur 3", vSafeText: "Onglet « Read » du Safe : getThreshold = 2 et getOwners liste 3 adresses.",
+  vSafeTitle: "Réserve communauté dans un Safe 2 sur 3", vSafeText: "Onglet « Read » du Safe : getThreshold = 2 et getOwners liste 3 adresses. Les 3 clés sont détenues par l'équipe, sur 3 appareils séparés.",
   vFeesTitle: "Frais d'échange : 60 % communauté, 40 % équipe", vFeesText: "Onglet « Read » du contrat de lancement : FEE_RECIPIENT (Safe communauté) reçoit 60 %, TEAM_FEE_RECIPIENT (Safe de l'équipe) 40 % ; tout le monde peut appeler collectFees.",
   vDeployerTitle: "Wallet de déploiement vide", vDeployerText: "Le wallet qui a déployé les contrats ne détient aucun $DIPDUCK.",
 });
@@ -1953,7 +1953,7 @@ Object.assign(I18N.es, {
   vPositionTitle: "Llave del pool en manos del contrato de lanzamiento", vPositionText: "El NFT de posición de Uniswap: su dueño es el contrato de lanzamiento, para siempre.",
   vPoolTitle: "El ETH de los compradores está en el pool", vPoolText: "El saldo del pool: ≈ 870 M de tokens al principio, y luego el ETH de cada compra.",
   vVestingTitle: "Parte del equipo bloqueada 900 días, desde el principio", vVestingText: "El contrato de vesting tiene los 100.000.000 tokens del equipo desde el despliegue; su calendario está escrito en su código.",
-  vSafeTitle: "Reserva de la comunidad en un Safe 2 de 3", vSafeText: "Pestaña «Read» del Safe: getThreshold = 2 y getOwners muestra 3 direcciones.",
+  vSafeTitle: "Reserva de la comunidad en un Safe 2 de 3", vSafeText: "Pestaña «Read» del Safe: getThreshold = 2 y getOwners muestra 3 direcciones. Las 3 llaves las tiene el equipo, en 3 dispositivos separados.",
   vFeesTitle: "Comisiones de intercambio: 60 % comunidad, 40 % equipo", vFeesText: "Pestaña «Read» del contrato de lanzamiento: FEE_RECIPIENT (Safe de la comunidad) recibe el 60 %, TEAM_FEE_RECIPIENT (Safe del equipo) el 40 %; cualquiera puede llamar a collectFees.",
   vDeployerTitle: "Wallet de despliegue vacía", vDeployerText: "La wallet que desplegó los contratos no tiene ningún $DIPDUCK.",
 });
@@ -2006,7 +2006,7 @@ Object.assign(I18N.zh, {
   vPositionTitle: "池子的钥匙由发行合约持有", vPositionText: "Uniswap 仓位 NFT：它的持有者永远是发行合约。",
   vPoolTitle: "买家的 ETH 在池子里", vPoolText: "池子的余额：开始时约 8.7 亿枚代币，之后是每一笔买入的 ETH。",
   vVestingTitle: "团队份额从一开始就锁定 900 天", vVestingText: "归属合约自部署起就持有团队的 100,000,000 枚代币；解锁时间表写在其代码中。",
-  vSafeTitle: "社区储备在 3 签 2 的 Safe 中", vSafeText: "Safe 的“Read”标签页：getThreshold = 2，getOwners 列出 3 个地址。",
+  vSafeTitle: "社区储备在 3 签 2 的 Safe 中", vSafeText: "Safe 的“Read”标签页：getThreshold = 2，getOwners 列出 3 个地址。3 把密钥由团队持有，分别存放在 3 台不同的设备上。",
   vFeesTitle: "交易手续费：60% 社区，40% 团队", vFeesText: "发行合约的“Read”标签页：FEE_RECIPIENT（社区 Safe）获得 60%，TEAM_FEE_RECIPIENT（团队 Safe）获得 40%；任何人都可以调用 collectFees。",
   vDeployerTitle: "部署钱包为空", vDeployerText: "部署合约的钱包不持有任何 $DIPDUCK。",
 });
