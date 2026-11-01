@@ -59,7 +59,11 @@ p { margin: 0; }
 
 .nav-right { display: flex; align-items: center; gap: 10px; }
 .nav-links a, .brand, .langs button { white-space: nowrap; }
-@media (max-width: 1320px) { .nav-links { gap: 0; } .nav-links a { padding: 8px 7px; font-size: 0.88rem; } .langs button { min-width: 38px; padding: 4px 8px; } }
+/* Menu compact à toutes les tailles : la barre ne dépasse jamais --max, et 9 liens + 4 langues + le bouton
+   wallet doivent y tenir. */
+.nav-links { gap: 0; }
+.nav-links a { padding: 8px 7px; font-size: 0.88rem; }
+.langs button { min-width: 38px; padding: 4px 8px; }
 .wallet-btn {
   display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 4px 14px;
   background: var(--yellow); color: var(--bg); border: 1px solid var(--yellow); border-radius: 999px;
@@ -250,7 +254,7 @@ footer { display: flex; align-items: center; justify-content: center; gap: 10px;
 }
 
 /* ── Responsive ──────────────────────────────────────── */
-@media (max-width: 1120px) {
+@media (max-width: 1160px) {
   .nav-links { display: none; }
 }
 @media (max-width: 1020px) {
