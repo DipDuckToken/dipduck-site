@@ -51,7 +51,7 @@ const I18N = {
     q6: "How do I avoid fake tokens?", a6: "Only use the contract address published on this site and our official accounts. Anyone can create a token with the same name. Ignore DMs.",
     ctaTitle: "Join the pond.", ctaText: "Follow Dip Duck and meet the other ducks. No promises — just quacks.",
     disclaimerTitle: "Disclaimer",
-    disclaimer: "$DIPDUCK is a meme token with no intrinsic value and no expectation of financial return. There is no roadmap, no promise and no dividend. Its price can go to zero. Only buy what you can afford to lose. Nothing on this site is financial advice. Dip Duck is not affiliated with, endorsed by or sponsored by Robinhood Markets, Inc. or its affiliates.",
+    disclaimer: "$DIPDUCK is a meme token with no intrinsic value and no expectation of financial return. There is a plan without dates, but no promise and no dividend. Its price can go to zero. Only buy what you can afford to lose. Nothing on this site is financial advice. Dip Duck is not affiliated with, endorsed by or sponsored by Robinhood Markets, Inc. or its affiliates.",
     footer: "Not affiliated with Robinhood.",
   },
   fr: {
@@ -103,7 +103,7 @@ const I18N = {
     q6: "Comment éviter les faux tokens ?", a6: "Utilise uniquement l'adresse publiée sur ce site et sur nos comptes officiels. N'importe qui peut créer un token du même nom. Ignore les messages privés.",
     ctaTitle: "Rejoins la mare.", ctaText: "Suis Dip Duck et rencontre les autres canards. Aucune promesse — juste des coin-coin.",
     disclaimerTitle: "Avertissement",
-    disclaimer: "$DIPDUCK est un token mème sans valeur intrinsèque et sans attente de rendement financier. Il n'y a ni feuille de route, ni promesse, ni dividende. Son prix peut tomber à zéro. N'achète que ce que tu peux te permettre de perdre. Rien sur ce site n'est un conseil financier. Dip Duck n'est ni affilié à Robinhood Markets, Inc. ou à ses sociétés liées, ni approuvé, ni parrainé par elles.",
+    disclaimer: "$DIPDUCK est un token mème sans valeur intrinsèque et sans attente de rendement financier. Il y a un plan sans date, mais ni promesse, ni dividende. Son prix peut tomber à zéro. N'achète que ce que tu peux te permettre de perdre. Rien sur ce site n'est un conseil financier. Dip Duck n'est ni affilié à Robinhood Markets, Inc. ou à ses sociétés liées, ni approuvé, ni parrainé par elles.",
     footer: "Non affilié à Robinhood.",
   },
   es: {
@@ -155,7 +155,7 @@ const I18N = {
     q6: "¿Cómo evito los tokens falsos?", a6: "Usa solo la dirección publicada en este sitio y en nuestras cuentas oficiales. Cualquiera puede crear un token con el mismo nombre. Ignora los mensajes privados.",
     ctaTitle: "Únete al estanque.", ctaText: "Sigue a Dip Duck y conoce a los demás patos. Sin promesas, solo cuacs.",
     disclaimerTitle: "Aviso",
-    disclaimer: "$DIPDUCK es un token meme sin valor intrínseco y sin expectativa de rendimiento financiero. No hay hoja de ruta, ni promesas, ni dividendos. Su precio puede llegar a cero. Compra solo lo que puedas permitirte perder. Nada en este sitio es asesoramiento financiero. Dip Duck no está afiliado, respaldado ni patrocinado por Robinhood Markets, Inc. ni sus filiales.",
+    disclaimer: "$DIPDUCK es un token meme sin valor intrínseco y sin expectativa de rendimiento financiero. Hay un plan sin fechas, pero ni promesas ni dividendos. Su precio puede llegar a cero. Compra solo lo que puedas permitirte perder. Nada en este sitio es asesoramiento financiero. Dip Duck no está afiliado, respaldado ni patrocinado por Robinhood Markets, Inc. ni sus filiales.",
     footer: "No afiliado a Robinhood.",
   },
   zh: {
@@ -207,7 +207,7 @@ const I18N = {
     q6: "如何避免假币？", a6: "只使用本网站及我们官方账号公布的合约地址。任何人都能创建同名代币。请忽略私信。",
     ctaTitle: "加入池塘。", ctaText: "关注 Dip Duck，认识其他鸭子。没有承诺，只有嘎嘎。",
     disclaimerTitle: "免责声明",
-    disclaimer: "$DIPDUCK 是一种迷因代币，没有内在价值，也不应期待任何财务回报。没有路线图、没有承诺、没有分红。其价格可能归零。请只投入你能承受损失的资金。本网站内容均不构成投资建议。Dip Duck 与 Robinhood Markets, Inc. 及其关联公司无任何关联，也未获其认可或赞助。",
+    disclaimer: "$DIPDUCK 是一种迷因代币，没有内在价值，也不应期待任何财务回报。有不设日期的计划，但没有承诺、没有分红。其价格可能归零。请只投入你能承受损失的资金。本网站内容均不构成投资建议。Dip Duck 与 Robinhood Markets, Inc. 及其关联公司无任何关联，也未获其认可或赞助。",
     footer: "与 Robinhood 无关联。",
   },
 };
@@ -2016,3 +2016,82 @@ Object.assign(I18N.en, { verifyFeesCommunity: "Community Safe (60%)", verifyFees
 Object.assign(I18N.fr, { verifyFeesCommunity: "Safe communauté (60 %)", verifyFeesTeam: "Safe de l'équipe, 2 signatures sur 3 (40 %)" });
 Object.assign(I18N.es, { verifyFeesCommunity: "Safe de la comunidad (60 %)", verifyFeesTeam: "Safe del equipo, 2 firmas de 3 (40 %)" });
 Object.assign(I18N.zh, { verifyFeesCommunity: "社区 Safe（60%）", verifyFeesTeam: "团队 Safe，3 人中需 2 人签名（40%）" });
+
+// Plan de l'étang : grandes lignes sur l'accueil, détail sur roadmap.html. Aucune date, aucune
+// promesse. « rmPhaseNItems » et « rmNeverItems » : « titre::texte » séparés par « | ».
+Object.assign(I18N.en, {
+  navRoadmap: "Plan",
+  rmKicker: "The pond plan",
+  rmTitle: "Where the duck would like to swim.",
+  rmLead: "Plans, not promises. No dates: each step is announced when it's built, never before.",
+  rm1Title: "Launch", rm1Text: "Fair launch, liquidity locked forever, 24h anti-bot, game and meme maker live.",
+  rm2Title: "Community", rm2Text: "Monthly meme contests, Telegram stickers and the Duck Alert on every crash.",
+  rm3Title: "Play & transparency", rm3Text: "Catch the Dip inside Telegram with ranked seasons, and a public monthly report of the Safes.",
+  rm4Title: "A bigger pond", rm4Text: "Dip Duck Cards with charity votes, more languages and groups, duck merch.",
+  rmMore: "See the full plan",
+  rmPageTitle: "The pond plan — Dip Duck",
+  rmBack: "Back to Dip Duck",
+  rmPhase1Items: "Fair launch::No presale, no whitelist: same price, same second for everyone.|Liquidity locked forever::The pool's key sits in a contract with no withdraw function.|24h anti-bot::Max 0.5%, then 1%, then 2% of the supply per wallet.|Game and meme maker::Catch the Dip and the meme lab, live on dipduck.xyz.|Token pages::GeckoTerminal and DEXTools pages with logo and official links.",
+  rmPhase2Items: "Monthly meme contests::Prizes in $DIPDUCK from the community reserve (2-of-3 Safe).|Duck Alert::When Bitcoin drops more than 5% in a day, the duck posts a “stay calm” meme on X and Telegram.|Duck calm index::The duck's mood on the site, following the market's fear and greed.|Telegram stickers::The calm duck in every chat.|Meme crossovers::Joint meme contests with other Robinhood Chain communities.",
+  rmPhase3Items: "Catch the Dip in Telegram::Play without leaving Telegram.|Ranked seasons::Challenges and leaderboards, with $DIPDUCK prizes for the top 10 from the community reserve.|Monthly Safe report::What the Safes received in fees and what was spent, with on-chain links.|A bigger “Check it yourself”::Pool, holders and team unlock in one place.|Anti-scam guides::Simple guides for crypto newcomers.",
+  rmPhase4Items: "Dip Duck Cards::Collectible NFT cards on Robinhood Chain. Part of the fees goes to charities chosen by holder vote.|More languages and groups::Spanish and Chinese groups with trusted volunteer moderators, and the site in more languages.|Duck merch::“Stay calm” t-shirts and mugs, printed on demand: no stock.|CoinGecko and CoinMarketCap::Applications for token pages.",
+  rmNeverTitle: "What we won't do",
+  rmNeverItems: "No staking or “rewards” for holding::That would look like a financial product.|No buybacks to push the price::The price is set by buyers and sellers, nothing else.|No paid exchange listings or influencers::Most of them sell fake reach.|No second token, no other chains::One duck, one pond.",
+});
+Object.assign(I18N.fr, {
+  navRoadmap: "Plan",
+  rmKicker: "Le plan de l'étang",
+  rmTitle: "Là où le canard aimerait nager.",
+  rmLead: "Des projets, pas des promesses. Aucune date : chaque étape est annoncée quand elle est construite, jamais avant.",
+  rm1Title: "Lancement", rm1Text: "Lancement équitable, liquidité verrouillée à vie, anti-bot 24 h, jeu et générateur de mèmes en ligne.",
+  rm2Title: "Communauté", rm2Text: "Concours de mèmes mensuels, stickers Telegram et l'alerte du canard à chaque krach.",
+  rm3Title: "Jeu et transparence", rm3Text: "« Attrape la baisse » dans Telegram avec des saisons classées, et un rapport mensuel public des Safes.",
+  rm4Title: "Un étang plus grand", rm4Text: "Les Dip Duck Cards avec vote pour des fondations, plus de langues et de groupes, des produits canard.",
+  rmMore: "Voir le plan complet",
+  rmPageTitle: "Le plan de l'étang — Dip Duck",
+  rmBack: "Retour à Dip Duck",
+  rmPhase1Items: "Lancement équitable::Pas de prévente, pas de liste privée : même prix, même seconde pour tout le monde.|Liquidité verrouillée à vie::La clé du pool est dans un contrat sans fonction de retrait.|Anti-bot 24 h::Au plus 0,5 %, puis 1 %, puis 2 % de l'offre par wallet.|Jeu et générateur de mèmes::« Attrape la baisse » et l'atelier de mèmes, en ligne sur dipduck.xyz.|Fiches du token::Pages GeckoTerminal et DEXTools avec logo et liens officiels.",
+  rmPhase2Items: "Concours de mèmes mensuels::Prix en $DIPDUCK payés par la réserve communauté (Safe 2 sur 3).|Alerte du canard::Quand le Bitcoin perd plus de 5 % en un jour, le canard publie un mème « reste calme » sur X et Telegram.|Indice de calme du canard::L'humeur du canard sur le site, selon la peur ou l'avidité du marché.|Stickers Telegram::Le canard calme dans toutes les conversations.|Mèmes croisés::Concours de mèmes avec d'autres communautés de Robinhood Chain.",
+  rmPhase3Items: "« Attrape la baisse » dans Telegram::Jouer sans quitter Telegram.|Saisons classées::Défis et classements, avec des prix en $DIPDUCK pour le top 10, payés par la réserve communauté.|Rapport mensuel des Safes::Ce que les Safes ont reçu en frais et ce qui a été dépensé, avec les liens sur la chaîne.|« Vérifie toi-même » enrichi::Pool, détenteurs et déblocage de l'équipe au même endroit.|Guides anti-arnaque::Des guides simples pour les nouveaux dans la crypto.",
+  rmPhase4Items: "Dip Duck Cards::Cartes NFT de collection sur Robinhood Chain. Une partie des frais va à des fondations choisies par vote des détenteurs.|Plus de langues et de groupes::Groupes en espagnol et en chinois avec des modérateurs bénévoles de confiance, et le site dans plus de langues.|Produits canard::T-shirts et tasses « Stay calm », imprimés à la demande : aucun stock.|CoinGecko et CoinMarketCap::Demandes de fiches du token.",
+  rmNeverTitle: "Ce qu'on ne fera pas",
+  rmNeverItems: "Pas de staking ni de « récompenses » pour détenir::Ce serait un produit financier.|Pas de rachats pour faire monter le prix::Le prix vient des acheteurs et des vendeurs, rien d'autre.|Pas de listing payé ni d'influenceurs payés::La plupart vendent une fausse audience.|Pas de 2ᵉ token, pas d'autres blockchains::Un canard, un étang.",
+});
+Object.assign(I18N.es, {
+  navRoadmap: "Plan",
+  rmKicker: "El plan del estanque",
+  rmTitle: "Hacia donde le gustaría nadar al pato.",
+  rmLead: "Planes, no promesas. Sin fechas: cada paso se anuncia cuando está construido, nunca antes.",
+  rm1Title: "Lanzamiento", rm1Text: "Lanzamiento justo, liquidez bloqueada para siempre, anti-bot de 24 h, juego y creador de memes en línea.",
+  rm2Title: "Comunidad", rm2Text: "Concursos de memes mensuales, stickers de Telegram y la alerta del pato en cada caída.",
+  rm3Title: "Juego y transparencia", rm3Text: "Atrapa la caída dentro de Telegram con temporadas clasificatorias, y un informe mensual público de los Safes.",
+  rm4Title: "Un estanque más grande", rm4Text: "Dip Duck Cards con votos para fundaciones, más idiomas y grupos, productos del pato.",
+  rmMore: "Ver el plan completo",
+  rmPageTitle: "El plan del estanque — Dip Duck",
+  rmBack: "Volver a Dip Duck",
+  rmPhase1Items: "Lanzamiento justo::Sin preventa ni lista privada: mismo precio, mismo segundo para todos.|Liquidez bloqueada para siempre::La llave del pool está en un contrato sin función de retiro.|Anti-bot de 24 h::Como máximo 0,5 %, luego 1 %, luego 2 % del suministro por wallet.|Juego y creador de memes::Atrapa la caída y el taller de memes, en línea en dipduck.xyz.|Fichas del token::Páginas en GeckoTerminal y DEXTools con logo y enlaces oficiales.",
+  rmPhase2Items: "Concursos de memes mensuales::Premios en $DIPDUCK pagados por la reserva de la comunidad (Safe 2 de 3).|Alerta del pato::Cuando Bitcoin cae más de un 5 % en un día, el pato publica un meme de «calma» en X y Telegram.|Índice de calma del pato::El humor del pato en el sitio, según el miedo o la codicia del mercado.|Stickers de Telegram::El pato tranquilo en todas las conversaciones.|Memes cruzados::Concursos de memes con otras comunidades de Robinhood Chain.",
+  rmPhase3Items: "Atrapa la caída en Telegram::Jugar sin salir de Telegram.|Temporadas clasificatorias::Desafíos y clasificaciones, con premios en $DIPDUCK para el top 10 pagados por la reserva de la comunidad.|Informe mensual de los Safes::Lo que los Safes recibieron en comisiones y lo que se gastó, con enlaces en la cadena.|Un «Compruébalo tú mismo» más completo::Pool, holders y desbloqueo del equipo en un solo lugar.|Guías contra estafas::Guías sencillas para quienes empiezan en cripto.",
+  rmPhase4Items: "Dip Duck Cards::Cartas NFT coleccionables en Robinhood Chain. Parte de las comisiones va a fundaciones elegidas por votación de los poseedores.|Más idiomas y grupos::Grupos en español y en chino con moderadores voluntarios de confianza, y el sitio en más idiomas.|Productos del pato::Camisetas y tazas «Stay calm», impresas bajo demanda: sin stock.|CoinGecko y CoinMarketCap::Solicitudes de fichas del token.",
+  rmNeverTitle: "Lo que no haremos",
+  rmNeverItems: "Nada de staking ni «recompensas» por mantener::Sería un producto financiero.|Nada de recompras para subir el precio::El precio lo ponen compradores y vendedores, nada más.|Nada de listados ni influencers pagados::La mayoría venden un alcance falso.|Ni un segundo token ni otras blockchains::Un pato, un estanque.",
+});
+Object.assign(I18N.zh, {
+  navRoadmap: "计划",
+  rmKicker: "池塘计划",
+  rmTitle: "鸭子想游去的地方。",
+  rmLead: "是计划，不是承诺。没有日期：每一步都在完成后才公布，绝不提前。",
+  rm1Title: "上线", rm1Text: "公平上线，流动性永久锁定，24 小时防机器人，游戏和表情包生成器已上线。",
+  rm2Title: "社区", rm2Text: "每月表情包比赛、Telegram 贴纸，以及每次大跌时的鸭子警报。",
+  rm3Title: "游戏与透明", rm3Text: "在 Telegram 里玩「抓住下跌」并设排名赛季，每月公开 Safe 报告。",
+  rm4Title: "更大的池塘", rm4Text: "Dip Duck Cards 与慈善投票、更多语言和社群、鸭子周边。",
+  rmMore: "查看完整计划",
+  rmPageTitle: "池塘计划 — Dip Duck",
+  rmBack: "返回 Dip Duck",
+  rmPhase1Items: "公平上线::没有预售，没有白名单：所有人同一价格、同一秒开始。|流动性永久锁定::池子的钥匙在一个没有提取功能的合约里。|24 小时防机器人::每个钱包最多持有供应量的 0.5%，然后 1%，然后 2%。|游戏和表情包生成器::「抓住下跌」和表情包工坊已在 dipduck.xyz 上线。|代币页面::带有标志和官方链接的 GeckoTerminal 与 DEXTools 页面。",
+  rmPhase2Items: "每月表情包比赛::奖品为 $DIPDUCK，由社区储备（3 签 2 的 Safe）支付。|鸭子警报::比特币单日下跌超过 5% 时，鸭子会在 X 和 Telegram 发布「保持冷静」表情包。|鸭子冷静指数::网站上鸭子的心情，跟随市场的恐惧与贪婪。|Telegram 贴纸::冷静的鸭子出现在每个聊天里。|表情包联动::与 Robinhood Chain 上其他社区合办表情包比赛。",
+  rmPhase3Items: "在 Telegram 里玩「抓住下跌」::无需离开 Telegram 即可游玩。|排名赛季::挑战和排行榜，前 10 名获得由社区储备支付的 $DIPDUCK 奖品。|每月 Safe 报告::Safe 收到了多少手续费、花了多少，附链上链接。|更完整的「自己查验」::池子、持有人和团队解锁集中在一处。|防骗指南::给加密新手的简单指南。",
+  rmPhase4Items: "Dip Duck Cards::Robinhood Chain 上的收藏型 NFT 卡牌。部分手续费捐给持有人投票选出的慈善机构。|更多语言和社群::由可信的志愿管理员运营西班牙语和中文社群，网站支持更多语言。|鸭子周边::「Stay calm」T 恤和杯子，按需印制：没有库存。|CoinGecko 和 CoinMarketCap::申请代币页面。",
+  rmNeverTitle: "我们不会做的事",
+  rmNeverItems: "不做质押，也不为持有发「奖励」::那会像金融产品。|不回购拉盘::价格只由买家和卖家决定。|不付费上所，不付费找网红::大多数卖的是虚假流量。|不发第二个代币，不上其他链::一只鸭子，一个池塘。",
+});

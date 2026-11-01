@@ -487,3 +487,15 @@ h4.mini { font-family: var(--font-head); font-size: 1.15rem; margin: 28px 0 10px
 .verify-list a { color: var(--water); font-weight: 800; white-space: nowrap; }
 .verify-links { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
 @media (max-width: 640px) { .verify-list li { grid-template-columns: auto 1fr; } .verify-list a, .verify-links { grid-column: 2; } .verify-links { align-items: flex-start; } }
+
+/* ── Plan de l'étang (accueil + roadmap.html) ────────── */
+.rm-more { margin-top: 24px; }
+.rm-phase { padding-top: 40px; }
+.rm-phase h2 { display: flex; align-items: center; gap: 14px; font-size: clamp(1.5rem, 3.2vw, 2.1rem); margin-bottom: 18px; }
+.rm-n { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--orange); color: var(--bg); font-size: 1.1rem; font-weight: 800; }
+.rm-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.rm-list li { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+.rm-list strong { display: block; font-family: var(--font-head); font-size: 1.12rem; margin-bottom: 4px; }
+.rm-list p { color: var(--muted); font-size: .97rem; }
+.rm-never li { border-color: rgba(255, 138, 61, .45); }
+@media (max-width: 640px) { .rm-list { grid-template-columns: 1fr; } }
