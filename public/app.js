@@ -26,7 +26,7 @@ const CONFIG = {
   // (ex. "2026-11-20T20:00:00Z"). Vide = pas de compte à rebours.
   launchAt: "",
   x: "https://x.com/DipDuckToken",
-  telegram: "",
+  telegram: "https://t.me/DipDuckToken",
 };
 // ────────────────────────────────────────────────────────────────────────────
 
