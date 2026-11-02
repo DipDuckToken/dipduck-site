@@ -2095,3 +2095,30 @@ Object.assign(I18N.zh, {
   rmNeverTitle: "我们不会做的事",
   rmNeverItems: "不做质押，也不为持有发「奖励」::那会像金融产品。|不回购拉盘::价格只由买家和卖家决定。|不付费上所，不付费找网红::大多数卖的是虚假流量。|不发第二个代币，不上其他链::一只鸭子，一个池塘。",
 });
+
+// « 0 % de taxe » vaut pour le token ; le pool Uniswap prend 1 % par échange (60/40) : le dire partout.
+Object.assign(I18N.en, {
+  badgeTax: "0% token tax",
+  marquee: "BUY THE DIP|QUACK|0% TOKEN TAX|LIQUIDITY LOCKED FOREVER|NO OWNER|FIXED SUPPLY|STAY CALM ON THE WATER",
+  a1: "No tax on the token: 0%, the contract has no tax function at all. The Uniswap pool takes a 1% fee on every swap: 60% to the community Safe, 40% to the team Safe.",
+});
+Object.assign(I18N.fr, {
+  badgeTax: "0 % de taxe sur le token",
+  marquee: "ACHÈTE LA BAISSE|COIN COIN|0 % DE TAXE SUR LE TOKEN|LIQUIDITÉ VERROUILLÉE À VIE|SANS OWNER|OFFRE FIXE|RESTE CALME SUR L'EAU",
+  a1: "Aucune taxe sur le token : 0 %, le contrat n'a aucune fonction de taxe. Le pool Uniswap prend 1 % de frais sur chaque échange : 60 % au Safe communauté, 40 % au Safe de l'équipe.",
+});
+Object.assign(I18N.es, {
+  badgeTax: "0 % de impuesto al token",
+  marquee: "COMPRA LA CAÍDA|CUAC|0 % DE IMPUESTO AL TOKEN|LIQUIDEZ BLOQUEADA PARA SIEMPRE|SIN OWNER|SUMINISTRO FIJO|CALMA SOBRE EL AGUA",
+  a1: "Ningún impuesto al token: 0 %, el contrato no tiene ninguna función de impuesto. El pool de Uniswap cobra un 1 % de comisión en cada intercambio: 60 % al Safe de la comunidad, 40 % al Safe del equipo.",
+});
+Object.assign(I18N.zh, {
+  badgeTax: "代币 0% 交易税",
+  marquee: "逢跌就买|嘎嘎|代币 0% 交易税|流动性永久锁定|无所有者|固定供应|水面上保持淡定",
+  a1: "代币本身没有交易税：0%，合约中没有任何收税功能。Uniswap 池每笔兑换收取 1% 手续费：60% 给社区 Safe，40% 给团队 Safe。",
+});
+// Le blocage de l'équipe n'est pas total pendant 900 jours : rien avant le jour 90, puis peu à peu.
+Object.assign(I18N.en, { badgeLock: "Team: nothing for 90 days" });
+Object.assign(I18N.fr, { badgeLock: "Équipe : rien avant 90 jours" });
+Object.assign(I18N.es, { badgeLock: "Equipo: nada antes de 90 días" });
+Object.assign(I18N.zh, { badgeLock: "团队：90 天内不解锁" });
