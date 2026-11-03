@@ -31,6 +31,12 @@ const CONFIG = {
 // ────────────────────────────────────────────────────────────────────────────
 
 const EXPLORER = "https://robinhoodchain.blockscout.com";
+
+// Jeu d'aventure : avant l'ouverture, le bouton propose seulement l'intro (bande-annonce).
+{
+  const advLabel = document.getElementById("adv-play");
+  if (advLabel && Date.now() < Date.parse(CONFIG.launchAt)) advLabel.dataset.i18n = "advTeaser";
+}
 const LANGS = Object.keys(I18N);
 const isAddress = (value) => /^0x[0-9a-fA-F]{40}$/.test(value);
 const launched = isAddress(CONFIG.contract);

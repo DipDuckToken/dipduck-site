@@ -429,6 +429,9 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
         "Everyone panicked... except one duck.",
       ],
       skip: "SPACE or tap: skip",
+      lockedTitle: "Playable at launch",
+      lockedDate: "Nov 11 · 7 PM ET",
+      countdown: "{d}d {h}:{m}:{s}",
       intro: [
         "The Pond was always calm. Three Calm Feathers kept it that way, even when the charts dipped.",
         "One stormy night, the Bear King stole all three. Now red candles rain on the Pond and everyone panics...",
@@ -535,6 +538,9 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
         "Tout le monde a paniqué... sauf un canard.",
       ],
       skip: "ESPACE ou touche : passer",
+      lockedTitle: "Jouable à l'ouverture",
+      lockedDate: "11 nov. · 19 h (heure de l'Est)",
+      countdown: "{d} j {h}:{m}:{s}",
       intro: [
         "L'Étang a toujours été calme. Trois Plumes du Calme le protégeaient, même quand les courbes plongeaient.",
         "Une nuit d'orage, le Roi Ours les a volées toutes les trois. Depuis, des bougies rouges pleuvent sur l'Étang et tout le monde panique...",
@@ -631,5 +637,9 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
     },
   };
 
-  return { SCREENS, ENTRANCES, EXITS, CARD_IDS, TEXT };
+  // Le jeu devient jouable à l'ouverture du token : 11 novembre 2026, 19 h (heure de l'Est).
+  // Avant, l'intro et l'écran titre restent visibles (bande-annonce).
+  const OPENS_AT = "2026-11-12T00:00:00Z";
+
+  return { SCREENS, ENTRANCES, EXITS, CARD_IDS, TEXT, OPENS_AT };
 })();

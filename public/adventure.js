@@ -182,6 +182,10 @@
 
   // ─── État ───
   let state = "intro"; // intro | title | play | menu | end
+  // Verrou d'ouverture : pas de partie avant le lancement (simple affichage, le jeu n'a aucun prix).
+  const OPENS_AT = Date.parse(DATA.OPENS_AT || "");
+  let unlocked = false;
+  const isLocked = () => !unlocked && !Number.isNaN(OPENS_AT) && Date.now() < OPENS_AT;
   let introT = 0, titleIdle = 0;
   const INTRO_SCENE = 4 * 60, INTRO_LEN = 4 * INTRO_SCENE;
   let menuPage = 0;
@@ -666,7 +670,7 @@
       menuQueued = false;
       // Comme les vieux jeux : sans action pendant 25 s, l'intro repasse.
       if (++titleIdle > 25 * 60) { state = "intro"; introT = 0; return; }
-      if (consumeAction()) startGame();
+      if (consumeAction() && !isLocked()) startGame();
       return;
     }
     if (state === "end") {
@@ -1349,6 +1353,14 @@
     if (logo.complete && logo.naturalWidth) ctx.drawImage(logo, W / 2 - 32, 8, 64, 64);
     txt("DIP DUCK", W / 2, 80, 16, UI.accent, "center");
     txt(T.subtitle, W / 2, 102, 8, UI.paper, "center");
+    if (isLocked()) {
+      const left = Math.max(0, Math.floor((OPENS_AT - Date.now()) / 1000));
+      const pad = (n) => String(n).padStart(2, "0");
+      txt(T.lockedTitle, W / 2, 118, 6, UI.accent, "center");
+      txt(T.lockedDate, W / 2, 128, 5, UI.paper, "center");
+      txt(fmt(T.countdown, { d: Math.floor(left / 86400), h: pad(Math.floor((left % 86400) / 3600)), m: pad(Math.floor((left % 3600) / 60)), s: pad(left % 60) }), W / 2, 138, 6, UI.accent, "center");
+      return;
+    }
     if (Math.floor(frame / 30) % 2) txt(T.start, W / 2, 124, 6, UI.accent, "center");
     txt(T.controls, W / 2, 140, 4, UI.dim, "center");
     if (hasSave) txt(T.newGame, W / 2, 150, 4, UI.dim, "center");
@@ -1500,6 +1512,6 @@
   window.__dipduckAdventure = {
     get state() { return state; }, get cur() { return cur; }, get dialog() { return dialog; },
     get enemies() { return enemies; }, get chests() { return chests; }, get blocks() { return blocks; },
-    get tiles() { return tiles; }, get npcs() { return npcs; }, introAt(t) { state = "intro"; introT = t; }, player, flags: () => flags, enter, tilePos, SCREENS,
+    get tiles() { return tiles; }, get npcs() { return npcs; }, introAt(t) { state = "intro"; introT = t; }, unlockForTests() { unlocked = true; }, player, flags: () => flags, enter, tilePos, SCREENS,
   };
 })();
