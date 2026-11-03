@@ -48,22 +48,35 @@ p { margin: 0; }
 .nav-links { display: flex; gap: 4px; }
 .nav-links a { color: var(--muted); text-decoration: none; padding: 8px 12px; border-radius: 999px; font-weight: 700; font-size: 0.95rem; transition: color .2s, background .2s; }
 .nav-links a:hover { color: var(--text); background: var(--panel-2); }
-.langs { display: flex; gap: 4px; }
-.langs button {
-  min-width: 44px; min-height: 36px; background: transparent; color: var(--muted);
-  border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; cursor: pointer;
-  font: inherit; font-size: 0.85rem; font-weight: 700; transition: color .2s, background .2s;
+/* Langue : un seul bouton (« FR ▾ ») qui ouvre une petite liste. */
+.langs { position: relative; display: flex; }
+.lang-toggle {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 12px;
+  background: transparent; color: var(--text); border: 1px solid var(--line); border-radius: 999px;
+  cursor: pointer; font: inherit; font-size: 0.85rem; font-weight: 700; white-space: nowrap; transition: border-color .2s, background .2s;
 }
-.langs button:hover { color: var(--text); }
-.langs button[aria-pressed="true"] { color: var(--bg); background: var(--yellow); border-color: var(--yellow); }
+.lang-toggle:hover, .lang-toggle[aria-expanded="true"] { border-color: var(--yellow); background: var(--panel-2); }
+.lang-caret { width: 10px; height: 6px; transition: transform .2s; }
+.lang-toggle[aria-expanded="true"] .lang-caret { transform: rotate(180deg); }
+.lang-menu {
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 60; min-width: 150px;
+  display: flex; flex-direction: column; gap: 2px; padding: 6px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 12px 30px rgba(0, 0, 0, .45);
+}
+.lang-menu[hidden] { display: none; }
+.lang-menu button {
+  text-align: left; min-height: 36px; padding: 6px 12px; background: transparent; color: var(--muted);
+  border: 0; border-radius: 10px; cursor: pointer; font: inherit; font-size: 0.9rem; font-weight: 700;
+}
+.lang-menu button:hover { color: var(--text); background: var(--panel-2); }
+.lang-menu button[aria-pressed="true"] { color: var(--bg); background: var(--yellow); }
 
 .nav-right { display: flex; align-items: center; gap: 10px; }
-.nav-links a, .brand, .langs button { white-space: nowrap; }
+.nav-links a, .brand { white-space: nowrap; }
 /* Menu compact à toutes les tailles : la barre ne dépasse jamais --max, et 9 liens + 4 langues + le bouton
    wallet doivent y tenir. */
 .nav-links { gap: 0; }
 .nav-links a { padding: 8px 7px; font-size: 0.88rem; }
-.langs button { min-width: 38px; padding: 4px 8px; }
 .wallet-btn {
   display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 4px 14px;
   background: var(--yellow); color: var(--bg); border: 1px solid var(--yellow); border-radius: 999px;
@@ -270,11 +283,9 @@ footer { display: flex; align-items: center; justify-content: center; gap: 10px;
   body { font-size: 16px; }
   .nav { padding: 8px 10px 8px 14px; }
   .brand span { display: none; }
-  .langs button { min-width: 40px; padding: 4px 8px; }
   .nav-right { gap: 6px; }
   .wallet-btn { padding: 4px 10px; font-size: 0.78rem; }
-  .langs { gap: 2px; }
-  .langs button { min-width: 34px; padding: 4px 6px; }
+  .lang-toggle { padding: 4px 9px; }
   .story, .steps, .checks, .timeline, .tok-facts { grid-template-columns: 1fr; }
   .stats { grid-template-columns: 1fr 1fr; gap: 10px; }
   .stat-value { font-size: 1.3rem; }
