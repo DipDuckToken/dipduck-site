@@ -181,7 +181,9 @@
   function consumeMenu() { if (menuQueued) { menuQueued = false; return true; } return false; }
 
   // ─── État ───
-  let state = "title"; // title | play | menu | end
+  let state = "intro"; // intro | title | play | menu | end
+  let introT = 0, titleIdle = 0;
+  const INTRO_SCENE = 4 * 60, INTRO_LEN = 4 * INTRO_SCENE;
   let menuPage = 0;
   let frame = 0, endAt = 0;
   let cur = "o:1,2";
@@ -276,7 +278,7 @@
     if (!flags.started) {
       flags.started = true;
       enter("o:1,2", tilePos(7, 7));
-      say(T.intro);
+      say(T.intro[T.intro.length - 1]);
     } else {
       const [k, x, y] = flags.last && SCREENS[flags.last[0]] ? flags.last : flags.cp;
       enter(k, [x, y]);
@@ -654,7 +656,19 @@
     frame++;
     if (shake > 0) shake--;
     if (swCd > 0) swCd--;
-    if (state === "title") { menuQueued = false; if (consumeAction()) startGame(); return; }
+    if (state === "intro") {
+      menuQueued = false;
+      introT++;
+      if (consumeAction() || introT >= INTRO_LEN) { state = "title"; titleIdle = 0; }
+      return;
+    }
+    if (state === "title") {
+      menuQueued = false;
+      // Comme les vieux jeux : sans action pendant 25 s, l'intro repasse.
+      if (++titleIdle > 25 * 60) { state = "intro"; introT = 0; return; }
+      if (consumeAction()) startGame();
+      return;
+    }
     if (state === "end") {
       menuQueued = false;
       if (frame - endAt < 90) { actionQueued = false; return; }
@@ -1267,6 +1281,69 @@
     }
   }
 
+  // Intro animée : 4 scènes de 4 secondes (l'Étang calme, l'orage, le vol des plumes, le canard calme).
+  function drawIntro() {
+    const scene = Math.min(3, Math.floor(introT / INTRO_SCENE));
+    const st = (introT - scene * INTRO_SCENE) / INTRO_SCENE; // 0 → 1 dans la scène
+    const storm = scene === 1 || scene === 2;
+    const sea = 118;
+    ctx = bgCtx;
+    rect(0, 0, W, H, scene === 0 ? "#4aa3df" : UI.night);
+    if (scene === 0) {
+      circle(206, 34, 14, "#ffd23f"); circle(206, 34, 9, "#f0d890");
+      for (const [cx, cy] of [[50, 30], [90, 46], [150, 24]]) { circle(cx, cy, 6, "#f4f4e8"); circle(cx + 7, cy + 1, 5, "#f4f4e8"); circle(cx - 7, cy + 2, 4, "#f4f4e8"); }
+    } else {
+      for (const [cx, cy] of [[40, 26], [110, 18], [190, 30], [240, 14]]) { circle(cx, cy, 9, "#5a5a7a"); circle(cx + 10, cy + 2, 7, "#5a5a7a"); circle(cx - 10, cy + 3, 6, "#5a5a7a"); }
+    }
+    rect(0, sea, W, H - sea, "#1e5aa8");
+    for (let i = 0; i < 12; i++) {
+      const wx = (i * 41 + Math.floor(frame / (storm ? 4 : 10)) * 2) % (W + 20) - 10;
+      rect(wx, sea + 4 + (i % 4) * 7, 8, 1, "#4aa3df");
+    }
+    if (storm) {
+      for (let i = 0; i < 50; i++) rect((i * 37 + frame * 2) % W, (i * 53 + frame * 6) % sea, 1, 4, "#a0a0b8");
+      if (frame % 97 < 4) rect(0, 0, W, sea, "#f4f4e8");
+    }
+    if (scene === 3) for (let i = 0; i < 24; i++) rect((i * 29) % W, (i * 17) % 90, 1, 1, "#f4f4e8");
+
+    ctx = spCtx;
+    if (scene === 1) {
+      for (let i = 0; i < 6; i++) {
+        const x = 20 + i * 42, y = ((i * 31 + introT * 1.5) % (sea + 10)) - 10;
+        rect(x, y + 2, 4, 7, "#d83a3a"); circle(x + 2, y + 1, 1.4, "#ff8c1a");
+      }
+    }
+    const bob = Math.round(Math.sin(frame / 15) * 1.5);
+    if (scene < 3) {
+      const shake = storm ? Math.round(Math.sin(frame / 2)) : 0;
+      drawDuck(80 + shake, sea - 4 + bob, "right", 0, 1.6);
+      // Les trois plumes : au-dessus du canard, puis volées vers le Roi Ours.
+      for (let i = 0; i < 3; i++) {
+        let fx = 62 + i * 18, fy = 70 + Math.round(Math.sin(frame / 12 + i) * 3);
+        if (scene === 2) {
+          const k = Math.min(1, Math.max(0, (st - 0.3) / 0.5));
+          fx += (176 + i * 10 - fx) * k; fy += (62 - fy) * k;
+        }
+        drawFeather(fx, fy, 1);
+      }
+    }
+    if (scene === 2) {
+      const bx = Math.round(W + 30 - Math.min(1, st / 0.3) * (W + 30 - 196));
+      rect(bx - 22, sea - 8, 44, 10, "#5a5a7a"); rect(bx - 20, sea - 10, 40, 3, "#a0a0b8");
+      drawEnemyAt("bearking", bx, sea - 30, { state: st > 0.8 ? "wind" : "walk", x: 0 });
+    }
+    if (scene === 3) {
+      drawDuck(W / 2, 92 + bob, "down", 0, 3.2);
+      const g = Math.floor((st * 3) % 1 * 30);
+      if (st > 0.25) rect(W / 2 - 14 + g, 80 + bob, 3, 2, "#f4f4e8");
+    }
+
+    ctx = bgCtx;
+    rect(0, 146, W, H - 146, UI.ink);
+    wrapText(T.introScenes[scene], W - 20, 6).slice(0, 3).forEach((l, i) => txt(l, W / 2, 152 + i * 10, 6, UI.paper, "center"));
+    if (Math.floor(frame / 30) % 2) txt(T.skip, W - 6, 4, 4, UI.dim, "right");
+  }
+
   function drawTitle() {
     drawPondBackground();
     if (logo.complete && logo.naturalWidth) ctx.drawImage(logo, W / 2 - 32, 8, 64, 64);
@@ -1395,7 +1472,8 @@
     spCtx.clearRect(0, 0, W, H);
     ctx = bgCtx;
     let ox = 0, oy = 0;
-    if (state === "title") drawTitle();
+    if (state === "intro") drawIntro();
+    else if (state === "title") drawTitle();
     else if (state === "end") drawEnd();
     else if (state === "menu") drawMenu();
     else {
@@ -1422,6 +1500,6 @@
   window.__dipduckAdventure = {
     get state() { return state; }, get cur() { return cur; }, get dialog() { return dialog; },
     get enemies() { return enemies; }, get chests() { return chests; }, get blocks() { return blocks; },
-    get tiles() { return tiles; }, get npcs() { return npcs; }, player, flags: () => flags, enter, tilePos, SCREENS,
+    get tiles() { return tiles; }, get npcs() { return npcs; }, introAt(t) { state = "intro"; introT = t; }, player, flags: () => flags, enter, tilePos, SCREENS,
   };
 })();

@@ -422,6 +422,13 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
       start: "Press SPACE or tap to start",
       newGame: "N: new game",
       controls: "Arrows: move · SPACE: quack/talk · M: menu",
+      introScenes: [
+        "The Pond was always calm. Three Calm Feathers kept it that way, even when the charts dipped.",
+        "One stormy night, panic came. Red candles started raining on the Pond...",
+        "The Bear King stole the three Calm Feathers!",
+        "Everyone panicked... except one duck.",
+      ],
+      skip: "SPACE or tap: skip",
       intro: [
         "The Pond was always calm. Three Calm Feathers kept it that way, even when the charts dipped.",
         "One stormy night, the Bear King stole all three. Now red candles rain on the Pond and everyone panics...",
@@ -521,6 +528,13 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
       start: "ESPACE ou touche l'écran pour jouer",
       newGame: "N : nouvelle partie",
       controls: "Flèches : bouger · ESPACE : coin-coin · M : menu",
+      introScenes: [
+        "L'Étang a toujours été calme. Trois Plumes du Calme le protégeaient, même quand les courbes plongeaient.",
+        "Une nuit d'orage, la panique est arrivée. Des bougies rouges se sont mises à pleuvoir sur l'Étang...",
+        "Le Roi Ours a volé les trois Plumes du Calme !",
+        "Tout le monde a paniqué... sauf un canard.",
+      ],
+      skip: "ESPACE ou touche : passer",
       intro: [
         "L'Étang a toujours été calme. Trois Plumes du Calme le protégeaient, même quand les courbes plongeaient.",
         "Une nuit d'orage, le Roi Ours les a volées toutes les trois. Depuis, des bougies rouges pleuvent sur l'Étang et tout le monde panique...",
