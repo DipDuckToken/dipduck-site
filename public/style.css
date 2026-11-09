@@ -518,3 +518,7 @@ h4.mini { font-family: var(--font-head); font-size: 1.15rem; margin: 28px 0 10px
 .rm-list p { color: var(--muted); font-size: .97rem; }
 .rm-never li { border-color: rgba(255, 138, 61, .45); }
 @media (max-width: 640px) { .rm-list { grid-template-columns: 1fr; } }
+
+/* Adresses longues (Safe, contrats) : coupées au besoin pour ne jamais élargir la page sur téléphone. */
+#community-link, #vesting-link, .tok-row a { overflow-wrap: anywhere; word-break: break-all; }
+.tok-list, .tok-row, .tok-row > div { min-width: 0; }
