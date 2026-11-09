@@ -505,7 +505,8 @@ h4.mini { font-family: var(--font-head); font-size: 1.15rem; margin: 28px 0 10px
 .verify-list p { margin: 2px 0 0; color: var(--muted); font-size: .92rem; }
 .verify-list a { color: var(--water); font-weight: 800; white-space: nowrap; }
 .verify-links { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
-@media (max-width: 640px) { .verify-list li { grid-template-columns: auto 1fr; } .verify-list a, .verify-links { grid-column: 2; } .verify-links { align-items: flex-start; } }
+@media (max-width: 640px) { .verify-list li { grid-template-columns: auto 1fr; } .verify-list a, .verify-links { grid-column: 2; } .verify-links { align-items: flex-start; } .verify-list a { white-space: normal; } }
+.verify-list li > div, .verify-links { min-width: 0; }
 
 /* ── Plan de l'étang (accueil + roadmap.html) ────────── */
 .rm-more { margin-top: 24px; }
@@ -524,3 +525,8 @@ h4.mini { font-family: var(--font-head); font-size: 1.15rem; margin: 28px 0 10px
 /* Adresses longues (Safe, contrats) : coupées au besoin pour ne jamais élargir la page sur téléphone. */
 #community-link, #vesting-link, .tok-row a { overflow-wrap: anywhere; word-break: break-all; }
 .tok-list, .tok-row, .tok-row > div { min-width: 0; }
+
+/* Formulaires achat / vente : jamais plus larges que l'écran (petits téléphones). */
+.launch-trade > *, .launch-row > .field { min-width: 0; }
+.launch-box input { width: 100%; min-width: 0; box-sizing: border-box; }
+.steps > *, .story > * { min-width: 0; overflow-wrap: anywhere; }
