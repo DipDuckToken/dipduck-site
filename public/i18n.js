@@ -1847,7 +1847,7 @@ Object.assign(I18N.en, {
   verifyKicker: "Don't trust, verify", verifyTitle: "Check it yourself, link by link.",
   verifyLead: "Every promise on this site has a public proof on Blockscout. One click per line.",
   verifyEmpty: "The links appear here as soon as the contracts are deployed.",
-  verifyOpen: "Check on Blockscout",
+  verifyOpen: "Check on Blockscout", verifyGithub: "Read on GitHub",
   vLauncherTitle: "Launch contract: verified code, no withdraw function", vLauncherText: "“Contract” tab: no owner, no admin function, no function to withdraw the liquidity — only collectFees, which splits the fees between the two Safes.",
   vTokenTitle: "Token: verified code, no owner", vTokenText: "“Contract” tab: verified source, fixed supply, no mint, no tax, no owner.",
   vPositionTitle: "Pool key held by the launch contract", vPositionText: "The Uniswap position NFT: its owner is the launch contract, forever.",
@@ -1856,6 +1856,7 @@ Object.assign(I18N.en, {
   vSafeTitle: "Community reserve in a 2-of-3 Safe", vSafeText: "“Read” tab of the Safe: getThreshold = 2 and getOwners lists 3 addresses. The 3 keys are held by the team, on 3 separate devices.",
   vFeesTitle: "Trading fees: 60% community, 40% team", vFeesText: "“Read” tab of the launch contract: FEE_RECIPIENT (community Safe) receives 60%, TEAM_FEE_RECIPIENT (team Safe) 40%; anyone can call collectFees.",
   vDeployerTitle: "Deployment wallet empty", vDeployerText: "The wallet that deployed the contracts holds no $DIPDUCK.",
+  vSourceTitle: "Full source code on GitHub", vSourceText: "Contracts, tests and deployment scripts are public: the same code as the one verified on Blockscout.",
 });
 Object.assign(I18N.fr, {
   tokPool: "Pool Uniswap v3",
@@ -1902,7 +1903,7 @@ Object.assign(I18N.fr, {
   verifyKicker: "Ne crois pas, vérifie", verifyTitle: "Vérifie toi-même, lien par lien.",
   verifyLead: "Chaque promesse de ce site a une preuve publique sur Blockscout. Un clic par ligne.",
   verifyEmpty: "Les liens apparaissent ici dès que les contrats sont déployés.",
-  verifyOpen: "Vérifier sur Blockscout",
+  verifyOpen: "Vérifier sur Blockscout", verifyGithub: "Lire sur GitHub",
   vLauncherTitle: "Contrat de lancement : code vérifié, aucune fonction de retrait", vLauncherText: "Onglet « Contract » : aucun owner, aucune fonction d'administration, aucune fonction pour retirer la liquidité — seulement collectFees, qui partage les frais entre les deux Safe.",
   vTokenTitle: "Token : code vérifié, sans owner", vTokenText: "Onglet « Contract » : code source vérifié, offre fixe, aucune émission, aucune taxe, aucun owner.",
   vPositionTitle: "Clé du pool gardée par le contrat de lancement", vPositionText: "Le NFT de position Uniswap : son propriétaire est le contrat de lancement, pour toujours.",
@@ -1911,6 +1912,7 @@ Object.assign(I18N.fr, {
   vSafeTitle: "Réserve communauté dans un Safe 2 sur 3", vSafeText: "Onglet « Read » du Safe : getThreshold = 2 et getOwners liste 3 adresses. Les 3 clés sont détenues par l'équipe, sur 3 appareils séparés.",
   vFeesTitle: "Frais d'échange : 60 % communauté, 40 % équipe", vFeesText: "Onglet « Read » du contrat de lancement : FEE_RECIPIENT (Safe communauté) reçoit 60 %, TEAM_FEE_RECIPIENT (Safe de l'équipe) 40 % ; tout le monde peut appeler collectFees.",
   vDeployerTitle: "Wallet de déploiement vide", vDeployerText: "Le wallet qui a déployé les contrats ne détient aucun $DIPDUCK.",
+  vSourceTitle: "Tout le code source sur GitHub", vSourceText: "Contrats, tests et scripts de déploiement sont publics : le même code que celui vérifié sur Blockscout.",
 });
 Object.assign(I18N.es, {
   tokPool: "Pool de Uniswap v3",
@@ -1957,7 +1959,7 @@ Object.assign(I18N.es, {
   verifyKicker: "No confíes, verifica", verifyTitle: "Compruébalo tú mismo, enlace por enlace.",
   verifyLead: "Cada promesa de este sitio tiene una prueba pública en Blockscout. Un clic por línea.",
   verifyEmpty: "Los enlaces aparecen aquí en cuanto se despliegan los contratos.",
-  verifyOpen: "Comprobar en Blockscout",
+  verifyOpen: "Comprobar en Blockscout", verifyGithub: "Leer en GitHub",
   vLauncherTitle: "Contrato de lanzamiento: código verificado, sin función de retirada", vLauncherText: "Pestaña «Contract»: sin owner, sin funciones de administración, sin ninguna función para retirar la liquidez; solo collectFees, que reparte las comisiones entre los dos Safe.",
   vTokenTitle: "Token: código verificado, sin owner", vTokenText: "Pestaña «Contract»: código fuente verificado, suministro fijo, sin emisión, sin impuesto, sin owner.",
   vPositionTitle: "Llave del pool en manos del contrato de lanzamiento", vPositionText: "El NFT de posición de Uniswap: su dueño es el contrato de lanzamiento, para siempre.",
@@ -1966,6 +1968,7 @@ Object.assign(I18N.es, {
   vSafeTitle: "Reserva de la comunidad en un Safe 2 de 3", vSafeText: "Pestaña «Read» del Safe: getThreshold = 2 y getOwners muestra 3 direcciones. Las 3 llaves las tiene el equipo, en 3 dispositivos separados.",
   vFeesTitle: "Comisiones de intercambio: 60 % comunidad, 40 % equipo", vFeesText: "Pestaña «Read» del contrato de lanzamiento: FEE_RECIPIENT (Safe de la comunidad) recibe el 60 %, TEAM_FEE_RECIPIENT (Safe del equipo) el 40 %; cualquiera puede llamar a collectFees.",
   vDeployerTitle: "Wallet de despliegue vacía", vDeployerText: "La wallet que desplegó los contratos no tiene ningún $DIPDUCK.",
+  vSourceTitle: "Todo el código fuente en GitHub", vSourceText: "Contratos, pruebas y scripts de despliegue son públicos: el mismo código que el verificado en Blockscout.",
 });
 Object.assign(I18N.zh, {
   tokPool: "Uniswap v3 流动性池",
@@ -2012,7 +2015,7 @@ Object.assign(I18N.zh, {
   verifyKicker: "不要轻信，亲自验证", verifyTitle: "逐个链接，亲自核实。",
   verifyLead: "本网站的每一项承诺都在 Blockscout 上有公开证明。每行点一下即可。",
   verifyEmpty: "合约部署后，链接会显示在这里。",
-  verifyOpen: "在 Blockscout 上核实",
+  verifyOpen: "在 Blockscout 上核实", verifyGithub: "在 GitHub 上查看",
   vLauncherTitle: "发行合约：代码已验证，没有取出功能", vLauncherText: "“Contract”标签页：没有 owner，没有管理功能，没有任何撤出流动性的功能——只有 collectFees，把手续费分给两个 Safe。",
   vTokenTitle: "代币：代码已验证，没有 owner", vTokenText: "“Contract”标签页：源代码已验证，固定供应，不能增发，没有交易税，没有 owner。",
   vPositionTitle: "池子的钥匙由发行合约持有", vPositionText: "Uniswap 仓位 NFT：它的持有者永远是发行合约。",
@@ -2021,6 +2024,7 @@ Object.assign(I18N.zh, {
   vSafeTitle: "社区储备在 3 签 2 的 Safe 中", vSafeText: "Safe 的“Read”标签页：getThreshold = 2，getOwners 列出 3 个地址。3 把密钥由团队持有，分别存放在 3 台不同的设备上。",
   vFeesTitle: "交易手续费：60% 社区，40% 团队", vFeesText: "发行合约的“Read”标签页：FEE_RECIPIENT（社区 Safe）获得 60%，TEAM_FEE_RECIPIENT（团队 Safe）获得 40%；任何人都可以调用 collectFees。",
   vDeployerTitle: "部署钱包为空", vDeployerText: "部署合约的钱包不持有任何 $DIPDUCK。",
+  vSourceTitle: "完整源代码在 GitHub 上", vSourceText: "合约、测试和部署脚本全部公开：与 Blockscout 上验证的代码相同。",
 });
 
 // Frais du pool partagés : liens des deux Safe dans « Vérifie toi-même ».

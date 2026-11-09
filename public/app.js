@@ -25,6 +25,8 @@ const CONFIG = {
   // Date et heure du lancement, en UTC, pour le compte à rebours
   // (ex. "2026-11-20T20:00:00Z"). Vide = pas de compte à rebours.
   launchAt: "2026-11-12T00:00:00Z",
+  // Dépôt public du code des contrats : ligne « Tout le code source » de « Vérifie toi-même »
+  source: "https://github.com/DipDuckToken/dipduck-contracts",
   x: "https://x.com/DipDuckToken",
   telegram: "https://t.me/DipDuckToken",
 };
@@ -143,6 +145,7 @@ function applyVerify() {
     ["v-deployer", CONFIG.deployer, (a) => `${EXPLORER}/address/${a}?tab=tokens`],
   ];
   for (const [id, address, url] of lines) if (isAddress(address)) showVerify(id, url(address));
+  if (launched && CONFIG.source) showVerify("v-source", CONFIG.source);
 }
 
 // ─── Chiffres en direct (DexScreener, API publique) ─────────────────────────
