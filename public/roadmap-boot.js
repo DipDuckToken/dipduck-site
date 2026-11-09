@@ -1,6 +1,12 @@
 // roadmap.html : même langue que le site, listes « titre::texte|… » construites depuis i18n.js.
 // Fichier séparé (pas de script inline) pour permettre une CSP script-src 'self'.
 const LANGS = Object.keys(I18N);
+// Étapes terminées, par liste et par position (0 = première), pareil dans toutes les langues.
+// Ne cocher que ce qui est vérifiable publiquement (chaîne, site).
+const DONE = {
+  rmPhase1Items: [1, 2, 3], // liquidité verrouillée, anti-bot 24 h, jeu et générateur de mèmes
+};
+const DONE_LABEL = { en: "Done", fr: "Fait", es: "Hecho", zh: "已完成" };
 
 function pickLanguage() {
   const fromUrl = new URLSearchParams(location.search).get("lang");
@@ -18,11 +24,19 @@ function applyLanguage(lang) {
   }
   for (const list of document.querySelectorAll("[data-items]")) {
     list.replaceChildren();
-    for (const item of t(list.dataset.items).split("|")) {
+    const done = DONE[list.dataset.items] ?? [];
+    for (const [index, item] of t(list.dataset.items).split("|").entries()) {
       const [title, text] = item.split("::");
       const li = document.createElement("li");
       const strong = document.createElement("strong");
       strong.textContent = title;
+      if (done.includes(index)) {
+        li.classList.add("done");
+        const badge = document.createElement("span");
+        badge.className = "rm-done";
+        badge.textContent = `✓ ${DONE_LABEL[lang] ?? DONE_LABEL.en}`;
+        strong.append(" ", badge);
+      }
       const p = document.createElement("p");
       p.textContent = text;
       li.append(strong, p);
