@@ -123,7 +123,7 @@ h1 .accent { color: var(--yellow); }
 
 .ca {
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 26px; padding: 10px 10px 10px 16px;
-  background: var(--panel); border: 1px dashed var(--line); border-radius: 16px; max-width: 560px;
+  background: var(--panel); border: 1px dashed var(--line); border-radius: 16px; max-width: 680px;
 }
 .ca-label { color: var(--orange); font-weight: 800; font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; }
 .ca-value { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .92rem; color: var(--text); word-break: break-all; flex: 1; min-width: 0; }
@@ -135,6 +135,10 @@ h1 .accent { color: var(--yellow); }
 .ca-copy:hover { border-color: var(--yellow); }
 .ca.pending .ca-copy { display: none; }
 .ca.pending .ca-value { color: var(--muted); font-family: var(--font-body); }
+/* L'adresse tient toujours sur une seule ligne : la taille s'adapte à la largeur. */
+.ca { container-type: inline-size; }
+.ca:not(.pending) { justify-content: space-between; }
+.ca:not(.pending) .ca-value { white-space: nowrap; word-break: normal; flex-basis: 100%; order: 3; font-size: min(.92rem, calc((100cqw - 34px) / 25.6)); }
 
 .badges { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
 .badges li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(255, 210, 63, .08); border: 1px solid rgba(255, 210, 63, .25); color: var(--yellow); font-weight: 700; font-size: .92rem; }
@@ -468,7 +472,7 @@ h4.mini { font-family: var(--font-head); font-size: 1.15rem; margin: 28px 0 10px
   .hero-text { text-align: center; }
   .hero-text .lead { margin-left: auto; margin-right: auto; }
   .badges { justify-content: center; }
-  .ca { justify-content: center; text-align: center; }
+  .ca { justify-content: center; text-align: center; padding: 10px; }
   .ca.pending .ca-value { word-break: normal; overflow-wrap: anywhere; flex-basis: 100%; }
   .kicker, .section > h2, .section-lead { text-align: center; }
   .section-lead { margin-left: auto; margin-right: auto; }
