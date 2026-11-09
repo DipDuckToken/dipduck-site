@@ -3,25 +3,25 @@
 // reste masquée ou le bouton désactivé.
 const CONFIG = {
   // Adresse du token (deployments/robinhood.json → token.address)
-  contract: "",
+  contract: "0x36384B0e1BE39EAaf2Ac36BdC53DF5123566139C",
   // Adresse du contrat de blocage (deployments/robinhood.json → vesting.address)
-  vesting: "",
+  vesting: "0x2C9f048336dD03B66aD3e8bCA4e84c3C3aC7bbB6",
   // Adresse du contrat de lancement LaunchPool (deployments/robinhood.json → launcher.address) :
   // section « Lancement » (achat / revente dans le pool Uniswap v3) ; vide = section masquée
-  launcher: "",
+  launcher: "0xbDd74deFe1D289Af77ED1E41cc5b05661ABE36F2",
   // Bloc de déploiement de LaunchPool (deployments/robinhood.json → launcher.blockNumber) :
   // départ de la liste des transactions ; 0 = seulement les blocs récents
-  launchFromBlock: 0,
+  launchFromBlock: 109757519,
   // Lien Uniswap (page de swap avec l'adresse du token), une fois testé : bouton
   // « Ouvrir sur Uniswap » de la section Lancement
   buyUrl: "",
   // Lien du graphique ; vide = la page DexScreener trouvée automatiquement
   chartUrl: "",
   // Wallet de la réserve communauté (launch.config.ts → community.beneficiary)
-  communityWallet: "",
+  communityWallet: "0x14aaC4b3072022142a2Fd597ED29FDC7bF602CFF",
   // Wallet qui a déployé les contrats (deployments/robinhood.json → deployer) :
   // « Vérifie toi-même » montre qu'il ne garde aucun token
-  deployer: "",
+  deployer: "0xf919a3f0ae458b899fde8Fc14196425fBB887060",
   // Date et heure du lancement, en UTC, pour le compte à rebours
   // (ex. "2026-11-20T20:00:00Z"). Vide = pas de compte à rebours.
   launchAt: "2026-11-12T00:00:00Z",
