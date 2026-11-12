@@ -14,7 +14,7 @@ const CONFIG = {
   launchFromBlock: 109757519,
   // Lien Uniswap (page de swap avec l'adresse du token), une fois testé : bouton
   // « Ouvrir sur Uniswap » de la section Lancement
-  buyUrl: "",
+  buyUrl: "https://app.uniswap.org/swap?chain=robinhood&inputCurrency=ETH&outputCurrency=0x36384B0e1BE39EAaf2Ac36BdC53DF5123566139C",
   // Lien du graphique ; vide = la page DexScreener trouvée automatiquement
   chartUrl: "",
   // Wallet de la réserve communauté (launch.config.ts → community.beneficiary)
