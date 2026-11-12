@@ -4,7 +4,7 @@ const LANGS = Object.keys(I18N);
 // Étapes terminées, par liste et par position (0 = première), pareil dans toutes les langues.
 // Ne cocher que ce qui est vérifiable publiquement (chaîne, site).
 const DONE = {
-  rmPhase1Items: [1, 2, 3], // liquidité verrouillée, anti-bot 24 h, jeu et générateur de mèmes
+  rmPhase1Items: [0, 1, 2, 3], // lancement équitable (11 nov. 19 h), liquidité verrouillée, anti-bot 24 h, jeu et mèmes
 };
 const DONE_LABEL = { en: "Done", fr: "Fait", es: "Hecho", zh: "已完成" };
 
