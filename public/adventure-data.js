@@ -5,6 +5,9 @@
 // # mur  _ sol  G grille (s'ouvre quand l'énigme est résolue)  P dalle  O bloc à pousser
 // l torche  Q cristal (inverse les barrières)  u barrière levée en position 0  v barrière levée en position 1
 // L porte verrouillée (petite clé)  E sortie du donjon  e sortie qui apparaît après le boss
+// Acte II : V gouffre (un bloc poussé dedans le comble)  o poteau du grappin  Z mur fragile (galet)
+// m miroir « / »  j miroir « \ » (coin-coin : on le tourne)  @ source de lumière  * récepteur
+// I glace (on glisse)  Y interrupteur à minuterie  J grille à minuterie  F Miroirs du Marais  A Tour de l'Horloge
 window.DIPDUCK_ADVENTURE_DATA = (() => {
   const SCREENS = {
     // ═══════════════ Dehors (4 × 4) ═══════════════
@@ -51,7 +54,7 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
       "R..........R.R",
       "R..x.......RKR",
       "R............R",
-      "R....RR......R",
+      "R....AA......R",
       "R............R",
       "R..,......x..R",
       "R............R",
@@ -161,7 +164,7 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
       "WWWWWWWWWWWWWW",
       "WWW......WWWWW",
       "WW..WWW...WWWW",
-      "W..WW.WW......",
+      "W..WW.WW....F.",
       "W..W...W......",
       "W..WW.WW......",
       "WW..WWW...WWWW",
@@ -408,20 +411,181 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
       "______________",
       "____________e_",
     ], chests: [{ id: "d3-feather", x: 8, y: 5, item: "f3", reward: true }] },
+
+    // ═══════════════ Acte II — Donjon 4 : les Miroirs du Marais ═══════════════
+    "d4:1,2": { name: "d4-entry", open: "nwe", border: "#", checkpoint: true, rows: [
+      "______LL______",
+      "_#__________#_",
+      "______________",
+      "______________",
+      "______n_______",
+      "______________",
+      "______________",
+      "_#__________#_",
+      "______E_______",
+    ], enemies: [["wisp", 4, 6], ["wisp", 11, 3]], signs: { "7,5": "signMarsh" } },
+
+    // Glace : on glisse jusqu'à un obstacle. Le coffre ne s'atteint qu'en remontant la colonne de gauche.
+    "d4:0,2": { name: "d4-ice", open: "e", border: "#", rows: [
+      "IIIIIIIIIIII__",
+      "I_RIIIIIIIII__",
+      "IIIIIIIIIIII__",
+      "IIIIIIIIIIII__",
+      "IIIIRIIIIIII__",
+      "IIIIIIIIIIII__",
+      "IIIIIIIIRIII__",
+      "IIIIIIIIIIII__",
+      "RIIIIIIIIIII__",
+    ], enemies: [["wisp", 8, 3]], signs: {},
+    chests: [{ id: "d4-key-ice", x: 2, y: 2, item: "smallkey" }] },
+
+    // Lumière : source à droite ; tourne les bons miroirs pour guider le rayon jusqu'au récepteur.
+    "d4:2,2": { name: "d4-beam1", open: "w", border: "#", puzzle: "beam", beamDir: "left", rows: [
+      "______________",
+      "______j_____@_",
+      "______________",
+      "___R______R___",
+      "______________",
+      "_j____m___m___",
+      "______________",
+      "_*____________",
+      "______________",
+    ], enemies: [["wisp", 9, 8], ["wisp", 4, 4]],
+    chests: [{ id: "d4-hook", x: 9, y: 8, item: "hook", reward: true }] },
+
+    // Gouffres : il faut le grappin (poteaux de chaque côté).
+    "d4:1,1": { name: "d4-pits", open: "nse", border: "#", rows: [
+      "______LL______",
+      "______________",
+      "______o_______",
+      "______________",
+      "VVVVVVVVVVVVVV",
+      "VVVVVVVVVVVVVV",
+      "VVVVVVVVVVVVVV",
+      "______________",
+      "________o_____",
+    ], enemies: [["wisp", 4, 6], ["wisp", 11, 6]] },
+
+    // Lumière 2 : un bloc coupe le rayon ; pousse-le hors du chemin.
+    "d4:2,1": { name: "d4-beam2", open: "w", border: "#", puzzle: "beam", beamDir: "right", rows: [
+      "______________",
+      "@__________m__",
+      "______________",
+      "______________",
+      "___________O__",
+      "______________",
+      "______________",
+      "___________j*_",
+      "______________",
+    ], enemies: [["wisp", 5, 7], ["gear", 4, 4]],
+    chests: [{ id: "d4-key-beam", x: 7, y: 8, item: "smallkey", reward: true }] },
+
+    "d4:1,0": { name: "d4-boss", open: "s", border: "#", puzzle: "clear", boss: "heron", rows: [
+      "______________",
+      "______________",
+      "__#________#__",
+      "______________",
+      "______________",
+      "______________",
+      "__#________#__",
+      "______________",
+      "____________e_",
+    ], chests: [{ id: "d4-pearl", x: 8, y: 5, item: "p1", reward: true }] },
+
+    // ═══════════════ Acte II — Donjon 5 : la Tour de l'Horloge ═══════════════
+    "d5:1,2": { name: "d5-entry", open: "nwe", border: "#", checkpoint: true, rows: [
+      "______LL______",
+      "_#__________#_",
+      "______________",
+      "______________",
+      "______n_______",
+      "______________",
+      "______________",
+      "_#__________#_",
+      "______E_______",
+    ], enemies: [["gear", 4, 6], ["gear", 11, 3]], signs: { "7,5": "signTower" } },
+
+    // Galets : bats les rouages pour gagner le sac. Un mur fragile cache un fragment de cœur.
+    "d5:0,2": { name: "d5-pebbles", open: "e", border: "#", puzzle: "clear", rows: [
+      "_Z____________",
+      "Z_____________",
+      "___#______#___",
+      "______________",
+      "______________",
+      "______________",
+      "___#______#___",
+      "______________",
+      "______________",
+    ], enemies: [["gear", 4, 5], ["gear", 10, 4], ["gear", 7, 8], ["wisp", 11, 8]],
+    chests: [{ id: "d5-pebbles", x: 8, y: 5, item: "pebbles", reward: true }, { id: "d5-heart", x: 1, y: 1, item: "heart" }] },
+
+    // Minuterie : un galet libère l'interrupteur ; un coin-coin dessus ouvre la grille quelques secondes. Cours !
+    "d5:2,2": { name: "d5-timer", open: "w", border: "#", timer: 6, rows: [
+      "_________#____",
+      "_________J____",
+      "_________#____",
+      "_________#####",
+      "______________",
+      "______________",
+      "______________",
+      "ZZ____________",
+      "YZ____________",
+    ], enemies: [["gear", 6, 6], ["wisp", 4, 3]],
+    chests: [{ id: "d5-key-timer", x: 13, y: 2, item: "smallkey" }] },
+
+    // Grappin + galet : traverse les gouffres, puis fais sauter le mur fragile à l'est.
+    "d5:1,1": { name: "d5-pits", open: "nse", border: "#", rows: [
+      "______LL______",
+      "______________",
+      "______o_______",
+      "_____________Z",
+      "VVVVVVVVVVVVVV",
+      "VVVVVVVVVVVVVV",
+      "VVVVVVVVVVVVVV",
+      "______________",
+      "________o_____",
+    ], enemies: [["wisp", 4, 6], ["gear", 10, 3]] },
+
+    // Lumière + galet + bloc : le rayon est bloqué par un mur fragile, puis par un bloc.
+    "d5:2,1": { name: "d5-beam", open: "w", border: "#", puzzle: "beam", beamDir: "left", rows: [
+      "______________",
+      "_____j_Z_____@",
+      "______________",
+      "___R______R___",
+      "_____O________",
+      "______________",
+      "______________",
+      "_____*________",
+      "______________",
+    ], enemies: [["gear", 10, 7], ["wisp", 3, 3]],
+    chests: [{ id: "d5-key-beam", x: 11, y: 7, item: "smallkey", reward: true }] },
+
+    "d5:1,0": { name: "d5-boss", open: "s", border: "#", puzzle: "clear", boss: "owl", rows: [
+      "______________",
+      "______________",
+      "__#________#__",
+      "______________",
+      "______________",
+      "______________",
+      "__#________#__",
+      "______________",
+      "____________e_",
+    ], chests: [{ id: "d5-pearl", x: 8, y: 5, item: "p2", reward: true }] },
   };
 
   // Entrées et sorties des donjons (cases entières : x, y).
-  const ENTRANCES = { C: ["d1:0,1", 7, 8], M: ["d2:1,2", 7, 8], B: ["d3:1,2", 7, 8] };
-  const EXITS = { d1: ["o:0,1", 3, 3], d2: ["o:3,2", 7, 3], d3: ["o:2,0", 7, 3] };
+  const ENTRANCES = { C: ["d1:0,1", 7, 8], M: ["d2:1,2", 7, 8], B: ["d3:1,2", 7, 8], F: ["d4:1,2", 7, 8], A: ["d5:1,2", 7, 8] };
+  const EXITS = { d1: ["o:0,1", 3, 3], d2: ["o:3,2", 7, 3], d3: ["o:2,0", 7, 3], d4: ["o:0,3", 13, 5], d5: ["o:3,0", 6, 6] };
 
-  const CARD_IDS = ["frog", "key", "crabking", "power", "pelican", "flippers", "bearking", "forest", "ducklings", "pieces", "beaver", "calm"];
+  const CARD_IDS = ["frog", "key", "crabking", "power", "pelican", "flippers", "bearking", "forest", "ducklings", "pieces", "beaver", "calm",
+    "hook", "heron", "pebbles", "owl"];
 
   const TEXT = {
     en: {
       subtitle: "The Calm Feathers",
       start: "Press SPACE or tap to start",
       newGame: "N: new game",
-      controls: "Arrows: move · SPACE: quack/talk · M: menu",
+      controls: "Arrows: move · SPACE: quack/talk · X: pebble · M: menu",
       introScenes: [
         "The Pond was always calm. Three Calm Feathers kept it that way, even when the charts dipped.",
         "One stormy night, panic came. Red candles started raining on the Pond...",
@@ -449,7 +613,9 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
         "Grandpa Frog: You have the key! The Cave of the Dip is on the lake shore, west of the meadow.",
         "Grandpa Frog: With that Mega Quack you can break cracked rocks. The Hollow Temple is past the old road, to the east.",
         "Grandpa Frog: Flippers! Now swim across the north lake to the Bear King's island. Stay calm!",
-        "Grandpa Frog: The Pond is calm again, thanks to you. Have you found every collection card?",
+        "Grandpa Frog: The feathers are back... but a strange Panic Fog rises over the mangrove, southwest. A misty door opened there: the Mirror Marsh. Swim there, and keep your head clear!",
+        "Grandpa Frog: A tower appeared on the northeast cliffs: the Clock Tower. Its door has a pearl-shaped lock. Some of its walls crumble with a pop, and some gates only wait a moment.",
+        "Grandpa Frog: The Pond is truly calm now, thanks to you. Have you found all 16 collection cards?",
       ],
       beaverAsk: "Beaver: I carve bigger hearts. Bring me 25 coins and you can take one more hit.",
       beaverPoor: "Beaver: Bushes and critters drop coins. Come back with 25!",
@@ -488,49 +654,72 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
         crabking: ["Giant Crab: SNIP SNAP! Everything is going DOWN!", "Giant Crab: Sell your shells! PANIC!"],
         pelican: ["Panic Pelican: Squaaawk! I swallowed all the calm!", "Panic Pelican: You'll never get the feather back!"],
         bearking: ["Bear King: PANIC! PANIC! Everything goes down with me!", "Bear King: You'll never get the last feather, little duck!"],
+        heron: ["Fog Heron: Shhh... In the fog, nobody knows which way the chart goes.", "Fog Heron: Lose yourself in the mist, little duck!"],
+        owl: ["Panic Owl: TICK TOCK! Every second the price could CRASH!", "Panic Owl: Check the chart! Check it again! AGAIN!"],
       },
       bossDown: {
         crabking: "Giant Crab: ...okay. I'll just sit in the sand for a while.",
         pelican: "Panic Pelican: ...that feels better. Calm is nice, actually.",
         bearking: "Bear King: ...zzz. Turns out I just needed a nap.",
+        heron: "Fog Heron: ...oh. The fog is lifting. I can see clearly now.",
+        owl: "Panic Owl: ...I'll stop checking the clock. It's nice out, actually.",
       },
       ending: [
         "The three Calm Feathers are back where they belong.",
         "The red candles stop falling. The Pond is calm again.",
+        "...but far away, a Panic Fog is rising. (Act II: talk to Grandpa Frog!)",
       ],
+      trueEnding: [
+        "The two Calm Pearls shine. The Panic Fog melts away like morning mist.",
+        "The Heron and the Owl take a long, calm nap. The Pond has never been this peaceful.",
+      ],
+      endTitle2: "TRULY CALM",
+      signMarsh: "Mirror Marsh. Light finds its way when mirrors face the right way: quack a mirror to turn it. On ice, you slide until something stops you.",
+      signTower: "Clock Tower. Some walls crumble with a pop (X: pebble). Some gates only open for a few seconds: quack the switch and run!",
+      fogLocked: "A misty door. A cold fog seeps out... It won't open while the Bear King still holds the last feather.",
+      towerLocked: "A tall door with a pearl-shaped lock. Find a Calm Pearl first.",
+      gotHook: "You got the FEATHER HOOK! Face a post across a gap and press SPACE: the hook pulls you over.",
+      gotPebbles: "You got a bag of POP PEBBLES! Press X to drop one: it pops after a moment and breaks fragile walls. Stand back!",
+      gotPebblesMore: "You found 5 pebbles.",
+      noPebbles: "No pebbles left. Bushes and critters sometimes drop some.",
+      gotPearl: "You found a Calm Pearl! ({n}/2) Your heart grows bigger!",
+      timerOn: "Click! A gate opens... hurry!",
       dead: "The duck floats back to the last checkpoint... Stay calm and try again!",
       endTitle: "THE POND IS CALM",
       endStats: "Coins: {c} · Time: {t} · Falls: {d}",
-      endCards: "Collection cards: {n}/12",
+      endCards: "Collection cards: {n}/16",
       thanks: "Thanks for playing Dip Duck!",
       again: "SPACE or tap: title screen",
       menuProgress: "PROGRESS",
       menuCards: "COLLECTION CARDS",
       menuHelp: "< > : pages · SPACE: close",
       objective: "Goal:",
-      chapters: ["The awakening", "The swamp key", "The Cave of the Dip", "The Hollow Temple", "The Bear King's island"],
+      chapters: ["The awakening", "The swamp key", "The Cave of the Dip", "The Hollow Temple", "The Bear King's island", "The Mirror Marsh", "The Clock Tower"],
       goals: [
         "Talk to Grandpa Frog in the village.",
         "Find the cave key in the swamp, northwest.",
         "Explore the Cave of the Dip, on the lake shore to the west.",
         "Break the cracked rocks to the east and explore the Hollow Temple.",
         "Swim across the north lake to the Bear King's island.",
-        "The Pond is calm! Complete your card collection.",
+        "Act II: swim to the misty door in the mangrove, southwest, and explore the Mirror Marsh.",
+        "Climb the Clock Tower on the northeast cliffs and calm the Panic Owl.",
+        "The Pond is truly calm! Complete your card collection.",
       ],
       statsLine1: "Ducklings {a}/3 · Heart pieces {b}/4",
-      statsLine2: "Cards {c}/12 · Falls {d} · Time {t}",
-      cardsNote: "Cards {n}/12 · just for fun, no value",
+      statsLine2: "Cards {c}/16 · Falls {d} · Time {t}",
+      cardsNote: "Cards {n}/16 · just for fun, no value",
       cards: {
         frog: "Grandpa Frog", key: "Swamp Key", crabking: "Giant Crab", power: "Mega Quack",
         pelican: "Pelican", flippers: "Flippers", bearking: "Bear King", forest: "Forest",
         ducklings: "Ducklings", pieces: "Full Heart", beaver: "Beaver", calm: "No Panic",
+        hook: "Feather Hook", heron: "Fog Heron", pebbles: "Pebbles", owl: "Panic Owl",
       },
     },
     fr: {
       subtitle: "Les Plumes du Calme",
       start: "ESPACE ou touche l'écran pour jouer",
       newGame: "N : nouvelle partie",
-      controls: "Flèches : bouger · ESPACE : coin-coin · M : menu",
+      controls: "Flèches : bouger · ESPACE : coin-coin · X : galet · M : menu",
       introScenes: [
         "L'Étang a toujours été calme. Trois Plumes du Calme le protégeaient, même quand les courbes plongeaient.",
         "Une nuit d'orage, la panique est arrivée. Des bougies rouges se sont mises à pleuvoir sur l'Étang...",
@@ -558,7 +747,9 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
         "Grand-père Grenouille : Tu as la clé ! La Grotte du Dip est au bord du lac, à l'ouest de la prairie.",
         "Grand-père Grenouille : Avec ce Méga Coin-coin, tu peux briser les rochers fissurés. Le Temple du Creux est après la vieille route, à l'est.",
         "Grand-père Grenouille : Des palmes ! Nage maintenant à travers le lac du nord jusqu'à l'île du Roi Ours. Reste calme !",
-        "Grand-père Grenouille : L'Étang est calme grâce à toi. As-tu trouvé toutes les cartes de la collection ?",
+        "Grand-père Grenouille : Les plumes sont revenues... mais un étrange Brouillard de Panique se lève sur la mangrove, au sud-ouest. Une porte de brume s'y est ouverte : les Miroirs du Marais. Nage jusque-là, et garde les idées claires !",
+        "Grand-père Grenouille : Une tour est apparue sur les falaises du nord-est : la Tour de l'Horloge. Sa porte a une serrure en forme de perle. Certains murs s'effritent d'un pop, et certaines grilles n'attendent qu'un instant.",
+        "Grand-père Grenouille : L'Étang est vraiment calme, grâce à toi. As-tu trouvé les 16 cartes de la collection ?",
       ],
       beaverAsk: "Castor : Je sculpte des cœurs plus grands. Apporte-moi 25 pièces et tu encaisseras un coup de plus.",
       beaverPoor: "Castor : Les buissons et les bestioles lâchent des pièces. Reviens avec 25 !",
@@ -597,42 +788,65 @@ window.DIPDUCK_ADVENTURE_DATA = (() => {
         crabking: ["Crabe Géant : CLIC CLAC ! Tout est en train de CHUTER !", "Crabe Géant : Vendez vos coquilles ! PANIQUE !"],
         pelican: ["Pélican Panique : Couaaac ! J'ai avalé tout le calme !", "Pélican Panique : Tu ne récupéreras jamais la plume !"],
         bearking: ["Roi Ours : PANIQUE ! PANIQUE ! Tout coule avec moi !", "Roi Ours : Tu n'auras jamais la dernière plume, petit canard !"],
+        heron: ["Héron du Brouillard : Chut... Dans le brouillard, personne ne sait où va la courbe.", "Héron du Brouillard : Perds-toi dans la brume, petit canard !"],
+        owl: ["Hibou Panique : TIC TAC ! À chaque seconde, le prix peut S'EFFONDRER !", "Hibou Panique : Regarde la courbe ! Encore ! ENCORE !"],
       },
       bossDown: {
         crabking: "Crabe Géant : ...bon. Je vais juste m'asseoir dans le sable un moment.",
         pelican: "Pélican Panique : ...ça va mieux. Le calme, c'est agréable, en fait.",
         bearking: "Roi Ours : ...zzz. En fait, j'avais juste besoin d'une sieste.",
+        heron: "Héron du Brouillard : ...oh. Le brouillard se lève. J'y vois clair, maintenant.",
+        owl: "Hibou Panique : ...je vais arrêter de regarder l'horloge. Il fait beau, en fait.",
       },
       ending: [
         "Les trois Plumes du Calme sont de retour à leur place.",
         "Les bougies rouges ne tombent plus. L'Étang est calme à nouveau.",
+        "...mais au loin, un Brouillard de Panique se lève. (Acte II : parle à Grand-père Grenouille !)",
       ],
+      trueEnding: [
+        "Les deux Perles du Calme brillent. Le Brouillard de Panique fond comme la brume du matin.",
+        "Le Héron et le Hibou font une longue sieste tranquille. L'Étang n'a jamais été aussi paisible.",
+      ],
+      endTitle2: "VRAIMENT CALME",
+      signMarsh: "Miroirs du Marais. La lumière trouve son chemin quand les miroirs sont bien tournés : fais coin-coin sur un miroir pour le tourner. Sur la glace, on glisse jusqu'à un obstacle.",
+      signTower: "Tour de l'Horloge. Certains murs s'effritent d'un pop (X : galet). Certaines grilles ne s'ouvrent que quelques secondes : coin-coin sur l'interrupteur, et cours !",
+      fogLocked: "Une porte de brume. Un brouillard froid s'en échappe... Elle restera fermée tant que le Roi Ours garde la dernière plume.",
+      towerLocked: "Une grande porte avec une serrure en forme de perle. Trouve d'abord une Perle du Calme.",
+      gotHook: "Tu as obtenu la PLUME-GRAPPIN ! Face à un poteau de l'autre côté d'un gouffre, appuie sur ESPACE : le grappin te tire jusque-là.",
+      gotPebbles: "Tu as obtenu un sac de GALETS PÉTILLANTS ! Appuie sur X pour en poser un : il éclate après un instant et brise les murs fragiles. Recule !",
+      gotPebblesMore: "Tu as trouvé 5 galets.",
+      noPebbles: "Plus de galets. Les buissons et les bestioles en lâchent parfois.",
+      gotPearl: "Tu as trouvé une Perle du Calme ! ({n}/2) Ton cœur grandit !",
+      timerOn: "Clic ! Une grille s'ouvre... vite !",
       dead: "Le canard retourne au dernier point de passage... Reste calme et réessaie !",
       endTitle: "L'ÉTANG EST CALME",
       endStats: "Pièces : {c} · Temps : {t} · Chutes : {d}",
-      endCards: "Cartes de collection : {n}/12",
+      endCards: "Cartes de collection : {n}/16",
       thanks: "Merci d'avoir joué à Dip Duck !",
       again: "ESPACE ou touche : écran titre",
       menuProgress: "PROGRESSION",
       menuCards: "CARTES DE COLLECTION",
       menuHelp: "< > : pages · ESPACE : fermer",
       objective: "Objectif :",
-      chapters: ["Le réveil", "La clé du marais", "La Grotte du Dip", "Le Temple du Creux", "L'île du Roi Ours"],
+      chapters: ["Le réveil", "La clé du marais", "La Grotte du Dip", "Le Temple du Creux", "L'île du Roi Ours", "Les Miroirs du Marais", "La Tour de l'Horloge"],
       goals: [
         "Parle à Grand-père Grenouille au village.",
         "Trouve la clé de la grotte dans le marais, au nord-ouest.",
         "Explore la Grotte du Dip, au bord du lac à l'ouest.",
         "Brise les rochers fissurés à l'est et explore le Temple du Creux.",
         "Nage à travers le lac du nord jusqu'à l'île du Roi Ours.",
-        "L'Étang est calme ! Complète ta collection de cartes.",
+        "Acte II : nage jusqu'à la porte de brume dans la mangrove, au sud-ouest, et explore les Miroirs du Marais.",
+        "Grimpe dans la Tour de l'Horloge, sur les falaises du nord-est, et calme le Hibou Panique.",
+        "L'Étang est vraiment calme ! Complète ta collection de cartes.",
       ],
       statsLine1: "Canetons {a}/3 · Fragments {b}/4",
-      statsLine2: "Cartes {c}/12 · Chutes {d} · Temps {t}",
-      cardsNote: "Cartes {n}/12 · pour le plaisir, sans valeur",
+      statsLine2: "Cartes {c}/16 · Chutes {d} · Temps {t}",
+      cardsNote: "Cartes {n}/16 · pour le plaisir, sans valeur",
       cards: {
         frog: "Grenouille", key: "Clé", crabking: "Crabe Géant", power: "Méga Coin",
         pelican: "Pélican", flippers: "Palmes", bearking: "Roi Ours", forest: "Forêt",
         ducklings: "Canetons", pieces: "Cœur entier", beaver: "Castor", calm: "Sans panique",
+        hook: "Grappin", heron: "Héron", pebbles: "Galets", owl: "Hibou",
       },
     },
   };

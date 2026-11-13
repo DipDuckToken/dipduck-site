@@ -21,6 +21,9 @@
     .up { grid-column: 2; grid-row: 1; } .left { grid-column: 1; grid-row: 2; }
     .right { grid-column: 3; grid-row: 2; } .down { grid-column: 2; grid-row: 3; }
     .menu { padding: 10px 12px; font: 9px "Press Start 2P", monospace; }
+    .side { display: flex; flex-direction: column; gap: 10px; }
+    .item { border: 0; border-radius: 10px; background: #5a5a7a; color: #f4f4e8; padding: 10px 8px; font: 8px "Press Start 2P", monospace; touch-action: none; }
+    .item:active { background: #a0a0b8; }
     .act { width: 84px; height: 84px; border-radius: 50%; background: #ffd23f; color: #10101c; font: 11px "Press Start 2P", monospace; }
     .act:active { background: #ff8c1a; }
     @media (pointer: coarse) {
@@ -40,10 +43,13 @@
       <button class="right" data-dir="right" aria-label="Right">▶</button>
       <button class="down" data-dir="down" aria-label="Down">▼</button>
     </div>
-    <button class="menu" id="menu" aria-label="Menu">MENU</button>
+    <div class="side">
+      <button class="menu" id="menu" aria-label="Menu">MENU</button>
+      <button class="item" id="item" aria-label="Pebble">PEBBLE</button>
+    </div>
     <button class="act" id="act" aria-label="Quack">QUACK</button>
   </div>
-  <script src="adventure-data.js?v=20261103d"></script>
-  <script src="adventure.js?v=20261103d"></script>
+  <script src="adventure-data.js?v=20261113a"></script>
+  <script src="adventure.js?v=20261113a"></script>
 </body>
 </html>
