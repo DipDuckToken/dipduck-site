@@ -159,6 +159,7 @@
   const MENU_KEYS = ["KeyM", "Escape", "Tab"];
   const ITEM_KEYS = ["KeyX", "KeyK", "ShiftLeft", "ShiftRight"];
   addEventListener("keydown", (e) => {
+    if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
     unlockAudio();
     if (state === "menu" && !e.repeat && ["ArrowLeft", "ArrowRight", "KeyA", "KeyD"].includes(e.code)) { menuPage ^= 1; e.preventDefault(); return; }
     if (KEYMAP[e.code]) { keys[KEYMAP[e.code]] = true; e.preventDefault(); }
@@ -168,6 +169,7 @@
     if (e.code === "KeyN" && state === "title") { flags = freshFlags(); hasSave = false; save(); }
   });
   addEventListener("keyup", (e) => { if (KEYMAP[e.code]) keys[KEYMAP[e.code]] = false; });
+  addEventListener("focusin", (e) => { if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) for (const k in keys) keys[k] = false; });
   addEventListener("blur", () => { for (const k in keys) keys[k] = false; });
   canvas.addEventListener("pointerdown", () => {
     unlockAudio();
@@ -865,6 +867,7 @@
     if (consumeMenu()) { state = "menu"; menuPage = 0; return; }
     flags.time += 1 / 60;
     if (frame % 300 === 0) rememberSpot();
+    if (frame % 6 === 0) coopSendPos();
     updatePlayer();
     if (dialog || state !== "play") return;
     updateBlocks();
@@ -1328,17 +1331,17 @@
     ctx.restore();
   }
 
-  function drawDuck(cx, cy, dir, step, scale = 1, bow = false) {
+  function drawDuck(cx, cy, dir, step, scale = 1, bow = false, color = "#ffd23f") {
     ctx.save();
     ctx.translate(cx, cy);
     ctx.scale(scale, scale);
     const leg = Math.floor(step / 8) % 2;
     rect(-4, 6 + leg, 3, 1.5, "#ff8c1a"); rect(1, 7 - leg, 3, 1.5, "#ff8c1a");
-    circle(0, 2, 6, "#ffd23f");
+    circle(0, 2, 6, color);
     circle(dir === "left" ? 2 : dir === "right" ? -2 : 0, 3, 3, "#f0d890");
     const hx = dir === "left" ? -2 : dir === "right" ? 2 : 0, hy = dir === "up" ? -4 : -3;
-    circle(hx, hy, 4.5, "#ffd23f");
-    rect(hx - 1, hy - 7, 2, 3, "#ffd23f"); rect(hx + 1, hy - 6, 1.5, 2, "#ffd23f");
+    circle(hx, hy, 4.5, color);
+    rect(hx - 1, hy - 7, 2, 3, color); rect(hx + 1, hy - 6, 1.5, 2, color);
     if (bow) { rect(hx - 4, hy - 6, 3, 3, "#d83a3a"); rect(hx - 2, hy - 5, 2, 1, "#d83a3a"); }
     if (dir === "down") {
       rect(hx - 4.5, hy - 1.5, 9, 2.5, "#10101c"); rect(hx - 3.5, hy - 1, 1.5, 1, "#ff8c1a"); rect(hx + 1.5, hy - 1, 1.5, 1, "#ff8c1a");
@@ -1598,6 +1601,7 @@
       ctx.strokeStyle = "#f0d890"; ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(pcx, pcy + HUD); ctx.lineTo(hx, hy); ctx.stroke();
     }
+    drawCoopDucks();
     drawPlayer();
     for (const s of shots) { rect(s.x, s.y + HUD + 1, 4, 6, "#d83a3a"); circle(s.x + 2, s.y + HUD, 1.4, "#ff8c1a"); }
     for (const p of parts) if (p.life > 6) rect(Math.round(p.x) - 1, Math.round(p.y) + HUD - 1, 2, 2, p.color);
@@ -1607,6 +1611,7 @@
       rect(W / 2 - 49, H - 8, (98 * boss.hp) / ENEMY_TYPES[boss.t].hp, 3, "#d83a3a");
     }
     drawHud();
+    drawCoopToast();
   }
 
   function drawPondBackground() {
@@ -1839,6 +1844,197 @@
     present(ox, oy);
   }
 
+
+  // ─── Co-op : groupes avec code, autres canards visibles, discussion filtrée ───
+  // Serveur : Cloudflare Worker « dipduck-coop ». Ni wallet ni token : pseudos, positions et messages.
+  const COOP_URL = (() => {
+    const forced = new URLSearchParams(location.search).get("coop");
+    if (forced && !/(^|\.)dipduck\.xyz$/.test(location.hostname)) return forced;
+    return "wss://dipduck-coop.dipduck.workers.dev";
+  })();
+  const CT = LANG === "fr" ? {
+    toggle: "COOP", title: "JOUER EN GROUPE",
+    intro: "Crée un groupe et partage le code, ou entre le code d'un ami. Vous vous verrez dans le jeu et pourrez discuter.",
+    name: "Ton pseudo", create: "Créer un groupe", codePh: "CODE", join: "Rejoindre",
+    note: "Pas de liens, pas d'adresses de wallet. L'équipe ne demande JAMAIS ta phrase secrète ni ta clé privée.",
+    codeLabel: "Code du groupe :", copy: "Copier", copied: "Copié !", count: (n) => n <= 1 ? "Tu es seul pour l'instant. Partage le code !" : `${n} canards dans le groupe`,
+    msgPh: "Message (Entrée pour envoyer)", send: "Envoyer", help: "Besoin d'aide", leave: "Quitter",
+    warn: "Ne clique sur aucun lien et ne donne jamais ta phrase secrète, même à un « admin ».",
+    joined: (n) => `${n} a rejoint le groupe.`, left: (n) => `${n} est parti.`, you: "Tu as rejoint le groupe.",
+    lost: "Connexion perdue… nouvel essai.", badCode: "Le code doit faire 6 lettres ou chiffres.",
+    helpMsg: (w) => `🆘 Besoin d'aide : ${w}`,
+    err: { link: "Les liens ne sont pas autorisés.", address: "Les adresses de wallet ne sont pas autorisées.", secret: "On ne parle jamais de phrase secrète ni de clé privée.", rude: "Reste gentil, s'il te plaît.", slow: "Doucement : quelques messages à la fois." },
+    areas: { o: "Dehors", d1: "Grotte du Dip", d2: "Temple du Creux", d3: "Tanière du Roi Ours", d4: "Miroirs du Marais", d5: "Tour de l'Horloge" },
+  } : {
+    toggle: "CO-OP", title: "PLAY TOGETHER",
+    intro: "Create a group and share the code, or enter a friend's code. You'll see each other in the game and can chat.",
+    name: "Your nickname", create: "Create a group", codePh: "CODE", join: "Join",
+    note: "No links, no wallet addresses. The team will NEVER ask for your seed phrase or private key.",
+    codeLabel: "Group code:", copy: "Copy", copied: "Copied!", count: (n) => n <= 1 ? "You're alone for now. Share the code!" : `${n} ducks in the group`,
+    msgPh: "Message (Enter to send)", send: "Send", help: "Need help", leave: "Leave",
+    warn: "Don't click any link and never share your seed phrase, even with an \"admin\".",
+    joined: (n) => `${n} joined the group.`, left: (n) => `${n} left.`, you: "You joined the group.",
+    lost: "Connection lost… retrying.", badCode: "The code must be 6 letters or digits.",
+    helpMsg: (w) => `🆘 Need help: ${w}`,
+    err: { link: "Links are not allowed.", address: "Wallet addresses are not allowed.", secret: "Never talk about seed phrases or private keys.", rude: "Please stay kind.", slow: "Slow down a little." },
+    areas: { o: "Overworld", d1: "Cave of the Dip", d2: "Hollow Temple", d3: "Bear King's den", d4: "Mirror Marsh", d5: "Clock Tower" },
+  };
+  const coop = { ws: null, code: null, me: null, others: new Map(), lastKey: "", wanted: false, retry: 0, toast: null };
+  const $c = (id) => document.getElementById(id);
+  const coopStore = (() => { try { return JSON.parse(localStorage.getItem("dipduck-coop") || "{}"); } catch { return {}; } })();
+  function coopSave() { try { localStorage.setItem("dipduck-coop", JSON.stringify({ name: $c("coop-name").value.trim(), code: coop.code })); } catch { /* privé */ } }
+  function coopLine(text, cls, color, name) {
+    const log = $c("coop-log");
+    if (!log) return;
+    const div = document.createElement("div");
+    if (cls) div.className = cls;
+    if (name) { const b = document.createElement("b"); b.style.color = color || "#ffd23f"; b.textContent = name + " : "; div.append(b); }
+    div.append(document.createTextNode(text));
+    log.append(div);
+    while (log.children.length > 60) log.firstChild.remove();
+    log.scrollTop = log.scrollHeight;
+  }
+  function coopUi() {
+    const inRoom = !!coop.code;
+    $c("coop-out").hidden = inRoom;
+    $c("coop-in").hidden = !inRoom;
+    $c("coop-code-value").textContent = coop.code || "";
+    $c("coop-count").textContent = CT.count(coop.others.size + (coop.me ? 1 : 0));
+    $c("coop-toggle").classList.toggle("on", !!(coop.ws && coop.ws.readyState === 1));
+  }
+  function coopConnect(code) {
+    if (coop.ws) { coop.wanted = false; try { coop.ws.close(); } catch { /* */ } }
+    coop.code = code; coop.wanted = true; coop.others.clear(); coop.me = null; coop.lastKey = "";
+    coopSave(); coopUi();
+    const name = $c("coop-name").value.trim();
+    let ws;
+    try { ws = new WebSocket(`${COOP_URL}/room/${code}?name=${encodeURIComponent(name)}`); } catch { coopLine(CT.lost, "sys"); return; }
+    coop.ws = ws;
+    ws.onopen = () => { coop.retry = 0; coopUi(); };
+    ws.onmessage = (ev) => {
+      let m; try { m = JSON.parse(ev.data); } catch { return; }
+      if (m.t === "welcome") {
+        coop.me = { id: m.id, name: m.name, color: m.color };
+        for (const p of m.players) coop.others.set(p.id, { ...p, dx: p.x, dy: p.y });
+        coopLine(CT.you, "sys");
+      } else if (m.t === "join") {
+        coop.others.set(m.id, { id: m.id, name: m.name, color: m.color, s: "", x: 0, y: 0, d: "down", dx: 0, dy: 0 });
+        coopLine(CT.joined(m.name), "sys");
+        coop.lastKey = "";
+      } else if (m.t === "leave") {
+        const o = coop.others.get(m.id);
+        if (o) coopLine(CT.left(o.name), "sys");
+        coop.others.delete(m.id);
+      } else if (m.t === "pos") {
+        const o = coop.others.get(m.id);
+        if (!o) return;
+        if (o.s !== m.s) { o.dx = m.x; o.dy = m.y; }
+        Object.assign(o, { s: m.s, x: m.x, y: m.y, d: m.d, w: m.w });
+      } else if (m.t === "chat") {
+        coopLine(m.m, m.help ? "help" : "", m.color, m.name);
+        if (!m.me && (!coop.me || m.id !== coop.me.id)) coop.toast = { text: `${m.name}: ${m.m}`, until: frame + 300, help: m.help };
+      } else if (m.t === "err") {
+        coopLine(CT.err[m.m] || "…", "sys");
+      }
+      coopUi();
+    };
+    ws.onclose = () => {
+      coopUi();
+      if (coop.wanted && coop.ws === ws) {
+        coopLine(CT.lost, "sys");
+        coop.retry = Math.min(coop.retry + 1, 5);
+        setTimeout(() => { if (coop.wanted && coop.ws === ws) coopConnect(code); }, 1500 * coop.retry);
+      }
+    };
+  }
+  function coopLeave() {
+    coop.wanted = false;
+    if (coop.ws) try { coop.ws.close(); } catch { /* */ }
+    coop.ws = null; coop.code = null; coop.me = null; coop.others.clear();
+    coopSave(); coopUi();
+  }
+  function coopSend(msg) { if (coop.ws && coop.ws.readyState === 1) coop.ws.send(JSON.stringify(msg)); }
+  function coopSendPos() {
+    if (!coop.ws || coop.ws.readyState !== 1 || state !== "play") return;
+    const x = Math.round(player.x), y = Math.round(player.y);
+    const key = `${cur}|${x}|${y}|${player.dir}|${player.swim ? 1 : 0}`;
+    if (key === coop.lastKey && frame % 120 !== 0) return;
+    coop.lastKey = key;
+    coopSend({ t: "pos", s: cur, x, y, d: player.dir, w: player.swim ? 1 : 0 });
+  }
+  function coopWhere() {
+    const area = areaOf(cur);
+    const ch = Math.min(chapter(), T.chapters.length - 1);
+    return `${T.chapters[ch]} · ${CT.areas[area] || area} (${cur})`;
+  }
+  function drawCoopDucks() {
+    for (const o of coop.others.values()) {
+      if (o.s !== cur) continue;
+      o.dx += (o.x - o.dx) * 0.35; o.dy += (o.y - o.dy) * 0.35;
+      const cx = o.dx + 6, cy = o.dy + 6 + HUD - 1;
+      if (o.w) {
+        ctx.save(); ctx.beginPath(); ctx.rect(cx - 12, cy - 14, 24, 15); ctx.clip();
+        drawDuck(cx, cy + 3, o.d, frame, 1, false, o.color);
+        ctx.restore();
+      } else drawDuck(cx, cy, o.d, Math.abs(o.x - o.dx) + Math.abs(o.y - o.dy) > 0.5 ? frame : 0, 1, false, o.color);
+      txt(o.name, cx, cy - 18, 4, UI.paper, "center");
+    }
+  }
+  function drawCoopToast() {
+    const t = coop.toast;
+    if (!t || frame > t.until) return;
+    const lines = wrapText(t.text, W - 24, 4).slice(0, 2);
+    const h = lines.length * 7 + 6;
+    ctx = spCtx;
+    rect(6, HUD + 3, W - 12, h, t.help ? "#7a4a24" : UI.night);
+    ctx = bgCtx;
+    lines.forEach((l, i) => txt(l, 10, HUD + 6 + i * 7, 4, UI.paper));
+  }
+  (function coopInit() {
+    if (!$c("coop")) return;
+    const set = (id, prop, v) => { const el = $c(id); if (el) el[prop] = v; };
+    set("coop-toggle-label", "textContent", CT.toggle); set("coop-title", "textContent", CT.title);
+    set("coop-intro", "textContent", CT.intro); set("coop-name", "placeholder", CT.name);
+    set("coop-create", "textContent", CT.create); set("coop-code", "placeholder", CT.codePh);
+    set("coop-join", "textContent", CT.join); set("coop-note", "textContent", CT.note);
+    set("coop-code-label", "textContent", CT.codeLabel); set("coop-copy", "textContent", CT.copy);
+    set("coop-msg", "placeholder", CT.msgPh); set("coop-send", "textContent", CT.send);
+    set("coop-help", "textContent", CT.help); set("coop-leave", "textContent", CT.leave);
+    set("coop-warn", "textContent", CT.warn);
+    $c("coop-name").value = coopStore.name || `Duck${Math.floor(100 + Math.random() * 900)}`;
+    $c("coop-toggle").addEventListener("click", () => {
+      const panel = $c("coop");
+      panel.hidden = !panel.hidden;
+      $c("coop-toggle").setAttribute("aria-expanded", String(!panel.hidden));
+      canvas.focus && canvas.blur();
+    });
+    $c("coop-create").addEventListener("click", () => {
+      const abc = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      const bytes = crypto.getRandomValues(new Uint8Array(6));
+      coopConnect(Array.from(bytes, (b) => abc[b % abc.length]).join(""));
+    });
+    $c("coop-join").addEventListener("click", () => {
+      const code = $c("coop-code").value.trim().toUpperCase();
+      if (!/^[A-Z0-9]{6}$/.test(code)) { $c("coop-note").textContent = CT.badCode; return; }
+      coopConnect(code);
+    });
+    $c("coop-copy").addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(coop.code || ""); $c("coop-copy").textContent = CT.copied; setTimeout(() => { $c("coop-copy").textContent = CT.copy; }, 1500); } catch { /* */ }
+    });
+    $c("coop-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const input = $c("coop-msg");
+      const text = input.value.trim();
+      if (!text) return;
+      coopSend({ t: "chat", m: text });
+      input.value = "";
+    });
+    $c("coop-help").addEventListener("click", () => coopSend({ t: "help", m: CT.helpMsg(coopWhere()) }));
+    $c("coop-leave").addEventListener("click", coopLeave);
+    coopUi();
+    if (coopStore.code && /^[A-Z0-9]{6}$/.test(coopStore.code)) coopConnect(coopStore.code);
+  })();
+
   // ─── Boucle ───
   let last = performance.now(), acc = 0;
   const STEP = 1000 / 60;
@@ -1856,6 +2052,6 @@
     get state() { return state; }, get cur() { return cur; }, get dialog() { return dialog; },
     get enemies() { return enemies; }, get chests() { return chests; }, get blocks() { return blocks; },
     get tiles() { return tiles; }, get npcs() { return npcs; }, introAt(t) { state = "intro"; introT = t; }, unlockForTests() { unlocked = true; }, player, flags: () => flags, enter, tilePos, SCREENS,
-    get beamLit() { return beamLit; }, get beamPath() { return beamPath; }, get pebbleObjs() { return pebbleObjs; }, get timedUntil() { return timedUntil; }, get frame() { return frame; }, mirrorOf,
+    coop, get beamLit() { return beamLit; }, get beamPath() { return beamPath; }, get pebbleObjs() { return pebbleObjs; }, get timedUntil() { return timedUntil; }, get frame() { return frame; }, mirrorOf,
   };
 })();

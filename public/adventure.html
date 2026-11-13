@@ -26,6 +26,25 @@
     .item:active { background: #a0a0b8; }
     .act { width: 84px; height: 84px; border-radius: 50%; background: #ffd23f; color: #10101c; font: 11px "Press Start 2P", monospace; }
     .act:active { background: #ff8c1a; }
+    #coop-toggle { position: fixed; top: 8px; right: 10px; z-index: 3; opacity: .92; border: 0; border-radius: 10px; background: #2b2b45; color: #ffd23f; padding: 8px 10px; font: 9px "Press Start 2P", monospace; cursor: pointer; }
+    #coop-toggle .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #5a5a7a; margin-right: 6px; vertical-align: middle; }
+    #coop-toggle.on .dot { background: #5aa83c; }
+    #coop { position: fixed; top: 44px; right: 10px; z-index: 3; width: min(330px, calc(100vw - 20px)); max-height: calc(100vh - 60px); overflow: auto; box-sizing: border-box;
+      background: #2b2b45; border: 2px solid #ffd23f; border-radius: 12px; padding: 12px; color: #f4f4e8; font: 700 14px "Nunito", sans-serif; }
+    #coop[hidden] { display: none; }
+    #coop h2 { margin: 0 0 8px; font: 10px "Press Start 2P", monospace; color: #ffd23f; }
+    #coop p { margin: 6px 0; line-height: 1.35; }
+    #coop .row { display: flex; gap: 6px; margin: 6px 0; }
+    #coop input { flex: 1; min-width: 0; border: 0; border-radius: 8px; padding: 8px; background: #10101c; color: #f4f4e8; font: 700 14px "Nunito", sans-serif; }
+    #coop button { border: 0; border-radius: 8px; padding: 8px 10px; background: #ffd23f; color: #10101c; font: 800 13px "Nunito", sans-serif; cursor: pointer; }
+    #coop button.ghost { background: #5a5a7a; color: #f4f4e8; }
+    #coop .code { font: 14px "Press Start 2P", monospace; color: #ffd23f; letter-spacing: 2px; }
+    #coop .small { font-size: 12px; color: #a0a0b8; }
+    #coop-log { height: 170px; overflow-y: auto; background: #10101c; border-radius: 8px; padding: 6px 8px; margin: 8px 0; font-size: 13px; }
+    #coop-log div { margin: 3px 0; overflow-wrap: anywhere; }
+    #coop-log .help { background: #7a4a24; border-radius: 6px; padding: 2px 5px; }
+    #coop-log .sys { color: #a0a0b8; font-style: italic; }
+    #coop .warn { color: #ff8c1a; }
     @media (pointer: coarse) {
       body { justify-content: flex-start; padding-top: 44px; }
       canvas { width: min(100vw, 70vh * 1.333); }
@@ -35,6 +54,25 @@
 </head>
 <body>
   <a class="back" href="./">← Dip Duck</a>
+  <button id="coop-toggle" type="button" aria-expanded="false"><span class="dot"></span><span id="coop-toggle-label">CO-OP</span></button>
+  <section id="coop" hidden aria-live="polite">
+    <h2 id="coop-title">CO-OP</h2>
+    <div id="coop-out">
+      <p id="coop-intro"></p>
+      <div class="row"><input id="coop-name" maxlength="12" autocomplete="off" spellcheck="false"></div>
+      <div class="row"><button type="button" id="coop-create"></button></div>
+      <div class="row"><input id="coop-code" maxlength="6" autocomplete="off" spellcheck="false" style="text-transform:uppercase"><button type="button" id="coop-join"></button></div>
+      <p class="small" id="coop-note"></p>
+    </div>
+    <div id="coop-in" hidden>
+      <p><span id="coop-code-label"></span> <span class="code" id="coop-code-value"></span> <button type="button" class="ghost" id="coop-copy"></button></p>
+      <p class="small" id="coop-count"></p>
+      <div id="coop-log"></div>
+      <form class="row" id="coop-form"><input id="coop-msg" maxlength="120" autocomplete="off"><button type="submit" id="coop-send"></button></form>
+      <div class="row"><button type="button" id="coop-help"></button><button type="button" class="ghost" id="coop-leave"></button></div>
+      <p class="small warn" id="coop-warn"></p>
+    </div>
+  </section>
   <canvas id="adv-canvas" aria-label="Dip Duck — The Calm Feathers"></canvas>
   <div id="pad">
     <div class="dpad">
@@ -49,7 +87,7 @@
     </div>
     <button class="act" id="act" aria-label="Quack">QUACK</button>
   </div>
-  <script src="adventure-data.js?v=20261113a"></script>
-  <script src="adventure.js?v=20261113a"></script>
+  <script src="adventure-data.js?v=20261113b"></script>
+  <script src="adventure.js?v=20261113b"></script>
 </body>
 </html>
