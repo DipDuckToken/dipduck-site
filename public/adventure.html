@@ -11,8 +11,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@700;800&display=swap">
   <style>
     html, body { margin: 0; height: 100%; background: #10101c; overflow: hidden; }
-    body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
-    canvas { width: min(100vw, 133vh); height: auto; display: block; touch-action: none; image-rendering: pixelated; }
+    body { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 10px; box-sizing: border-box; padding: 0 8px; }
+    #stage { flex: 1 1 auto; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+    canvas { width: min(100%, calc((100vh - 16px) * 1.3333)); height: auto; display: block; touch-action: none; image-rendering: pixelated; }
     a.back { position: fixed; top: 10px; left: 12px; color: #ffd23f; font: 700 14px "Nunito", sans-serif; text-decoration: none; z-index: 2; }
     #pad { display: none; width: min(100vw, 520px); justify-content: space-between; align-items: center; padding: 0 18px; box-sizing: border-box; user-select: none; -webkit-user-select: none; }
     .dpad { display: grid; grid-template-columns: repeat(3, 52px); grid-template-rows: repeat(3, 52px); }
@@ -29,10 +30,19 @@
     #coop-toggle { position: fixed; top: 8px; right: 10px; z-index: 3; opacity: .92; border: 0; border-radius: 10px; background: #2b2b45; color: #ffd23f; padding: 8px 10px; font: 9px "Press Start 2P", monospace; cursor: pointer; }
     #coop-toggle .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #5a5a7a; margin-right: 6px; vertical-align: middle; }
     #coop-toggle.on .dot { background: #5aa83c; }
-    #coop { position: fixed; top: 44px; right: 10px; z-index: 3; width: min(330px, calc(100vw - 20px)); max-height: calc(100vh - 60px); overflow: auto; box-sizing: border-box;
-      background: #2b2b45; border: 2px solid #ffd23f; border-radius: 12px; padding: 12px; color: #f4f4e8; font: 700 14px "Nunito", sans-serif; }
+    /* Discussion à côté du jeu : on peut la rendre plus étroite ou plus large en tirant le coin en bas à droite. */
+    #coop { flex: 0 0 auto; width: 320px; min-width: 210px; max-width: 520px; resize: horizontal; height: calc(100vh - 70px); margin-top: 40px; overflow: auto; box-sizing: border-box;
+      background: #2b2b45; border: 2px solid #ffd23f; border-radius: 12px; padding: 12px; color: #f4f4e8; font: 700 14px "Nunito", sans-serif; display: flex; flex-direction: column; }
     #coop[hidden] { display: none; }
-    #coop h2 { margin: 0 0 8px; font: 10px "Press Start 2P", monospace; color: #ffd23f; }
+    #coop .head { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 8px; }
+    #coop h2 { margin: 0; font: 10px "Press Start 2P", monospace; color: #ffd23f; }
+    #coop .head button { padding: 4px 8px; font: 800 13px "Nunito", sans-serif; }
+    #coop-in { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
+    #coop-in[hidden] { display: none; }
+    #coop.narrow { width: 230px; }
+    #coop.narrow .small, #coop.narrow #coop-warn { display: none; }
+    #coop-toggle .badge { display: none; margin-left: 6px; background: #d83a3a; color: #f4f4e8; border-radius: 8px; padding: 1px 5px; font-size: 8px; }
+    #coop-toggle .badge.on { display: inline-block; }
     #coop p { margin: 6px 0; line-height: 1.35; }
     #coop .row { display: flex; gap: 6px; margin: 6px 0; }
     #coop input { flex: 1; min-width: 0; border: 0; border-radius: 8px; padding: 8px; background: #10101c; color: #f4f4e8; font: 700 14px "Nunito", sans-serif; }
@@ -40,7 +50,7 @@
     #coop button.ghost { background: #5a5a7a; color: #f4f4e8; }
     #coop .code { font: 14px "Press Start 2P", monospace; color: #ffd23f; letter-spacing: 2px; }
     #coop .small { font-size: 12px; color: #a0a0b8; }
-    #coop-log { height: 170px; overflow-y: auto; background: #10101c; border-radius: 8px; padding: 6px 8px; margin: 8px 0; font-size: 13px; }
+    #coop-log { flex: 1 1 auto; min-height: 120px; overflow-y: auto; background: #10101c; border-radius: 8px; padding: 6px 8px; margin: 8px 0; font-size: 13px; }
     #coop-log div { margin: 3px 0; overflow-wrap: anywhere; }
     #coop-log .help { background: #7a4a24; border-radius: 6px; padding: 2px 5px; }
     #coop-log .sys { color: #a0a0b8; font-style: italic; }
@@ -50,13 +60,40 @@
       canvas { width: min(100vw, 70vh * 1.333); }
       #pad { display: flex; }
     }
+    /* Écran étroit (téléphone) : la discussion passe sous le jeu, qui rapetisse pour lui laisser la place. */
+    @media (max-width: 760px) {
+      body { flex-direction: column; justify-content: flex-start; padding: 40px 0 0; gap: 6px; }
+      #stage { height: auto; flex: 0 0 auto; width: 100%; }
+      #coop { width: calc(100vw - 16px) !important; max-width: none; resize: vertical; height: 34vh; margin-top: 0; }
+      #coop.narrow { height: 16vh; }
+      body.coop-open canvas { width: min(100vw, 40vh * 1.333); }
+      body.coop-open .dpad { grid-template-columns: repeat(3, 42px); grid-template-rows: repeat(3, 42px); }
+      body.coop-open .act { width: 64px; height: 64px; }
+    }
   </style>
 </head>
 <body>
   <a class="back" href="./">← Dip Duck</a>
-  <button id="coop-toggle" type="button" aria-expanded="false"><span class="dot"></span><span id="coop-toggle-label">CO-OP</span></button>
+  <button id="coop-toggle" type="button" aria-expanded="false"><span class="dot"></span><span id="coop-toggle-label">CO-OP</span><span class="badge" id="coop-badge"></span></button>
+
+  <main id="stage">
+  <canvas id="adv-canvas" aria-label="Dip Duck — The Calm Feathers"></canvas>
+  <div id="pad">
+    <div class="dpad">
+      <button class="up" data-dir="up" aria-label="Up">▲</button>
+      <button class="left" data-dir="left" aria-label="Left">◀</button>
+      <button class="right" data-dir="right" aria-label="Right">▶</button>
+      <button class="down" data-dir="down" aria-label="Down">▼</button>
+    </div>
+    <div class="side">
+      <button class="menu" id="menu" aria-label="Menu">MENU</button>
+      <button class="item" id="item" aria-label="Pebble">PEBBLE</button>
+    </div>
+    <button class="act" id="act" aria-label="Quack">QUACK</button>
+  </div>
+  </main>
   <section id="coop" hidden aria-live="polite">
-    <h2 id="coop-title">CO-OP</h2>
+    <div class="head"><h2 id="coop-title">CO-OP</h2><span><button type="button" class="ghost" id="coop-shrink" title="Réduire / agrandir">⇔</button> <button type="button" class="ghost" id="coop-close" title="Fermer">✕</button></span></div>
     <div id="coop-out">
       <p id="coop-intro"></p>
       <div class="row"><input id="coop-name" maxlength="12" autocomplete="off" spellcheck="false"></div>
@@ -73,21 +110,7 @@
       <p class="small warn" id="coop-warn"></p>
     </div>
   </section>
-  <canvas id="adv-canvas" aria-label="Dip Duck — The Calm Feathers"></canvas>
-  <div id="pad">
-    <div class="dpad">
-      <button class="up" data-dir="up" aria-label="Up">▲</button>
-      <button class="left" data-dir="left" aria-label="Left">◀</button>
-      <button class="right" data-dir="right" aria-label="Right">▶</button>
-      <button class="down" data-dir="down" aria-label="Down">▼</button>
-    </div>
-    <div class="side">
-      <button class="menu" id="menu" aria-label="Menu">MENU</button>
-      <button class="item" id="item" aria-label="Pebble">PEBBLE</button>
-    </div>
-    <button class="act" id="act" aria-label="Quack">QUACK</button>
-  </div>
   <script src="adventure-data.js?v=20261113b"></script>
-  <script src="adventure.js?v=20261113b"></script>
+  <script src="adventure.js?v=20261113c"></script>
 </body>
 </html>

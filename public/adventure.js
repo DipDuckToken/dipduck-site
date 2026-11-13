@@ -1902,6 +1902,12 @@
     $c("coop-count").textContent = CT.count(coop.others.size + (coop.me ? 1 : 0));
     $c("coop-toggle").classList.toggle("on", !!(coop.ws && coop.ws.readyState === 1));
   }
+  function coopBadge() {
+    const b = $c("coop-badge");
+    if (!b) return;
+    b.textContent = coop.unread > 9 ? "9+" : String(coop.unread || "");
+    b.classList.toggle("on", (coop.unread || 0) > 0);
+  }
   function coopConnect(code) {
     if (coop.ws) { coop.wanted = false; try { coop.ws.close(); } catch { /* */ } }
     coop.code = code; coop.wanted = true; coop.others.clear(); coop.me = null; coop.lastKey = "";
@@ -1932,6 +1938,7 @@
         Object.assign(o, { s: m.s, x: m.x, y: m.y, d: m.d, w: m.w });
       } else if (m.t === "chat") {
         coopLine(m.m, m.help ? "help" : "", m.color, m.name);
+        if ($c("coop").hidden && (!coop.me || m.id !== coop.me.id)) { coop.unread = (coop.unread || 0) + 1; coopBadge(); }
         if (!m.me && (!coop.me || m.id !== coop.me.id)) coop.toast = { text: `${m.name}: ${m.m}`, until: frame + 300, help: m.help };
       } else if (m.t === "err") {
         coopLine(CT.err[m.m] || "…", "sys");
@@ -2002,12 +2009,18 @@
     set("coop-help", "textContent", CT.help); set("coop-leave", "textContent", CT.leave);
     set("coop-warn", "textContent", CT.warn);
     $c("coop-name").value = coopStore.name || `Duck${Math.floor(100 + Math.random() * 900)}`;
-    $c("coop-toggle").addEventListener("click", () => {
+    const showPanel = (open) => {
       const panel = $c("coop");
-      panel.hidden = !panel.hidden;
-      $c("coop-toggle").setAttribute("aria-expanded", String(!panel.hidden));
-      canvas.focus && canvas.blur();
-    });
+      panel.hidden = !open;
+      document.body.classList.toggle("coop-open", open);
+      $c("coop-toggle").setAttribute("aria-expanded", String(open));
+      if (open) { coop.unread = 0; coopBadge(); }
+      try { localStorage.setItem("dipduck-coop-panel", open ? "1" : "0"); } catch { /* */ }
+    };
+    $c("coop-toggle").addEventListener("click", () => showPanel($c("coop").hidden));
+    $c("coop-close").addEventListener("click", () => showPanel(false));
+    $c("coop-shrink").addEventListener("click", () => $c("coop").classList.toggle("narrow"));
+    try { if (localStorage.getItem("dipduck-coop-panel") === "1") showPanel(true); } catch { /* */ }
     $c("coop-create").addEventListener("click", () => {
       const abc = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
       const bytes = crypto.getRandomValues(new Uint8Array(6));
