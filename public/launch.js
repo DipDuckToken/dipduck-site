@@ -157,13 +157,14 @@
   }
 
   async function loadState() {
-    const [slot0, wethInPool, limit] = await Promise.all([
+    const [slot0, wethInPool, limit, tokensInPool] = await Promise.all([
       callTo(info.pool, POOL_SEL.slot0),
       uintAt(info.weth, TOKEN_SEL.balanceOf + addressWord(info.pool)),
       uintAt(info.token, TOKEN_SEL.walletLimit),
+      uintAt(info.token, TOKEN_SEL.balanceOf + addressWord(info.pool)),
     ]);
     const balance = account ? await uintAt(info.token, TOKEN_SEL.balanceOf + addressWord(account)) : undefined;
-    state = { sqrtPrice: words(slot0)[0], wethInPool, limit, balance };
+    state = { sqrtPrice: words(slot0)[0], wethInPool, limit, balance, tokensInPool };
   }
 
   // Prix d'un token en ETH, depuis slot0 (même nombre de décimales des deux côtés).
@@ -527,6 +528,7 @@
       feedBroken = true;
     }
     renderFeed();
+    publishMarket();
   }
 
   // ─── Affichage ────────────────────────────────────────────────────────────
@@ -557,6 +559,23 @@
     when.textContent = fill(key, { pct, time: clock(step[0] - elapsed) });
   }
 
+  // Chiffres du haut de la page (app.js) lus directement sur la chaîne, en ETH : utilisés quand
+  // DexScreener n'a pas encore de données pour le pool.
+  function publishMarket() {
+    if (!info || !state) return;
+    const price = priceEth();
+    if (!Number.isFinite(price)) return;
+    const dayAgo = Date.now() - 24 * 3_600_000;
+    const vol24 = feed.filter((e) => e.time && e.time >= dayAgo).reduce((sum, e) => sum + toNumber(e.eth), 0);
+    window.dispatchEvent(new CustomEvent("dipduck:onchain", { detail: {
+      priceEth: price,
+      mcapEth: price * toNumber(info.supply),
+      liquidityEth: toNumber(state.wethInPool) + toNumber(state.tokensInPool ?? 0n) * price,
+      vol24Eth: vol24,
+      feedKnown: scannedTo !== undefined,
+    } }));
+  }
+
   function render() {
     const before = Date.now() < info.openAt;
     const price = priceEth();
@@ -578,6 +597,7 @@
     const uniswap = $("launch-uniswap");
     uniswap.hidden = !CONFIG.buyUrl || before;
     if (CONFIG.buyUrl) uniswap.href = CONFIG.buyUrl;
+    publishMarket();
   }
 
   // Bouton d'achat principal : vers cette section (achat sur le site, lien Uniswap à côté).

@@ -159,8 +159,38 @@ function money(value, compact) {
   return new Intl.NumberFormat(locale, { style: "currency", currency: "USD", maximumSignificantDigits: 4 }).format(value);
 }
 
+let onchain; // chiffres lus sur la chaîne par launch.js (en ETH)
+let ethUsd; // cours de l'ETH en dollars (Coinbase), pour convertir
+async function loadEthUsd() {
+  try {
+    const response = await fetch("https://api.coinbase.com/v2/prices/ETH-USD/spot");
+    if (!response.ok) return;
+    const value = Number((await response.json())?.data?.amount);
+    if (Number.isFinite(value) && value > 0) { ethUsd = value; renderStats(); }
+  } catch {
+    // Pas de cours : les chiffres restent en ETH.
+  }
+}
+window.addEventListener("dipduck:onchain", (event) => {
+  onchain = event.detail;
+  if (!market) renderStats();
+});
+
 function renderStats() {
   const note = document.getElementById("stats-note");
+  if (!market && onchain) {
+    const eth = (value, compact) => {
+      if (ethUsd) return money(value * ethUsd, compact);
+      const locale = currentLang === "zh" ? "zh-CN" : currentLang;
+      return `${new Intl.NumberFormat(locale, compact ? { maximumSignificantDigits: 3 } : { maximumSignificantDigits: 4 }).format(value)} ETH`;
+    };
+    document.getElementById("s-price").textContent = eth(onchain.priceEth, false);
+    document.getElementById("s-mcap").textContent = eth(onchain.mcapEth, true);
+    document.getElementById("s-liq").textContent = eth(onchain.liquidityEth, true);
+    document.getElementById("s-vol").textContent = onchain.feedKnown ? eth(onchain.vol24Eth, true) : "—";
+    note.textContent = t("statsChain");
+    return;
+  }
   if (!market) {
     note.textContent = t("statsSoon");
     return;
@@ -260,6 +290,7 @@ applyLanguage(pickLanguage());
 startCountdown();
 if (launched) {
   loadMarket();
+  loadEthUsd();
   loadHolders();
   setInterval(loadMarket, 60_000);
   setInterval(loadHolders, 120_000);
