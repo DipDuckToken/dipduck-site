@@ -366,7 +366,18 @@
   function overlap(a, b) { return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y; }
   const center = (e) => [e.x + e.w / 2, e.y + e.h / 2];
   function npcAt(x, y, w, h) {
-    return npcs.some((n) => n.t !== "duckling" && overlap({ x, y, w, h }, { x: n.x * TILE + 2, y: n.y * TILE + 2, w: 12, h: 12 }));
+    if (npcs.some((n) => n.t !== "duckling" && overlap({ x, y, w, h }, { x: n.x * TILE + 2, y: n.y * TILE + 2, w: 12, h: 12 }))) return true;
+    // Les canards des autres joueurs (co-op) sont solides, comme les personnages. Si l'on est déjà
+    // collé à l'un d'eux (il vient d'arriver sur l'écran), on peut toujours s'en éloigner.
+    if (typeof coop !== "undefined" && coop.others.size) {
+      const now = { x: player.x, y: player.y, w: player.w, h: player.h };
+      for (const o of coop.others.values()) {
+        if (o.s !== cur) continue;
+        const box = { x: o.x + 1, y: o.y + 1, w: 10, h: 10 };
+        if (overlap({ x, y, w, h }, box) && !overlap(now, box)) return true;
+      }
+    }
+    return false;
   }
   // Barrières levées sous le canard : on ne le coince pas dedans.
   function barrierIgnore(ent) {

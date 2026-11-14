@@ -534,3 +534,10 @@ h4.mini { font-family: var(--font-head); font-size: 1.15rem; margin: 28px 0 10px
 .launch-trade > *, .launch-row > .field { min-width: 0; }
 .launch-box input { width: 100%; min-width: 0; box-sizing: border-box; }
 .steps > *, .story > * { min-width: 0; overflow-wrap: anywhere; }
+
+/* Images du jeu d'aventure */
+.adv-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 22px 0; }
+.adv-gallery figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.adv-gallery img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.adv-gallery figcaption { padding: 10px 14px; color: var(--muted); font-size: .92rem; font-weight: 700; }
+@media (max-width: 760px) { .adv-gallery { grid-template-columns: 1fr; } }
