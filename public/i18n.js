@@ -2146,3 +2146,9 @@ Object.assign(I18N.en, { badgeLock: "Team: nothing for 90 days" });
 Object.assign(I18N.fr, { badgeLock: "Équipe : rien avant 90 jours" });
 Object.assign(I18N.es, { badgeLock: "Equipo: nada antes de 90 días" });
 Object.assign(I18N.zh, { badgeLock: "团队：90 天内不解锁" });
+
+// Achat depuis le téléphone : bots Telegram qui prennent en charge Robinhood Chain (services tiers).
+Object.assign(I18N.en, { botsHint: "On your phone? Some Telegram trading bots that support Robinhood Chain (for example Banana Gun or Cove) can buy $DIPDUCK: paste the contract address copied from this site. They are third-party services, not Dip Duck: they hold a wallet for you, so only put in what you can afford to lose, and never share your secret phrase." });
+Object.assign(I18N.fr, { botsHint: "Sur téléphone ? Certains bots d'échange Telegram qui prennent en charge Robinhood Chain (par exemple Banana Gun ou Cove) peuvent acheter des $DIPDUCK : collez l'adresse du contrat copiée sur ce site. Ce sont des services tiers, pas Dip Duck : ils gardent un wallet pour vous, alors n'y mettez que ce que vous pouvez perdre et ne donnez jamais votre phrase secrète." });
+Object.assign(I18N.es, { botsHint: "¿En el móvil? Algunos bots de trading de Telegram compatibles con Robinhood Chain (por ejemplo Banana Gun o Cove) pueden comprar $DIPDUCK: pega la dirección del contrato copiada de este sitio. Son servicios de terceros, no Dip Duck: guardan una wallet por ti, así que pon solo lo que puedas perder y nunca compartas tu frase secreta." });
+Object.assign(I18N.zh, { botsHint: "用手机？一些支持 Robinhood Chain 的 Telegram 交易机器人（例如 Banana Gun 或 Cove）可以购买 $DIPDUCK：粘贴从本网站复制的合约地址。它们是第三方服务，不属于 Dip Duck：它们替你保管钱包，因此只投入你能承受损失的金额，绝不要分享你的助记词。" });
