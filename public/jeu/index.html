@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Dip Duck : Les Plumes du Calme — Acte I (bêta)</title>
+  <meta name="description" content="Dip Duck : Les Plumes du Calme — une grande aventure gratuite dans le navigateur : 4 régions, 4 donjons, des boss, des énigmes. Version bêta.">
+  <meta property="og:title" content="Dip Duck : Les Plumes du Calme — Acte I (bêta)">
+  <meta property="og:description" content="Une grande aventure gratuite : 4 régions, 4 donjons, des boss. Jouez dans le navigateur.">
+  <meta property="og:image" content="https://dipduck.xyz/jeu/apercu.jpg">
+  <link rel="icon" href="../favicon-48.png">
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #1a2030; font-family: "Nunito", system-ui, sans-serif; touch-action: none; user-select: none; -webkit-user-select: none; }
+    canvas { display: block; width: 100vw; height: 100vh; }
+    .btn { position: fixed; border: 3px solid #3a2a10; border-radius: 50%; font: 800 15px system-ui, sans-serif; color: #3a2a10; box-shadow: 0 4px 0 rgba(0,0,0,.35); cursor: pointer; }
+    #quack { right: 24px; bottom: 28px; width: 96px; height: 96px; background: #ffd23f; }
+    #saison { right: 24px; top: 20px; border-radius: 14px; padding: 8px 14px; background: #fffaf0; font-size: 14px; }
+    #objet { right: 132px; bottom: 30px; width: 70px; height: 70px; background: #6fd0ef; font-size: 12px; }
+    #reglages { right: 24px; top: 162px; border-radius: 14px; padding: 8px 14px; background: #fffaf0; font-size: 14px; }
+    #panneau { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(10,10,20,.55); z-index: 10; }
+    #panneau.ouvert { display: flex; }
+    #panneau .boite { background: #fffaf0; border: 4px solid #5a4326; border-radius: 18px; padding: 22px 26px; width: min(92vw, 420px); color: #3d2a12; font: 600 15px system-ui, sans-serif; box-shadow: 0 8px 0 rgba(0,0,0,.3); }
+    #panneau h2 { margin: 0 0 14px; font-size: 22px; }
+    #panneau label { display: grid; grid-template-columns: 120px 1fr 44px; align-items: center; gap: 10px; margin: 12px 0; }
+    #panneau input[type=range] { width: 100%; accent-color: #e0a830; height: 28px; }
+    #panneau .val { text-align: right; font-variant-numeric: tabular-nums; }
+    #panneau .ligne { display: flex; gap: 10px; margin-top: 16px; }
+    #panneau button { flex: 1; border: 3px solid #3a2a10; border-radius: 12px; padding: 10px; font: 800 15px system-ui, sans-serif; background: #ffd23f; color: #3a2a10; cursor: pointer; }
+    #panneau button.gris { background: #e8dcc4; }
+    #panneau .petit { font: 500 13px system-ui, sans-serif; margin: 14px 0 0; color: #5a4326; }
+    #panneau .petit a { color: #b8602a; }
+    #beta { position: fixed; right: 24px; top: 212px; background: #ff8fb1; color: #3a1020; font: 800 11px system-ui, sans-serif; padding: 2px 8px; border-radius: 8px; pointer-events: none; }
+    @media (max-width: 760px) { #beta { right: auto; left: 14px; top: auto; bottom: 200px; } }
+    #carte { right: 24px; top: 112px; border-radius: 14px; padding: 8px 14px; background: #fffaf0; font-size: 14px; }
+    #stick { position: fixed; left: 26px; bottom: 26px; width: 150px; height: 150px; border-radius: 50%; background: rgba(25,20,35,.3); border: 3px solid rgba(255,255,255,.65); display: none; }
+    #knob { position: absolute; left: 45px; top: 45px; width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,.88); }
+    @media (pointer: coarse) { #stick { display: block; } }
+    #aide { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); color: #fff; font-size: 14px; background: rgba(25,20,35,.6); padding: 6px 12px; border-radius: 10px; }
+    @media (pointer: coarse) { #aide { display: none; } }
+    @media (max-width: 760px) {
+      #saison, #carte, #reglages { right: 8px; font-size: 11px; padding: 5px 9px; }
+      #saison { top: 10px; } #carte { top: 44px; } #reglages { top: 78px; }
+      #quack { width: 84px; height: 84px; right: 14px; bottom: 18px; } #objet { right: 108px; bottom: 22px; width: 62px; height: 62px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="jeu"></canvas>
+  <div id="beta">BÊTA</div>
+  <button class="btn" id="saison" type="button">Saison : été</button>
+  <button class="btn" id="carte" type="button">Carte</button>
+  <button class="btn" id="reglages" type="button">⚙ Réglages</button>
+  <div id="panneau" role="dialog" aria-modal="true" aria-labelledby="titre-reglages">
+    <div class="boite">
+      <h2 id="titre-reglages">Réglages du son</h2>
+      <label>Volume général <input type="range" min="0" max="100" data-v="general"><span class="val"></span></label>
+      <label>Musique <input type="range" min="0" max="100" data-v="musique"><span class="val"></span></label>
+      <label>Bruitages <input type="range" min="0" max="100" data-v="effets"><span class="val"></span></label>
+      <label>Ambiance <input type="range" min="0" max="100" data-v="ambiance"><span class="val"></span></label>
+      <div class="ligne"><button type="button" class="gris" id="muet">Couper le son</button><button type="button" id="fermer">Fermer</button></div>
+      <p class="petit">Version <strong>bêta</strong> de l'Acte I : la partie est sauvegardée dans ce navigateur. Un souci ? Écrivez-nous sur <a href="https://t.me/DipDuckToken" target="_blank" rel="noopener">Telegram</a>.</p>
+      <p class="petit"><a href="../">← Retour à dipduck.xyz</a> · Jeu gratuit, sans achat, sans aucune récompense de valeur.</p>
+    </div>
+  </div>
+  <button class="btn" id="quack" type="button">QUACK</button>
+  <button class="btn" id="objet" type="button">OBJET</button>
+  <div id="stick"><div id="knob"></div></div>
+  <div id="aide">Flèches ou ZQSD/WASD : marcher · Espace : parler / coup de bec · X : objet · C : changer d'objet · M : carte · N : saison · V : couper le son · Échap : réglages</div>
+  <script>window.DD_LIB = true;</script>
+  <script src="dessins.js?v=20261116b"></script>
+  <script src="audio.js?v=20261116b"></script>
+  <script>
+    // Réglages : curseurs de volume (retenus dans le navigateur)
+    (() => {
+      const pan = document.getElementById("panneau"), muet = document.getElementById("muet");
+      const maj = () => { const v = window.AUDIO.volumes(); for (const r of pan.querySelectorAll("input[type=range]")) { r.value = Math.round(v[r.dataset.v] * 100); r.nextElementSibling.textContent = r.value + " %"; } muet.textContent = window.AUDIO.on ? "Couper le son" : "Remettre le son"; };
+      document.getElementById("reglages").addEventListener("click", () => { maj(); pan.classList.add("ouvert"); });
+      document.getElementById("fermer").addEventListener("click", () => pan.classList.remove("ouvert"));
+      pan.addEventListener("click", (e) => { if (e.target === pan) pan.classList.remove("ouvert"); });
+      muet.addEventListener("click", () => { window.AUDIO.init(); window.AUDIO.toggle(); maj(); });
+      for (const r of pan.querySelectorAll("input[type=range]")) r.addEventListener("input", () => { window.AUDIO.init(); window.AUDIO.setVolume(r.dataset.v, r.value / 100); r.nextElementSibling.textContent = r.value + " %"; if (r.dataset.v === "effets") window.AUDIO.sfx("piece"); });
+      addEventListener("keydown", (e) => { if (e.key === "Escape") pan.classList.toggle("ouvert") && maj(); });
+    })();
+  </script>
+  <script src="meubles.js?v=20261116b"></script>
+  <script src="animaux-vues.js?v=20261116b"></script>
+  <script src="jeu.js?v=20261116b"></script>
+</body>
+</html>
