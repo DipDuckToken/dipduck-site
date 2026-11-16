@@ -2154,7 +2154,11 @@ Object.assign(I18N.es, { botsHint: "¿En el móvil? Algunos bots de trading de T
 Object.assign(I18N.zh, { botsHint: "用手机？一些支持 Robinhood Chain 的 Telegram 交易机器人（例如 Banana Gun 或 Cove）可以购买 $DIPDUCK：粘贴从本网站复制的合约地址。它们是第三方服务，不属于 Dip Duck：它们替你保管钱包，因此只投入你能承受损失的金额，绝不要分享你的助记词。" });
 
 // Nouveau jeu : Les Plumes du Calme, Acte I (bêta, en français pour l'instant).
-Object.assign(I18N.en, { advBeta: "NEW: the big adventure (beta)", advBetaNote: "New: “The Calm Feathers — Act I”, a big free adventure in 4 regions with 4 dungeons and bosses. Beta, in French for now. No purchase, no prize of value." });
-Object.assign(I18N.fr, { advBeta: "NOUVEAU : la grande aventure (bêta)", advBetaNote: "Nouveau : « Les Plumes du Calme — Acte I », une grande aventure gratuite en 4 régions, avec 4 donjons et leurs boss. Version bêta, en français pour l'instant. Sans achat, sans récompense de valeur." });
-Object.assign(I18N.es, { advBeta: "NUEVO: la gran aventura (beta)", advBetaNote: "Nuevo: «Las Plumas de la Calma — Acto I», una gran aventura gratuita en 4 regiones con 4 mazmorras y jefes. Beta, en francés por ahora. Sin compras, sin premios de valor." });
-Object.assign(I18N.zh, { advBeta: "新：大冒险（测试版）", advBetaNote: "新游戏：《平静之羽——第一幕》，免费大冒险，4 个地区、4 座地下城和首领。测试版，目前仅有法语。无需购买，没有任何有价值的奖励。" });
+Object.assign(I18N.en, { advBeta: "NEW: the big adventure (beta)", advBetaNote: "New: “The Calm Feathers — Act I”, a big free adventure in 4 regions with 4 dungeons and bosses. Beta, in English and French. No purchase, no prize of value." });
+Object.assign(I18N.fr, { advBeta: "NOUVEAU : la grande aventure (bêta)", advBetaNote: "Nouveau : « Les Plumes du Calme — Acte I », une grande aventure gratuite en 4 régions, avec 4 donjons et leurs boss. Version bêta, en français et en anglais. Sans achat, sans récompense de valeur." });
+Object.assign(I18N.es, { advBeta: "NUEVO: la gran aventura (beta)", advBetaNote: "Nuevo: «Las Plumas de la Calma — Acto I», una gran aventura gratuita en 4 regiones con 4 mazmorras y jefes. Beta, en inglés y francés. Sin compras, sin premios de valor." });
+Object.assign(I18N.zh, { advBeta: "新：大冒险（测试版）", advBetaNote: "新游戏：《平静之羽——第一幕》，免费大冒险，4 个地区、4 座地下城和首领。测试版，提供英语和法语。无需购买，没有任何有价值的奖励。" });
+Object.assign(I18N.en, { advFeatureTitle: "New: Act I of the big adventure.", advFeatureCap: "4 regions, 4 dungeons, bosses and puzzles. Free, in your browser, on computer and phone. Click to play." });
+Object.assign(I18N.fr, { advFeatureTitle: "Nouveau : l'Acte I de la grande aventure.", advFeatureCap: "4 régions, 4 donjons, des boss et des énigmes. Gratuit, dans le navigateur, sur ordinateur et téléphone. Cliquez pour jouer." });
+Object.assign(I18N.es, { advFeatureTitle: "Nuevo: el Acto I de la gran aventura.", advFeatureCap: "4 regiones, 4 mazmorras, jefes y acertijos. Gratis, en el navegador, en ordenador y móvil. Haz clic para jugar." });
+Object.assign(I18N.zh, { advFeatureTitle: "新：大冒险第一幕。", advFeatureCap: "4 个地区、4 座地下城、首领和谜题。免费，在浏览器中即可玩，电脑和手机都支持。点击开始游戏。" });

@@ -1258,7 +1258,7 @@
   stickEl.addEventListener("pointermove", (e) => { if (stick.on) stickMove(e); });
   const stickEnd = () => { stick.on = false; stick.x = stick.y = 0; knob.style.transform = ""; };
   stickEl.addEventListener("pointerup", stickEnd); stickEl.addEventListener("pointercancel", stickEnd);
-  function nextSeason() { AUDIO.sfx("chime"); season = SEASONS[(SEASONS.indexOf(season) + 1) % SEASONS.length]; document.getElementById("saison").textContent = "Saison : " + SEASON_NAME[season]; rebuild(); }
+  function nextSeason() { AUDIO.sfx("chime"); season = SEASONS[(SEASONS.indexOf(season) + 1) % SEASONS.length]; document.getElementById("saison").textContent = T("Saison : " + SEASON_NAME[season]); rebuild(); }
 
   const near = (a, d) => Math.hypot(a.i - duck.i, a.j - duck.j) < d;
   function sparkle(i, j, cols, n = 16) { const [x, y] = toScreen(i, j); for (let k = 0; k < n; k++) particles.push({ x, y: y - 40, vx: (rnd() - .5) * 160, vy: -rnd() * 160 - 40, life: 1, col: cols[k % cols.length] }); }
@@ -1450,7 +1450,7 @@
     panel(14, 14, pw, ph);
     ctx.fillStyle = "#fff"; ctx.font = "bold 15px system-ui, sans-serif"; ctx.fillText("Dip Duck", 28, 36);
     for (let k = 0; k < Q.maxHearts; k++) heart(36 + k * 24, 56, k < duck.hearts);
-    { const full = `Plumes ${Q.plumes}/100 · Lucioles ${Q.lucioles}/8 · Edelweiss ${Q.edel}/6 · Coquillages ${Q.coq}/6 · Champignons ${Q.champis}/12 · Canetons ${ducklings.filter((d) => d.got).length}/3`; ctx.fillStyle = "#ffd9a0";
+    { const full = T(`Plumes ${Q.plumes}/100 · Lucioles ${Q.lucioles}/8 · Edelweiss ${Q.edel}/6 · Coquillages ${Q.coq}/6 · Champignons ${Q.champis}/12 · Canetons ${ducklings.filter((d) => d.got).length}/3`); ctx.fillStyle = "#ffd9a0";
       if (mob) { ctx.font = "bold 10px system-ui, sans-serif"; const parts = full.split(" · "), h1 = parts.slice(0, 3).join(" · "), h2 = parts.slice(3).join(" · "); ctx.fillText(h1, 24, 88, pw - 20); ctx.fillText(h2, 24, 102, pw - 20); }
       else { ctx.font = "bold 12px system-ui, sans-serif"; ctx.fillText(full, 26, 92); } }
     const cx0 = mob ? 14 + pw - 64 : 220; DD.ell(ctx, cx0, 36, 7, 7, "#ffd23f"); ctx.fillStyle = "#fff"; ctx.font = "bold 14px system-ui"; ctx.fillText(String(Q.pieces), cx0 + 12, 41); if (Q.d1.key && !Q.d1.door) { ctx.fillStyle = "#ffd23f"; ctx.fillText("🔑", cx0 + 44, 41); }
@@ -1509,7 +1509,7 @@
     const [px, py] = proj(duck.i, duck.j); DD.ell(ctx, px, py, 7, 7, "#ff5a3a"); ctx.fillStyle = "#ff8a6a"; ctx.fillText("Dip Duck", px, py + 22);
     ctx.fillStyle = "#ffd23f"; ctx.fillText("Carte : " + (cur.name || "Val de l'Étang") + " — jaune = objectif · bleu = passage · M ou Espace pour fermer", Wc / 2, Hc - 70); ctx.textAlign = "left";
   }
-  function wrap(text, x, y, max, lh) { const words = text.split(" "); let line = ""; for (const w of words) { const t = line ? line + " " + w : w; if (ctx.measureText(t).width > max && line) { ctx.fillText(line, x, y); line = w; y += lh; } else line = t; } ctx.fillText(line, x, y); }
+  function wrap(text, x, y, max, lh) { text = T(text); const words = text.split(" "); let line = ""; for (const w of words) { const t = line ? line + " " + w : w; if (ctx.measureText(t).width > max && line) { ctx.fillText(line, x, y); line = w; y += lh; } else line = t; } ctx.fillText(line, x, y); }
 
   // ─── Boucle ───
   rebuild();

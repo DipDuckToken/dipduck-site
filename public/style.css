@@ -536,6 +536,11 @@ h4.mini { font-family: var(--font-head); font-size: 1.15rem; margin: 28px 0 10px
 .steps > *, .story > * { min-width: 0; overflow-wrap: anywhere; }
 
 /* Images du jeu d'aventure */
+.adv-feature { display: block; margin: 22px 0 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; color: inherit; text-decoration: none; transition: transform .15s; }
+.adv-feature:hover { transform: translateY(-2px); }
+.adv-feature img { display: block; width: 100%; height: auto; }
+.adv-feature-cap { display: block; padding: 12px 16px; color: var(--muted); font-weight: 700; }
+.adv-feature-cap strong { color: var(--yellow); }
 .adv-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 22px 0; }
 .adv-gallery figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .adv-gallery img { display: block; width: 100%; height: auto; image-rendering: pixelated; }

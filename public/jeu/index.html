@@ -57,6 +57,7 @@
       <label>Musique <input type="range" min="0" max="100" data-v="musique"><span class="val"></span></label>
       <label>Bruitages <input type="range" min="0" max="100" data-v="effets"><span class="val"></span></label>
       <label>Ambiance <input type="range" min="0" max="100" data-v="ambiance"><span class="val"></span></label>
+      <div class="ligne"><button type="button" class="gris" id="langue"></button></div>
       <div class="ligne"><button type="button" class="gris" id="muet">Couper le son</button><button type="button" id="fermer">Fermer</button></div>
       <p class="petit">Version <strong>bêta</strong> de l'Acte I : la partie est sauvegardée dans ce navigateur. Un souci ? Écrivez-nous sur <a href="https://t.me/DipDuckToken" target="_blank" rel="noopener">Telegram</a>.</p>
       <p class="petit"><a href="../">← Retour à dipduck.xyz</a> · Jeu gratuit, sans achat, sans aucune récompense de valeur.</p>
@@ -66,6 +67,7 @@
   <button class="btn" id="objet" type="button">OBJET</button>
   <div id="stick"><div id="knob"></div></div>
   <div id="aide">Flèches ou ZQSD/WASD : marcher · Espace : parler / coup de bec · X : objet · C : changer d'objet · M : carte · N : saison · V : couper le son · Échap : réglages</div>
+  <script src="langue.js?v=20261116b"></script>
   <script>window.DD_LIB = true;</script>
   <script src="dessins.js?v=20261116b"></script>
   <script src="audio.js?v=20261116b"></script>
@@ -73,7 +75,8 @@
     // Réglages : curseurs de volume (retenus dans le navigateur)
     (() => {
       const pan = document.getElementById("panneau"), muet = document.getElementById("muet");
-      const maj = () => { const v = window.AUDIO.volumes(); for (const r of pan.querySelectorAll("input[type=range]")) { r.value = Math.round(v[r.dataset.v] * 100); r.nextElementSibling.textContent = r.value + " %"; } muet.textContent = window.AUDIO.on ? "Couper le son" : "Remettre le son"; };
+      const maj = () => { const v = window.AUDIO.volumes(); for (const r of pan.querySelectorAll("input[type=range]")) { r.value = Math.round(v[r.dataset.v] * 100); r.nextElementSibling.textContent = r.value + " %"; } muet.textContent = T(window.AUDIO.on ? "Couper le son" : "Remettre le son"); };
+      const lb = document.getElementById("langue"); lb.textContent = window.LANG === "fr" ? "🌐 English" : "🌐 Français"; lb.addEventListener("click", () => window.changerLangue(window.LANG === "fr" ? "en" : "fr"));
       document.getElementById("reglages").addEventListener("click", () => { maj(); pan.classList.add("ouvert"); });
       document.getElementById("fermer").addEventListener("click", () => pan.classList.remove("ouvert"));
       pan.addEventListener("click", (e) => { if (e.target === pan) pan.classList.remove("ouvert"); });
