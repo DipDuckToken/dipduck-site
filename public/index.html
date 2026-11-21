@@ -651,6 +651,18 @@
       <div class="actions rm-more"><a class="btn ghost" href="roadmap.html" data-i18n="rmMore"></a></div>
     </section>
 
+    <!-- Optional quote-only embed; swaps open separately on Stoa. -->
+    <section id="stoa-quote" class="section">
+      <h2 data-i18n="stoaTitle">Compare a quote on Stoa</h2>
+      <p class="section-lead" data-i18n="stoaLead">Optional third-party quote. Any swap takes place on stoadex.com, with your wallet and your approval.</p>
+      <details class="stoa-panel">
+        <summary data-i18n="stoaShow">Load Stoa's quote widget</summary>
+        <iframe id="stoa-frame" data-src="https://stoadex.com/embed/swap/robinhood/0x36384B0e1BE39EAaf2Ac36BdC53DF5123566139C?pay=ETH&amp;ref=0x8c14cc5e5e5dd597fedb1107e598fedefac4b305" width="420" height="330" title="DIPDUCK quote on Stoa — Robinhood Chain" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <p class="hint"><a href="https://stoadex.com/embed/swap/robinhood/0x36384B0e1BE39EAaf2Ac36BdC53DF5123566139C?pay=ETH&amp;ref=0x8c14cc5e5e5dd597fedb1107e598fedefac4b305" target="_blank" rel="noopener noreferrer" data-i18n="stoaOpen">Open the quote separately</a></p>
+        <p class="hint" data-i18n="stoaReferral">The integration maintainer may receive a share of Stoa's fee through this referral. This is not an endorsement or a promise of price.</p>
+      </details>
+    </section>
+
     <!-- FAQ -->
     <section id="faq" class="section">
       <p class="kicker">FAQ</p>
@@ -710,5 +722,6 @@
     // le grand jeu s'ouvre dans la langue du site (anglais si espagnol ou chinois)
     document.addEventListener("click", (e) => { const a = e.target.closest('a[href^="jeu/"]'); if (a) a.href = "jeu/?lang=" + (document.documentElement.lang.startsWith("fr") ? "fr" : "en"); });
   </script>
+  <script src="stoa-widget.js?v=20261121a" defer></script>
 </body>
 </html>

@@ -546,3 +546,9 @@ h4.mini { font-family: var(--font-head); font-size: 1.15rem; margin: 28px 0 10px
 .adv-gallery img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
 .adv-gallery figcaption { padding: 10px 14px; color: var(--muted); font-size: .92rem; font-weight: 700; }
 @media (max-width: 760px) { .adv-gallery { grid-template-columns: 1fr; } }
+
+/* Optional Stoa quote: scoped so the existing trading flow is untouched. */
+.stoa-panel { max-width: 520px; margin: 0 auto; }
+.stoa-panel > summary { cursor: pointer; padding: 16px 0; font-weight: 700; }
+.stoa-panel > iframe { display: block; width: 100%; max-width: 420px; border: 0; border-radius: 16px; background: transparent; margin-top: 12px; }
+.stoa-panel .hint { overflow-wrap: anywhere; }
