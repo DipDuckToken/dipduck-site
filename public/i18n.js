@@ -3,6 +3,12 @@
 // « marquee » : phrases du bandeau défilant, séparées par « | ».
 const I18N = {
   en: {
+    stoaTitle: "Compare a quote on Stoa",
+    stoaLead: "Optional third-party quote. Any swap takes place on stoadex.com, with your wallet and your approval.",
+    stoaShow: "Load Stoa's quote widget",
+    stoaOpen: "Open the quote separately",
+    stoaReferral: "The integration maintainer may receive a share of Stoa's fee through this referral. This is not an endorsement or a promise of price.",
+
     navStory: "Story", navTokenomics: "Tokenomics", navUnlock: "Unlock", navBuy: "How to buy", navFaq: "FAQ",
     eyebrow: "Meme token · fixed supply · no owner",
     heroLine1: "Buy the dip.", heroLine2: "Quack.",
@@ -56,6 +62,12 @@ const I18N = {
     footer: "Not affiliated with Robinhood.",
   },
   fr: {
+    stoaTitle: "Comparer un devis sur Stoa",
+    stoaLead: "Devis tiers facultatif. Tout échange se fait sur stoadex.com, avec votre wallet et votre accord.",
+    stoaShow: "Charger le module de devis Stoa",
+    stoaOpen: "Ouvrir le devis séparément",
+    stoaReferral: "Le responsable de cette intégration peut recevoir une part des frais Stoa via ce lien de parrainage. Ce n’est ni une recommandation ni une promesse de prix.",
+
     navStory: "Histoire", navTokenomics: "Tokenomics", navUnlock: "Déblocage", navBuy: "Acheter", navFaq: "FAQ",
     eyebrow: "Token mème · offre fixe · sans owner",
     heroLine1: "Achète la baisse.", heroLine2: "Coin coin.",
@@ -109,6 +121,12 @@ const I18N = {
     footer: "Non affilié à Robinhood.",
   },
   es: {
+    stoaTitle: "Comparar una cotización en Stoa",
+    stoaLead: "Cotización externa opcional. Todo intercambio se realiza en stoadex.com, con tu cartera y tu aprobación.",
+    stoaShow: "Cargar el módulo de cotización de Stoa",
+    stoaOpen: "Abrir la cotización por separado",
+    stoaReferral: "El responsable de esta integración puede recibir una parte de las comisiones de Stoa mediante este enlace de referido. No es una recomendación ni una promesa de precio.",
+
     navStory: "Historia", navTokenomics: "Tokenomics", navUnlock: "Desbloqueo", navBuy: "Comprar", navFaq: "FAQ",
     eyebrow: "Token meme · suministro fijo · sin owner",
     heroLine1: "Compra la caída.", heroLine2: "Cuac.",
@@ -162,6 +180,12 @@ const I18N = {
     footer: "No afiliado a Robinhood.",
   },
   zh: {
+    stoaTitle: "在 Stoa 比较报价",
+    stoaLead: "可选的第三方报价。所有兑换均在 stoadex.com 上通过您的钱包并经您批准进行。",
+    stoaShow: "加载 Stoa 报价组件",
+    stoaOpen: "单独打开报价",
+    stoaReferral: "此集成的维护者可能通过此推荐链接获得部分 Stoa 费用。这不是推荐，也不是价格承诺。",
+
     navStory: "故事", navTokenomics: "代币经济", navUnlock: "解锁", navBuy: "购买", navFaq: "常见问题",
     eyebrow: "迷因代币 · 固定供应 · 无所有者",
     heroLine1: "逢跌就买。", heroLine2: "嘎嘎。",
